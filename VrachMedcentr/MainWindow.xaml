@@ -12,18 +12,15 @@
             <RowDefinition ></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <Menu>
-                <MenuItem x:Name="File" Header="File">
-                   
-                </MenuItem>
-            </Menu>
-            <WrapPanel>
-                
-            </WrapPanel>
-        </StackPanel>
-        <GridSplitter Grid.Row="1" Width="50"></GridSplitter>
-        <TabControl Grid.Row="1"  x:Name="PacientCard"  Margin="0,0,0,0" d:IsHidden="True" >
+
+        <Button Click="AddNewPage" Margin="308,30,906,0" Height="36" VerticalAlignment="Top"/>
+        <TextBox x:Name="Textbox1" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="Button1"  HorizontalAlignment="Left" Margin="171,28,0,0" VerticalAlignment="Top" Width="95" Height="23"/>
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
+        </Menu>
+        <TabControl  x:Name="PacientCard"   >
+
             <TabItem  x:Name="page1">
                 <TabItem.Header>
                     <StackPanel>
@@ -41,26 +38,22 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <TabControl>
-                        <TabItem Header="Сигнальні позначки">
-                            <Grid Background="#FFE5E5E5">
-                                <GroupBox Header="Сигнальні позначки" HorizontalAlignment="Left" Height="298" Margin="122,28,0,0" VerticalAlignment="Top" Width="260">
-                                    <Grid>
-                                        <Label Content="Цукровий діабет" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                        <Label Content="Інфекційні захворювання" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,31,0,0"/>
-                                    </Grid>
-                                </GroupBox>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Відомості про щеплення">
-                            <DataGrid/>
-                        </TabItem>
-                        <TabItem Header="Листок профілактичного огляду" >
-                            <Grid Background="#FFE5E5E5">
-                                <DataGrid/>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
+                    <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
+                        <Grid>
+                            <Label Content="Цукровий діабет" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Label Content="Інфекційні захворювання" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,26,0,0"/>
+                            <Label Content="Непереносимість до лікарських препаратів" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,84,0,0"/>
+                            <Label Content="Алергічний анамнез" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,53,0,0"/>
+                            <TextBox  Margin="253,4,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox  Margin="253,30,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox  Margin="253,88,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox  Margin="253,57,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
+                        </Grid>
+                    </GroupBox>
+                    <DataGrid 
+                        Margin="10,127,10,0" VerticalAlignment="Top"/>
+                    <DataGrid 
+                        Margin="10,457,10,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="page3">
