@@ -52,6 +52,7 @@ namespace WPF_Hospital
         int i = 6;
         private void AddNewPage(object sender, RoutedEventArgs e)
         {
+            
             i++;
             PacientCard.Items.Add(new TabItem
             {
