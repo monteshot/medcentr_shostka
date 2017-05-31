@@ -36,14 +36,14 @@ namespace WPF_Hospital
             connect.Close();
 
             //TestGrid.DataContext = dt;
-
+            
 
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
 
-
+            
         }
 
         private void MenuFile_Click(object sender, RoutedEventArgs e)
