@@ -15,24 +15,51 @@ using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Data;
 
-namespace VrachMedcentr
+namespace WPF_Hospital
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+       // Card First = new Card("Valera");
         public MainWindow()
         {
             InitializeComponent();
-            connect con = new connect();
-            likariDGV.DataContext= con.query("SELECT * FROM by_ds_app_services");
-            textbox1_Copy.Text = con.selectSTR("name","Офтальмолог");
-         //  textbox1.Text= con.selectARR("name", "Офтальмолог",1);
-            patDGV.DataContext= con.selectONE("name", "Офтальмолог",1);
-            //patDGV.Items.Add(con.selectARR("name", "Офтальмолог", 1));
+            string connectionstring = "SERVER=shostka.mysql.ukraine.com.ua;DATABASE=shostka_medcentr;UID=shostka_medcentr;PASSWORD=Cpu25Pro;";
+            MySqlConnection connect = new MySqlConnection(connectionstring);
+            MySqlCommand cmd = new MySqlCommand("SELECT *  FROM by_ds_app_services", connect);
+            connect.Open();
+            DataTable dt = new DataTable();
+            dt.Load(cmd.ExecuteReader());
+            connect.Close();
+
+            //TestGrid.DataContext = dt;
+
+
         }
 
-        
+        private void Button1_Click(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
+        private void MenuFile_Click(object sender, RoutedEventArgs e)
+        {
+            //Textbox1.Text = First.Name;
+        }
+        int i = 6;
+        private void AddNewPage(object sender, RoutedEventArgs e)
+        {
+            i++;
+            PacientCard.Items.Add(new TabItem
+            {
+                Header = new TextBlock { Text = i.ToString() } // установка заголовка вкладки
+
+            });
+        }
+
+
     }
 }

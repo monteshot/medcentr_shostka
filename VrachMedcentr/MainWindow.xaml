@@ -10,7 +10,7 @@
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
         <TextBox x:Name="Textbox1" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Button1" Click="Button1_Click" HorizontalAlignment="Left" Margin="171,28,0,0" VerticalAlignment="Top" Width="95" Height="23"/>
+        <Button x:Name="Button1"  HorizontalAlignment="Left" Margin="171,28,0,0" VerticalAlignment="Top" Width="95" Height="23"/>
         <Menu Height="25" VerticalAlignment="Top">
             <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
         </Menu>
