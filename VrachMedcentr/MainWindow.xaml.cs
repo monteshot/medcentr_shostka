@@ -63,6 +63,14 @@ namespace WPF_Hospital
             });
         }
 
+        private void AddNewPage(object sender, MouseButtonEventArgs e)
+        {
+            i++;
+            PacientCard.Items.Add(new TabItem
+            {
+                Header = new TextBlock { Text = i.ToString() } // установка заголовка вкладки
 
+            });
+        }
     }
 }

@@ -9,63 +9,59 @@
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
+        <Button Click="AddNewPage" Margin="308,30,906,0" Height="36" VerticalAlignment="Top"/>
         <TextBox x:Name="Textbox1" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="Button1"  HorizontalAlignment="Left" Margin="171,28,0,0" VerticalAlignment="Top" Width="95" Height="23"/>
         <Menu Height="25" VerticalAlignment="Top">
             <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
         </Menu>
-        <TabControl  Name="PacientCard"  Margin="0,100,0,200" >
-            <TabItem  Name="page1">
+        <TabControl  x:Name="PacientCard"  Margin="0,100,0,200" >
+            <TabItem  x:Name="page1">
                 <TabItem.Header>
                     <StackPanel>
-                        <TextBlock TextAlignment ="Center">Титульний</TextBlock>
-                        <TextBlock TextAlignment ="Center"> лист</TextBlock>
+                        <TextBlock TextAlignment ="Center"><Run Text="Титульний"/></TextBlock>
+                        <TextBlock TextAlignment ="Center"><Run Text="лист"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Name="page2">
+            <TabItem x:Name="page2">
                 <TabItem.Header>
                     <StackPanel>
-                        <TextBlock TextAlignment ="Center">Сигнальні</TextBlock>
-                        <TextBlock TextAlignment ="Center">позначки</TextBlock>
+                        <TextBlock TextAlignment ="Center"><Run Text="Сигнальні"/></TextBlock>
+                        <TextBlock TextAlignment ="Center"><Run Text="позначки"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Name="page3">
+            <TabItem x:Name="page3">
                 <TabItem.Header>
                     <StackPanel>
-                        <TextBlock TextAlignment ="Center">Лист запису</TextBlock>
-                        <TextBlock TextAlignment ="Center">Заключних діагнозів</TextBlock>
+                        <TextBlock TextAlignment ="Center"><Run Text="Лист запису"/></TextBlock>
+                        <TextBlock TextAlignment ="Center"><Run Text="Заключних діагнозів"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Name="page4">
+            <TabItem x:Name="page4">
                 <TabItem.Header>
                     <StackPanel>
-                        <TextBlock TextAlignment ="Center">Картка обліку навантаженнь</TextBlock>
-                        <TextBlock TextAlignment ="Center">при рентген дослідженнях</TextBlock>
+                        <TextBlock TextAlignment ="Center"><Run Text="Картка обліку навантаженнь"/></TextBlock>
+                        <TextBlock TextAlignment ="Center"><Run Text="при рентген дослідженнях"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Name="page5">
+            <TabItem x:Name="page5">
                 <TabItem.Header>
                     <WrapPanel>
-                        <TextBlock TextAlignment ="Center">Щоденник</TextBlock>
-                        <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"></GridSplitter>
-                        <Button Margin="10,0,0,0" Click="AddNewPage" Width="15" Height="15">
-                            <Ellipse Height="10" Width="10" Fill="Black" />
-                        </Button>
+                        <TextBlock TextAlignment ="Center"><Run Text="Щоденник"/></TextBlock>
+                        <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
                     </WrapPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem VerticalAlignment="Bottom" Name="Add" Height="20" Width="20">
-
-            </TabItem>
+            <TabItem x:Name="Add"  Margin="0,0,-32,0" MouseLeftButtonDown="AddNewPage"/>
 
         </TabControl>
     </Grid>
