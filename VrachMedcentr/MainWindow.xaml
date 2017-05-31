@@ -8,18 +8,30 @@
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
-            <RowDefinition ></RowDefinition>
-            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="100" ></RowDefinition>
             <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
-
-        <Button Click="AddNewPage" Margin="308,30,906,0" Height="36" VerticalAlignment="Top"/>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Menu VerticalAlignment="Top">
+                <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
+            </Menu>
+            <DockPanel>
+                
+                    <Button DockPanel.Dock="Left">
+                        <TextBlock >Додати запис</TextBlock>
+                    </Button>
+                
+            </DockPanel>          
+        </StackPanel>
+        <GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
+        HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+        
         <TextBox x:Name="Textbox1" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="Button1"  HorizontalAlignment="Left" Margin="171,28,0,0" VerticalAlignment="Top" Width="95" Height="23"/>
-        <Menu Height="25" VerticalAlignment="Top">
-            <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
-        </Menu>
-        <TabControl  x:Name="PacientCard"   >
+        
+        <TabControl Grid.Row="1"  x:Name="PacientCard"   >
 
             <TabItem  x:Name="page1">
                 <TabItem.Header>
