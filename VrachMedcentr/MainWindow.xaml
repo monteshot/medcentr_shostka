@@ -8,8 +8,7 @@
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" ></RowDefinition>
-            <RowDefinition ></RowDefinition>
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
@@ -63,9 +62,30 @@
                         </Grid>
                     </GroupBox>
                     <DataGrid 
-                        Margin="10,127,10,0" VerticalAlignment="Top"/>
+                        Margin="10,127,10,0" VerticalAlignment="Top" MaxHeight="300">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Найменування щеплення"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Вік"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Доза"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Серія"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Назва препарату"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Спосіб введення"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Місцева реак. на щеплення"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Загальна реак. на щеплення"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Медичні протипоказання"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <DataGrid 
-                        Margin="10,457,10,0" VerticalAlignment="Top"/>
+                        Margin="10,457,10,0" VerticalAlignment="Top" MaxHeight="330">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата/рік"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Кабінет №"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Флюрографія органів грудної клітки"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Обстеження на сифіліс"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Обстеження на ВІЛ"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem x:Name="page3">
@@ -75,7 +95,14 @@
                         <TextBlock TextAlignment ="Center"><Run Text="Заключних діагнозів"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Заключні (уточнені) діагнози"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem x:Name="page4">
                 <TabItem.Header>
