@@ -8,9 +8,9 @@
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
-            <RowDefinition ></RowDefinition>
-            <RowDefinition ></RowDefinition>
-            <RowDefinition ></RowDefinition>
+            
+            
+            
         </Grid.RowDefinitions>
 
         <Button Click="AddNewPage" Margin="308,30,906,0" Height="36" VerticalAlignment="Top"/>
@@ -51,9 +51,9 @@
                         </Grid>
                     </GroupBox>
                     <DataGrid 
-                        Margin="10,127,10,0" VerticalAlignment="Top"/>
+                        Margin="10,127,10,0" VerticalAlignment="Top" MaxHeight="300"/>
                     <DataGrid 
-                        Margin="10,457,10,0" VerticalAlignment="Top"/>
+                        Margin="10,457,10,0" VerticalAlignment="Top" MaxHeight="330"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="page3">
