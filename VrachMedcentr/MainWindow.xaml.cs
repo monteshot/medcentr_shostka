@@ -27,17 +27,19 @@ namespace WPF_Hospital
         public MainWindow()
         {
             InitializeComponent();
-            
-            string connectionstring = "SERVER=shostka.mysql.ukraine.com.ua;DATABASE=shostka_medcentr;UID=shostka_medcentr;PASSWORD=Cpu25Pro;";
-            MySqlConnection connect = new MySqlConnection(connectionstring);
-            MySqlCommand cmd = new MySqlCommand("SELECT *  FROM by_ds_app_services", connect);
-            connect.Open();
-            DataTable dt = new DataTable();
-            dt.Load(cmd.ExecuteReader());
-            connect.Close();
+
+            connect con = new connect();
+            page1.DataContext = con.query("SELECT * FROM by_ds_app_services");
+            //string connectionstring = "SERVER=shostka.mysql.ukraine.com.ua;DATABASE=shostka_medcentr;UID=shostka_medcentr;PASSWORD=Cpu25Pro;";
+            //MySqlConnection connect = new MySqlConnection(connectionstring);
+            //MySqlCommand cmd = new MySqlCommand("SELECT *  FROM by_ds_app_services", connect);
+            //connect.Open();
+            //DataTable dt = new DataTable();
+            //dt.Load(cmd.ExecuteReader());
+            //connect.Close();
 
             //TestGrid.DataContext = dt;
-            
+
 
         }
 

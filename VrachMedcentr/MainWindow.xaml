@@ -20,7 +20,7 @@
                 <TabItem.Header>
                     <StackPanel>
                         <TextBlock TextAlignment ="Center"><Run Text="Титульний"/></TextBlock>
-                        <TextBlock TextAlignment ="Center"><Run Text="лист"/></TextBlock>
+                        <TextBlock TextAlignment ="Center" Foreground="#FF020202"><Run Text="лист"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5"/>
@@ -32,7 +32,24 @@
                         <TextBlock TextAlignment ="Center"><Run Text="позначки"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem Header="Сигнальні позначки">
+                            <Grid Background="#FFE5E5E5">
+                                <Label Content="Label" HorizontalAlignment="Left" Margin="60,128,0,0" VerticalAlignment="Top" FontSize="14"/>
+                                <Label Content="Label" HorizontalAlignment="Left" Margin="60,162,0,0" VerticalAlignment="Top" FontSize="14"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Відомості про щеплення">
+                            <DataGrid/>
+                        </TabItem>
+                        <TabItem Header="Листок профілактичного огляду" >
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
             </TabItem>
             <TabItem x:Name="page3">
                 <TabItem.Header>
