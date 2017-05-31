@@ -14,7 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Data;
-namespace VrachMedcentr
+
+
+namespace kepkaSQL
 {
     class connect
     {

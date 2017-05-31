@@ -42,7 +42,7 @@ namespace WPF_Hospital
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-
+           
             
         }
 
