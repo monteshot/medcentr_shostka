@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Data;
+using kepkaSQL;
 
 namespace WPF_Hospital
 {
