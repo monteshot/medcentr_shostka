@@ -61,7 +61,6 @@
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem x:Name="Add"  Margin="0,0,-32,0" MouseLeftButtonDown="AddNewPage"/>
 
         </TabControl>
     </Grid>
