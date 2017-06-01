@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:local="clr-namespace:WPF_Hospital"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
@@ -202,10 +203,23 @@
                 <TabItem.Header>
                     <WrapPanel>
                         <TextBlock TextAlignment ="Center"><Run Text="Щоденник"/></TextBlock>
-                        <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
                     </WrapPanel>
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5"/>
+                <Grid>
+                    <DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Скарги хворого,об'єктивні дані, діагноз, перебіг хвороби"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--<WindowsFormsHost>
+                        <wf:ScrollableControl/>
+                    </WindowsFormsHost>-->
+                </Grid>
+
+
             </TabItem>
 
         </TabControl>
