@@ -101,13 +101,43 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Margin="100,0,0,0" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="25" FontFamily="Times New Roman">МЕДИЧНА КАРТКА АМБУЛАТОРНОГО ХВОРОГО №</TextBlock>
+                                <TextBlock Margin="200,0,0,0" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="25" FontFamily="Times New Roman">МЕДИЧНА КАРТКА АМБУЛАТОРНОГО ХВОРОГО №</TextBlock>
                                 <TextBox Margin="50,10,0,10" Width="100"></TextBox>
                             </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,1050,0">
+                                <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman">Код хворого</TextBlock>
+                                <TextBox VerticalAlignment="Center" Margin="20,0,0,0" Width="100"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="900,10,50,0">
+                                <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman">Дата заповнення карти</TextBlock>
+                                <DatePicker VerticalAlignment="Center" Margin="10,0,0,0"></DatePicker>
+                            </StackPanel>                      
+
                         </Grid>
+                        <Border BorderBrush="Black"  BorderThickness="1.5"></Border>
                     </Grid>
-
-
+                    <Border BorderBrush="Black"  BorderThickness="1.5"></Border>
+                    <Grid Margin="0,237,0,0">                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10,0,0">
+                           <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">Прізвище, ім'я, по батькові</TextBlock>
+                           <TextBox Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
+                        </StackPanel>
+                        <StackPanel></StackPanel>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem x:Name="page2">
