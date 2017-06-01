@@ -13,24 +13,26 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
-        <StackPanel>
-            <Menu VerticalAlignment="Top">
+        <DockPanel>
+            <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
                 <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
             </Menu>
-            <DockPanel>
-                
-                    <Button DockPanel.Dock="Left">
-                        <TextBlock >Додати запис</TextBlock>
+            <DockPanel Margin="0,0,0,10">
+                <WrapPanel Height="34" VerticalAlignment="Top"  Margin="0,38,0,0">
+                    <Button  Margin="10,10,0,0" >
+                        <TextBlock>Додати запис</TextBlock>
                     </Button>
-                
-            </DockPanel>          
-        </StackPanel>
+                    <Button  Margin="10,10,0,0">
+                        <TextBlock>Друкувати</TextBlock>
+                    </Button>
+                </WrapPanel>
+
+
+            </DockPanel>
+        </DockPanel>
         <GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
         HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
-        
-        <TextBox x:Name="Textbox1" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Button1"  HorizontalAlignment="Left" Margin="171,28,0,0" VerticalAlignment="Top" Width="95" Height="23"/>
-        
+
         <TabControl Grid.Row="1"  x:Name="PacientCard"   >
 
             <TabItem  x:Name="page1">
@@ -40,7 +42,45 @@
                         <TextBlock TextAlignment ="Center" Foreground="#FF020202"><Run Text="лист"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    
+                        <Grid Margin="900,10,0,675">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" FontSize="14">Код форми за ЗКУД</TextBlock>
+                            <TextBox Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" ></TextBox>
+                            <TextBlock Grid.Row="1" FontSize="14">Код закладу за ЗКПО</TextBlock>
+                            <TextBox Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" ></TextBox>
+                        </Grid>
+                    
+                    <Grid Margin="0,50,0,605">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderBrush="Black" Grid.Column="0" BorderThickness="1.5"></Border>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.70*"></RowDefinition>
+                                <RowDefinition Height="0.70*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock HorizontalAlignment="Center" FontSize="14" Grid.Row="0">Міністерство охорони здоров'я України</TextBlock>
+                            <GridSplitter Grid.Row="0"  Background="Black"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom"  Height="2"></GridSplitter>
+                            <TextBlock HorizontalAlignment="Center" FontSize="14" Grid.Row="1">Найменування закладу:</TextBlock>
+                            
+                            
+                        </Grid>
+                    </Grid>
+
+                </Grid>
             </TabItem>
             <TabItem x:Name="page2">
                 <TabItem.Header>
