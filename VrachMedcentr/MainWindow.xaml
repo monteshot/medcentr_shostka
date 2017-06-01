@@ -43,22 +43,22 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    
-                        <Grid Margin="900,10,0,675">
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" FontSize="14">Код форми за ЗКУД</TextBlock>
-                            <TextBox Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" ></TextBox>
-                            <TextBlock Grid.Row="1" FontSize="14">Код закладу за ЗКПО</TextBlock>
-                            <TextBox Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" ></TextBox>
-                        </Grid>
-                    
+
+                    <Grid Margin="900,10,0,675">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" FontSize="14">Код форми за ЗКУД</TextBlock>
+                        <TextBox Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" ></TextBox>
+                        <TextBlock Grid.Row="1" FontSize="14">Код закладу за ЗКПО</TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" ></TextBox>
+                    </Grid>
+
                     <Grid Margin="0,60,0,595">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition ></ColumnDefinition>
@@ -120,14 +120,16 @@
                 <Grid Background="#FFE5E5E5">
                     <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
                         <Grid>
-                            <Label Content="Цукровий діабет" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <Label Content="Інфекційні захворювання" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,26,0,0"/>
-                            <Label Content="Непереносимість до лікарських препаратів" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,84,0,0"/>
-                            <Label Content="Алергічний анамнез" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,53,0,0"/>
+
                             <TextBox  Margin="253,4,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
                             <TextBox  Margin="253,30,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
                             <TextBox  Margin="253,88,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
                             <TextBox  Margin="253,57,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
+                            <TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Цукровий діабет" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="5,62,0,0" TextWrapping="Wrap" Text="Алергічний анамнез" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="5,31,0,0" TextWrapping="Wrap" Text="Інфекційні захворювання" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="5,89,0,0" TextWrapping="Wrap" Text="Непереносимість до лікарських препаратів" VerticalAlignment="Top"/>
+
                         </Grid>
                     </GroupBox>
                     <DataGrid 
