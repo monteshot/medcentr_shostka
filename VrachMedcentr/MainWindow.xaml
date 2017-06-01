@@ -121,7 +121,7 @@
                     <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
                         <Grid>
                             <Label Content="Цукровий діабет" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <Label Content="Інфекційні захворювання" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,26,0,0"/>
+                            <Label Content="Інфекційні захворювання" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,26,0,0"/>
                             <Label Content="Непереносимість до лікарських препаратів" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,84,0,0"/>
                             <Label Content="Алергічний анамнез" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,53,0,0"/>
                             <TextBox  Margin="253,4,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
