@@ -121,10 +121,10 @@
                     <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
                         <Grid>
 
-                            <TextBox  Margin="253,4,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox  Margin="253,30,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox  Margin="253,88,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox  Margin="253,57,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
+                            <TextBox  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox  Margin="253,88,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox  Margin="253,57,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
                             <TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Цукровий діабет" VerticalAlignment="Top"/>
                             <TextBlock HorizontalAlignment="Left" Margin="5,62,0,0" TextWrapping="Wrap" Text="Алергічний анамнез" VerticalAlignment="Top"/>
                             <TextBlock HorizontalAlignment="Left" Margin="5,31,0,0" TextWrapping="Wrap" Text="Інфекційні захворювання" VerticalAlignment="Top"/>
@@ -133,7 +133,7 @@
                         </Grid>
                     </GroupBox>
                     <DataGrid 
-                        Margin="10,127,10,0" VerticalAlignment="Top" MaxHeight="300">
+                        Margin="10,127,18,0" VerticalAlignment="Top" MaxHeight="300">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Найменування щеплення"/>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
@@ -171,6 +171,9 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Заключні (уточнені) діагнози"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Вперше встаовлений діагноз (Так/Ні)"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="в т.ч. встановлений вперше при профогляді (Так/Ні)"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Підпис"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -182,7 +185,18 @@
                         <TextBlock TextAlignment ="Center"><Run Text="при рентген дослідженнях"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+
+                    <DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
+                            <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
+                            <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Вид дослідження, кількість і вид процедур"/>
+                            <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Ефективна доза дослідження"/>
+                            <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem x:Name="page5">
                 <TabItem.Header>
