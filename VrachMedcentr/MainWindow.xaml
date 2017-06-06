@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:local="clr-namespace:WPF_Hospital"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
@@ -43,6 +44,8 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
+
+
                     
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.20*"></RowDefinition>
@@ -72,6 +75,7 @@
                         </Grid>
                     
                     <Grid  Grid.Row="1">
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition ></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
@@ -223,18 +227,20 @@
                 <Grid Background="#FFE5E5E5">
                     <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
                         <Grid>
-                            <Label Content="Цукровий діабет" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <Label Content="Інфекційні захворювання" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,26,0,0"/>
-                            <Label Content="Непереносимість до лікарських препаратів" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,84,0,0"/>
-                            <Label Content="Алергічний анамнез" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,53,0,0"/>
-                            <TextBox  Margin="253,4,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox  Margin="253,30,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox  Margin="253,88,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox  Margin="253,57,6,0" TextWrapping="Wrap" Text="Діагноз" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
+
+                            <TextBox  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox  Margin="253,88,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox  Margin="253,57,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
+                            <TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Цукровий діабет" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="5,62,0,0" TextWrapping="Wrap" Text="Алергічний анамнез" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="5,31,0,0" TextWrapping="Wrap" Text="Інфекційні захворювання" VerticalAlignment="Top"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="5,89,0,0" TextWrapping="Wrap" Text="Непереносимість до лікарських препаратів" VerticalAlignment="Top"/>
+
                         </Grid>
                     </GroupBox>
                     <DataGrid 
-                        Margin="10,127,10,0" VerticalAlignment="Top" MaxHeight="300">
+                        Margin="10,127,18,0" VerticalAlignment="Top" MaxHeight="300">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Найменування щеплення"/>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
@@ -272,6 +278,9 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
                             <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Заключні (уточнені) діагнози"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Вперше встаовлений діагноз (Так/Ні)"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="в т.ч. встановлений вперше при профогляді (Так/Ні)"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Підпис"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -283,16 +292,40 @@
                         <TextBlock TextAlignment ="Center"><Run Text="при рентген дослідженнях"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+
+                    <DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
+                            <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
+                            <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Вид дослідження, кількість і вид процедур"/>
+                            <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Ефективна доза дослідження"/>
+                            <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem x:Name="page5">
                 <TabItem.Header>
                     <WrapPanel>
                         <TextBlock TextAlignment ="Center"><Run Text="Щоденник"/></TextBlock>
-                        <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
                     </WrapPanel>
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5"/>
+                <Grid>
+                    <DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Скарги хворого,об'єктивні дані, діагноз, перебіг хвороби"/>
+                            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <!--<WindowsFormsHost>
+                        <wf:ScrollableControl/>
+                    </WindowsFormsHost>-->
+                </Grid>
+
+
             </TabItem>
 
         </TabControl>
