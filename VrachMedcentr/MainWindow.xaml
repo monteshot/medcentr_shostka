@@ -8,28 +8,31 @@
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
-
+            <RowDefinition Height="100" ></RowDefinition>
+            <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
-        <StackPanel>
-            <Menu VerticalAlignment="Top">
+        <DockPanel>
+            <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
                 <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
             </Menu>
-            <DockPanel>
-                
-                    <Button DockPanel.Dock="Left">
-                        <TextBlock >Додати запис</TextBlock>
+            <DockPanel Margin="0,0,0,10">
+                <WrapPanel Height="34" VerticalAlignment="Top"  Margin="0,38,0,0">
+                    <Button  Margin="10,10,0,0" >
+                        <TextBlock>Додати запис</TextBlock>
                     </Button>
-                
-            </DockPanel>          
-        </StackPanel>
+                    <Button  Margin="10,10,0,0">
+                        <TextBlock>Друкувати</TextBlock>
+                    </Button>
+                </WrapPanel>
+
+
+            </DockPanel>
+        </DockPanel>
         <GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
         HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
-        
-        <TextBox x:Name="Textbox1" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Button1"  HorizontalAlignment="Left" Margin="171,28,0,0" VerticalAlignment="Top" Width="95" Height="23"/>
-        
+
         <TabControl Grid.Row="1"  x:Name="PacientCard"   >
 
             <TabItem  x:Name="page1">
@@ -39,7 +42,176 @@
                         <TextBlock TextAlignment ="Center" Foreground="#FF020202"><Run Text="лист"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.20*"></RowDefinition>
+                        <RowDefinition Height="0.25*"></RowDefinition>
+                        <RowDefinition Height="0.25*"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="Black"  BorderThickness="1.5" Grid.Row="3"></Border>
+                    <Grid  Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                        <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1.55" BorderBrush="Black" ></Border>
+                        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код форми за ЗКУД</TextBlock>
+                            <TextBox Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" ></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                            <TextBlock   Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код закладу за ЗКПО</TextBlock>
+                            <TextBox  Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
+                        </StackPanel>                            
+                        </Grid>
+                    
+                    <Grid  Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderBrush="Black" Grid.Column="0" BorderThickness="1.5"></Border>
+                        <Border BorderBrush="Black" Grid.Column="1" BorderThickness="1.5"></Border>
+                        <Border BorderBrush="Black" Grid.Column="2" BorderThickness="1.5"></Border>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.70*"></RowDefinition>
+                                <RowDefinition Height="0.70*"></RowDefinition>
+                                <RowDefinition  ></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock HorizontalAlignment="Center" FontSize="14" Grid.Row="0">Міністерство охорони здоров'я України</TextBlock>
+                            <GridSplitter Grid.Row="0"  Background="Black"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom"  Height="2"></GridSplitter>
+                            <TextBlock HorizontalAlignment="Center" FontSize="14" Grid.Row="1">Найменування закладу:</TextBlock>
+                            <Canvas Background="Red" Grid.Row="2"/>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left" FontSize="14" Grid.Row="0">МЕДИЧНА ДОКУМЕНТАЦІЯ ФОРМА № 0 2 5 / 0</TextBlock>
+                            <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left" FontSize="14" Grid.Row="1">Затверджено наказом МОЗ України</TextBlock>
+                            <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left" FontSize="15" Grid.Row="2">2 7. 1 2. 1 9 9 9 р. № 3 0 2</TextBlock>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>                           
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.3*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="25" FontFamily="Times New Roman">МЕДИЧНА КАРТКА АМБУЛАТОРНОГО ХВОРОГО №</TextBlock>
+                                <TextBox  FontSize="25" TextAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" MinWidth="100"></TextBox>
+                            
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" >
+                                <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman">Код хворого</TextBlock>
+                                <TextBox VerticalAlignment="Center" Margin="20,0,0,0" Width="100"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
+                                <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman">Дата заповнення карти</TextBlock>
+                                <DatePicker VerticalAlignment="Center" Margin="10,0,0,0"></DatePicker>
+                            </StackPanel>                      
+
+                        </Grid>
+                        <Border BorderBrush="Black"  BorderThickness="1.5"></Border>
+                    </Grid>
+                    <Border BorderBrush="Black"  BorderThickness="1.5"></Border>
+                    <Grid  Grid.Row="3"> 
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="1.9*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10,0,0">
+                           <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">1. Прізвище, ім'я, по батькові</TextBlock>
+                           <TextBox Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">2. Стать: чоловіча -</TextBlock>
+                            <CheckBox Margin="5,0,0,0" VerticalAlignment="Bottom"></CheckBox>
+                            <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">жіноча -</TextBlock>
+                            <CheckBox Margin="5,0,0,0" VerticalAlignment="Bottom"></CheckBox>
+                            <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">3. Дата народження</TextBlock>
+                            <DatePicker VerticalAlignment="Bottom" Margin="10,0,0,0"></DatePicker>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">4. Адереса</TextBlock>
+                            <TextBox Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">5. Проживає постійно (в місті, селі) -</TextBlock>
+                            <TextBox Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">6. Місце і адреса роботи </TextBlock>
+                            <TextBox Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">7. Дисперсна група (так -</TextBlock>
+                            <CheckBox Margin="5,0,0,0" VerticalAlignment="Bottom"></CheckBox>
+                            <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">ні -</TextBlock>
+                            <CheckBox Margin="5,0,0,0" VerticalAlignment="Bottom">)</CheckBox>                           
+                        </StackPanel>
+                        <Grid Grid.Row="6" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="0.6*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBlock    Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman" TextWrapping="Wrap">
+                                8. Контингенти: інваліди війни - 1; учасник війни - 2; учасник бойових дій - 3; інші інваліди - 4; ліквідатори аварії ЧАЕС - 5; евакуйовані - 6;  жителі які проживають на території
+                                <LineBreak/>
+                                радіоекологічного контролю - 7; діти які народились від батьків 1 - 3  групи, постраждалих від аварії на ЧАЕС - 8; інші пільгові категорії - 9 (впиcати нижче)
+                                </TextBlock>
+                            </StackPanel>                            
+                            <TextBox Grid.Row="1" Margin="10,0,0,0" Background="LightGray"  MinWidth="400"  VerticalAlignment="Stretch" HorizontalAlignment="Left"></TextBox>
+                        </Grid>
+                        <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman" TextWrapping="Wrap">
+                                9. Номер пільгового посвідчення
+                            </TextBlock>
+                            <TextBox Margin="10,0,0,0" Background="LightGray"  MinWidth="150"  VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBox>
+                        </StackPanel>
+                        <Grid Grid.Row="8" Grid.RowSpan="4" Margin="5">
+                            <DataGrid x:Name="Grid_Oblick">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn x:Name="Grid_Oblick_Taken_Date" Header="Взятий на облік"/>
+                                    <DataGridTextColumn x:Name="Grid_Oblick_Occasion" Header="Зприводу"/>
+                                    <DataGridTextColumn x:Name="Grid_Oblick_derecognised_Date" Header="Знятий з обліку"/>
+                                    <DataGridTextColumn x:Name="Oblick_Date_Given" Header="Причина"/>
+                                </DataGrid.Columns>                                
+                            </DataGrid>
+                        </Grid>
+                        
+                    </Grid>
+                </Grid>
             </TabItem>
             <TabItem x:Name="page2">
                 <TabItem.Header>
