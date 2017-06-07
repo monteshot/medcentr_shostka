@@ -28,8 +28,12 @@ namespace WPF_Hospital
         {
             InitializeComponent();
 
-            
-            dataDich.DataContext = con.query("SELECT * FROM karta");
+            DataTable dt;
+            dt = con.query("SELECT * FROM karta");
+            dataDich.DataContext = dt;
+            var selected = dt.Select("ID='2'");
+            textDich.Text = selected[0].ItemArray[5].ToString();
+            textDich.Text = selected[0].ItemArray[3].ToString()+" " + selected[0].ItemArray[4].ToString()+" " + selected[0].ItemArray[5].ToString() ;
             //string connectionstring = "SERVER=shostka.mysql.ukraine.com.ua;DATABASE=shostka_medcentr;UID=shostka_medcentr;PASSWORD=Cpu25Pro;";
             //MySqlConnection connect = new MySqlConnection(connectionstring);
             //MySqlCommand cmd = new MySqlCommand("SELECT *  FROM by_ds_app_services", connect);
