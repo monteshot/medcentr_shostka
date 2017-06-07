@@ -327,6 +327,11 @@
 
 
             </TabItem>
+            <TabItem x:Name="dich" Header="ДИЧь" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="54">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid ItemsSource="{Binding}"  x:Name="dataDich"/>
+                </Grid>
+            </TabItem>
 
         </TabControl>
     </Grid>
