@@ -30,6 +30,7 @@ namespace WPF_Hospital
 
             DataTable dt;
             dt = con.query("SELECT * FROM karta");
+            //textDich.Text= dataDich.Columns[0].Header.ToString();
             dataDich.DataContext = dt;
             var selected = dt.Select("ID='2'");
             textDich.Text = selected[0].ItemArray[5].ToString();
