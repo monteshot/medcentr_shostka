@@ -29,8 +29,8 @@ namespace kepkaSQL
         {
             server = "192.168.1.114";
             database = "medcentr";
-            UserID = "admin";
-            Password = "pass";
+            UserID = "monteshot";
+            Password = "a12345";
         }
         public connect(string Server, string Database, string userid, string pass)
         {
