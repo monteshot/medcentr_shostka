@@ -27,7 +27,7 @@ namespace WPF_Hospital
         public MainWindow()
         {
             InitializeComponent();
-
+        
             connect con = new connect();
             page1.DataContext = con.query("SELECT * FROM by_ds_app_services");
             //string connectionstring = "SERVER=shostka.mysql.ukraine.com.ua;DATABASE=shostka_medcentr;UID=shostka_medcentr;PASSWORD=Cpu25Pro;";
@@ -53,15 +53,15 @@ namespace WPF_Hospital
         {
             //Textbox1.Text = First.Name;
         }
-        int i = 6;
+        int i = 5;
         private void AddNewPage(object sender, RoutedEventArgs e)
         {
             
             i++;
             PacientCard.Items.Add(new TabItem
             {
-                Header = new TextBlock { Text = i.ToString() } // установка заголовка вкладки
-
+                Header = new TextBlock { Text = i.ToString() }, // установка заголовка вкладки
+                Name = "Page"+i.ToString()
             });
         }
 
@@ -75,6 +75,10 @@ namespace WPF_Hospital
             });
         }
 
-        
+        private void Delate(object sender, RoutedEventArgs e)
+        {
+             int count = PacientCard.SelectedIndex;
+            PacientCard.Items.RemoveAt(count);
+        }
     }
 }
