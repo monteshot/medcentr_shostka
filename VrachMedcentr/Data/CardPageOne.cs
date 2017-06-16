@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,21 +13,31 @@ namespace VrachMedcentr
     {
         #region Helpers Class Object
         private DateTime thisDay = DateTime.Today;
-
+        private DataTable TestTable = new DataTable();
+        
         #endregion
+
         #region Data_page1
 
         public string CodeZYCD { get; set; }
         public string CodeZKPO { get; set; }
         public string NumberPacient { get; set; }
-        public string CodePacient { get; set; }
-        // public DateTime DateCardWriten { get; set; }
+        public string CodePacient { get; set; }       
         public DateTime DateCardWriten { get => thisDay; set => thisDay = value; }
         public string Sername { get; set; }
         public string Name { get; set; }
         public string FathersName { get; set; }
         public bool SexFaMale { get; set; }
+        public bool SexMale { get; set; }
+        public string Adress { get; set; }
+        public string LeavingPlace { get; set; }
+        public string WorkingPlace { get; set; }
+        public bool DispersedGroupYes { get; set; }
+        public bool DispersedGroupNo { get; set; }
+        public string PreferentNumber { get; set; }
+        public DataTable AccountingTable { get; set; }
         #endregion
+
         #region Helpers method
 
         public void Setter()
