@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:local="clr-namespace:WPF_Hospital"
+        xmlns:local1="clr-namespace:VrachMedcentr.Data"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
+    <Window.Resources>
+       
+    </Window.Resources>
+   
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" ></RowDefinition>
@@ -14,6 +19,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
+       
         <DockPanel>
             <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
                 <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
@@ -29,6 +35,9 @@
                     <Button  Margin="5" Click="Delate" >
                         <TextBlock>Видалити сторінку</TextBlock>
                     </Button>
+                    <Button Click="sadada" Margin="5" >
+                        <TextBlock>Тест</TextBlock>
+                    </Button>
                 </WrapPanel>
 
 
@@ -37,19 +46,22 @@
         <GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
         HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
 
-        <TabControl Grid.Row="1"  x:Name="PacientCard"   >
+        <TabControl Grid.Row="1" x:Name="PacientCard" >
 
-            <TabItem  x:Name="page1">
+            <TabItem  x:Name="page1" >
                 <TabItem.Header>
                     <StackPanel>
                         <TextBlock TextAlignment ="Center"><Run Text="Титульний"/></TextBlock>
                         <TextBlock TextAlignment ="Center" Foreground="#FF020202"><Run Text="лист"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid Background="#FFE5E5E5">
-
-
-                    
+                <Grid x:Name="test" Background="#FFE5E5E5" >
+                    <Grid.Resources>
+                        <local1:CardPageOne x:Key="Page1"></local1:CardPageOne>
+                    </Grid.Resources>
+                    <Grid.DataContext>
+                        <Binding Source="{StaticResource Page1}"></Binding>
+                    </Grid.DataContext>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.20*"></RowDefinition>
                         <RowDefinition Height="0.25*"></RowDefinition>
@@ -57,7 +69,8 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Border BorderBrush="Black"  BorderThickness="1.5" Grid.Row="3"></Border>
-                    <Grid  Grid.Row="0">
+                    <Grid x:Name="Test"  Grid.Row="0" >
+
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
@@ -67,13 +80,15 @@
                                 <ColumnDefinition Width="0.4*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                         <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1.55" BorderBrush="Black" ></Border>
+                        
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
                             <TextBlock  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код форми за ЗКУД</TextBlock>
-                            <TextBox x:Name="CodeZYCD" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" ></TextBox>
+                            <TextBox Text="{Binding Title}"  Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
+                            
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                             <TextBlock   Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код закладу за ЗКПО</TextBlock>
-                            <TextBox x:Name="CodeZKPO" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
+                            <TextBox Text="{Binding Title, Mode=TwoWay}" x:Name="CodeZKPO" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
                         </StackPanel>                            
                         </Grid>
                     
@@ -329,6 +344,37 @@
                 </Grid>
 
 
+            </TabItem>
+            <TabItem>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.8*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListBox Grid.Column="0" >
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5">
+                                    <TextBlock FontSize="18" Text="{Binding Path=Phones.Title}" />
+                                    <TextBlock Text="{Binding Path=Company}" />
+                                    <TextBlock Text="{Binding Path=Price}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <StackPanel Grid.Column="1" DataContext="{Binding SelectedPhone}">
+                        <TextBlock Text="Выбранный элемент"  />
+                        <TextBlock Text="Модель" />
+                        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Text="Производитель" />
+                        <TextBox Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Text="Цена" />
+                        <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </Grid>
             </TabItem>
 
         </TabControl>
