@@ -77,13 +77,13 @@
                         <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1.55" BorderBrush="Black" ></Border>
                         
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="{Binding Title}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                            <TextBox   Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
+                            <TextBlock Text="{Binding Title,UpdateSourceTrigger=PropertyChanged}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                            <TextBox  Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
                             
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                             <TextBlock   Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код закладу за ЗКПО</TextBlock>
-                            <TextBox  x:Name="CodeZKPO" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
+                            <TextBox Text="{Binding Title,UpdateSourceTrigger=PropertyChanged}" x:Name="CodeZKPO" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
                         </StackPanel>                            
                         </Grid>
                     

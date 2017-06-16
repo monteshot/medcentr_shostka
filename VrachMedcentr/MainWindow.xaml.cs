@@ -31,6 +31,7 @@ namespace WPF_Hospital
         
             connect con = new connect();
             this.DataContext = new CardPageOne();
+            
 
 
         }
@@ -77,6 +78,7 @@ namespace WPF_Hospital
         {
             CardPageOne one = new CardPageOne();
             one.Setter();
+            //one.Title = "TEst";
         }
     }
 }
