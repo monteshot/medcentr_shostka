@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Data;
 using kepkaSQL;
+using VrachMedcentr;
 
 namespace WPF_Hospital
 {
@@ -27,10 +28,15 @@ namespace WPF_Hospital
         public MainWindow()
         {
             InitializeComponent();
-
-            connect con = new connect();
-            page1.DataContext = con.query("SELECT * FROM by_ds_app_services");
-            //string connectionstring = "SERVER=shostka.mysql.ukraine.com.ua;DATABASE=shostka_medcentr;UID=shostka_medcentr;PASSWORD=Cpu25Pro;";
+         //   DataContext = new test1();
+            //DataTable dt;
+            //dt = con.query("SELECT * FROM karta");
+            ////textDich.Text= dataDich.Columns[0].Header.ToString();
+            //dataDich.DataContext = dt;
+            //var selected = dt.Select("ID='2'");
+            //textDich.Text = selected[0].ItemArray[5].ToString();
+            //textDich.Text = selected[0].ItemArray[3].ToString()+" " + selected[0].ItemArray[4].ToString()+" " + selected[0].ItemArray[5].ToString() ;
+            ////string connectionstring = "SERVER=shostka.mysql.ukraine.com.ua;DATABASE=shostka_medcentr;UID=shostka_medcentr;PASSWORD=Cpu25Pro;";
             //MySqlConnection connect = new MySqlConnection(connectionstring);
             //MySqlCommand cmd = new MySqlCommand("SELECT *  FROM by_ds_app_services", connect);
             //connect.Open();
@@ -40,12 +46,14 @@ namespace WPF_Hospital
 
             //TestGrid.DataContext = dt;
 
-
+            
         }
+        connect con = new connect();      
+       
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-           
+         
             
         }
 
@@ -75,6 +83,13 @@ namespace WPF_Hospital
             });
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            test1 vw = new test1();
+            vw.title = "8szdgzdsf";
+            //mw.DataContext = vw;
+            DataContext = vw;
+        }
     }
 }
