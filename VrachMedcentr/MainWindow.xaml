@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:local="clr-namespace:WPF_Hospital"
+        xmlns:local1="clr-namespace:VrachMedcentr"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
+    <Window.Resources>
+        <local1:test1 x:Key="azaza1"/>
+    </Window.Resources>
+    
+    <Window.DataContext>
+        <Binding Source="{StaticResource azaza1}"/>
+    </Window.DataContext>
+
+
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" ></RowDefinition>
@@ -327,10 +337,18 @@
 
 
             </TabItem>
-            <TabItem x:Name="dich" Header="ДИЧь" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="54">
+            <TabItem  Header="ДИЧь" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="54">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid ItemsSource="{Binding}"  x:Name="dataDich"/>
-                    <TextBox x:Name="textDich"  HorizontalAlignment="Left" Height="78" Margin="229,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="228"/>
+                    <!--<Grid.Resources>
+                        <local1:test1 x:Key="azaza1"/>
+                    </Grid.Resources>
+                    <Grid.DataContext>
+                        <Binding Source="{StaticResource azaza1}"/>
+                    </Grid.DataContext>-->
+                    <DataGrid ItemsSource="{Binding Title}"  x:Name="dataDich"/>
+                    <TextBox Text="{Binding Title, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="78" Margin="229,54,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="228"/>
+                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Margin="229,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="46" Width="228"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="229,196,0,0" VerticalAlignment="Top" Width="228" Height="93" Click="Button_Click"/>
                 </Grid>
             </TabItem>
 
