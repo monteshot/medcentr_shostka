@@ -8,16 +8,7 @@
         xmlns:local1="clr-namespace:VrachMedcentr"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
-    <Window.Resources>
-
-        <local1:test1 x:Key="azaza1"/>
-    </Window.Resources>
     
-    <Window.DataContext>
-        <Binding Source="{StaticResource azaza1}"/>
-    </Window.DataContext>
-
-
 
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
