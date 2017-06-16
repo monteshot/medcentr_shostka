@@ -24,17 +24,17 @@ namespace WPF_Hospital
     /// </summary>
     public partial class MainWindow : Window
     {
-       // Card First = new Card("Valera");
+        // Card First = new Card("Valera");
         public MainWindow()
         {
             InitializeComponent();
 
-        
+
             connect con = new connect();
             this.DataContext = new CardPageOne();
-            
 
-         //   DataContext = new test1();
+
+            //   DataContext = new test1();
             //DataTable dt;
             //dt = con.query("SELECT * FROM karta");
             ////textDich.Text= dataDich.Columns[0].Header.ToString();
@@ -53,15 +53,15 @@ namespace WPF_Hospital
             //TestGrid.DataContext = dt;
 
 
-            
+
         }
-        connect con = new connect();      
-       
+        connect con = new connect();
+
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-         
-            
+
+
         }
 
         private void MenuFile_Click(object sender, RoutedEventArgs e)
@@ -71,12 +71,12 @@ namespace WPF_Hospital
         int i = 5;
         private void AddNewPage(object sender, RoutedEventArgs e)
         {
-            
+
             i++;
             PacientCard.Items.Add(new TabItem
             {
                 Header = new TextBlock { Text = i.ToString() }, // установка заголовка вкладки
-                Name = "Page"+i.ToString()
+                Name = "Page" + i.ToString()
             });
         }
 
@@ -93,16 +93,18 @@ namespace WPF_Hospital
 
         private void Delate(object sender, RoutedEventArgs e)
         {
-             int count = PacientCard.SelectedIndex;
+            int count = PacientCard.SelectedIndex;
             PacientCard.Items.RemoveAt(count);
         }
-       
+
         private void sadada(object sender, RoutedEventArgs e)
         {
             CardPageOne one = new CardPageOne();
             one.Setter();
             //one.Title = "TEst";
 
+          
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();

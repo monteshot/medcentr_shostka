@@ -8,16 +8,7 @@
         xmlns:local1="clr-namespace:VrachMedcentr"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
-    <Window.Resources>
-
-        <local1:test1 x:Key="azaza1"/>
-    </Window.Resources>
     
-    <Window.DataContext>
-        <Binding Source="{StaticResource azaza1}"/>
-    </Window.DataContext>
-
-
 
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
@@ -88,14 +79,14 @@
                         <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1.55" BorderBrush="Black" ></Border>
                         
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="{Binding Title,UpdateSourceTrigger=PropertyChanged}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                            <TextBox  Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
+                            <TextBlock Text="{Binding CodeZYCD,UpdateSourceTrigger=PropertyChanged}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                            <TextBox  Text="{Binding CodeZYCD, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
                             
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                             <TextBlock   Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код закладу за ЗКПО</TextBlock>
 
-                            <TextBox Text="{Binding Title,UpdateSourceTrigger=PropertyChanged}" x:Name="CodeZKPO" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
+                            <TextBox Text="{Binding CodeZKPO,UpdateSourceTrigger=PropertyChanged}" x:Name="CodeZKPO" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
                         </StackPanel>                            
                         </Grid>
                     
@@ -195,7 +186,7 @@
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">жіноча -</TextBlock>
                             <CheckBox Margin="5,0,0,0" VerticalAlignment="Bottom"></CheckBox>
                             <TextBlock x:Name="SexMale"  Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">3. Дата народження</TextBlock>
-                            <DatePicker x:Name="BornDate" VerticalAlignment="Bottom" Margin="10,0,0,0"></DatePicker>
+                            <DatePicker x:Name="BornDate" VerticalAlignment="Center" Margin="10,0,0,0"></DatePicker>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">4. Адереса</TextBlock>
