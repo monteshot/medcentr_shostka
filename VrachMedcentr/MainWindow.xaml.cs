@@ -16,7 +16,6 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using kepkaSQL;
 using VrachMedcentr;
-using VrachMedcentr.Data;
 
 namespace WPF_Hospital
 {
@@ -31,17 +30,7 @@ namespace WPF_Hospital
             InitializeComponent();
         
             connect con = new connect();
-            ///page1.DataContext = con.query("SELECT * FROM by_ds_app_services");
-            //string connectionstring = "SERVER=shostka.mysql.ukraine.com.ua;DATABASE=shostka_medcentr;UID=shostka_medcentr;PASSWORD=Cpu25Pro;";
-            //MySqlConnection connect = new MySqlConnection(connectionstring);
-            //MySqlCommand cmd = new MySqlCommand("SELECT *  FROM by_ds_app_services", connect);
-            //connect.Open();
-            //DataTable dt = new DataTable();
-            //dt.Load(cmd.ExecuteReader());
-            //connect.Close();            
-          
-           
-            //TestGrid.DataContext = dt;
+            this.DataContext = new CardPageOne();
 
 
         }
@@ -83,11 +72,11 @@ namespace WPF_Hospital
              int count = PacientCard.SelectedIndex;
             PacientCard.Items.RemoveAt(count);
         }
-
+       
         private void sadada(object sender, RoutedEventArgs e)
         {
-            CardPageOne one = test.DataContext as CardPageOne;
-            one.Setter("fasfa");
+            CardPageOne one = new CardPageOne();
+            one.Setter();
         }
     }
 }

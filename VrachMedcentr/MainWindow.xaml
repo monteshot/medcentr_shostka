@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:local="clr-namespace:WPF_Hospital"
-        xmlns:local1="clr-namespace:VrachMedcentr.Data"
+        xmlns:local1="clr-namespace:VrachMedcentr"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
     <Window.Resources>
@@ -56,12 +56,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid x:Name="test" Background="#FFE5E5E5" >
-                    <Grid.Resources>
-                        <local1:CardPageOne x:Key="Page1"></local1:CardPageOne>
-                    </Grid.Resources>
-                    <Grid.DataContext>
-                        <Binding Source="{StaticResource Page1}"></Binding>
-                    </Grid.DataContext>
+                   
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.20*"></RowDefinition>
                         <RowDefinition Height="0.25*"></RowDefinition>
@@ -70,8 +65,8 @@
                     </Grid.RowDefinitions>
                     <Border BorderBrush="Black"  BorderThickness="1.5" Grid.Row="3"></Border>
                     <Grid x:Name="Test"  Grid.Row="0" >
-
-                            <Grid.RowDefinitions>
+                       
+                        <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
@@ -82,13 +77,13 @@
                         <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1.55" BorderBrush="Black" ></Border>
                         
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код форми за ЗКУД</TextBlock>
-                            <TextBox Text="{Binding Title}"  Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
+                            <TextBlock Text="{Binding Title}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                            <TextBox   Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
                             
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                             <TextBlock   Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код закладу за ЗКПО</TextBlock>
-                            <TextBox Text="{Binding Title, Mode=TwoWay}" x:Name="CodeZKPO" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
+                            <TextBox  x:Name="CodeZKPO" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
                         </StackPanel>                            
                         </Grid>
                     
