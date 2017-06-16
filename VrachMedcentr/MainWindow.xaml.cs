@@ -28,6 +28,12 @@ namespace WPF_Hospital
         public MainWindow()
         {
             InitializeComponent();
+
+        
+            connect con = new connect();
+            this.DataContext = new CardPageOne();
+            
+
          //   DataContext = new test1();
             //DataTable dt;
             //dt = con.query("SELECT * FROM karta");
@@ -46,6 +52,7 @@ namespace WPF_Hospital
 
             //TestGrid.DataContext = dt;
 
+
             
         }
         connect con = new connect();      
@@ -61,15 +68,15 @@ namespace WPF_Hospital
         {
             //Textbox1.Text = First.Name;
         }
-        int i = 6;
+        int i = 5;
         private void AddNewPage(object sender, RoutedEventArgs e)
         {
             
             i++;
             PacientCard.Items.Add(new TabItem
             {
-                Header = new TextBlock { Text = i.ToString() } // установка заголовка вкладки
-
+                Header = new TextBlock { Text = i.ToString() }, // установка заголовка вкладки
+                Name = "Page"+i.ToString()
             });
         }
 
@@ -83,6 +90,19 @@ namespace WPF_Hospital
             });
         }
 
+
+        private void Delate(object sender, RoutedEventArgs e)
+        {
+             int count = PacientCard.SelectedIndex;
+            PacientCard.Items.RemoveAt(count);
+        }
+       
+        private void sadada(object sender, RoutedEventArgs e)
+        {
+            CardPageOne one = new CardPageOne();
+            one.Setter();
+            //one.Title = "TEst";
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
@@ -90,6 +110,7 @@ namespace WPF_Hospital
             vw.title = "8szdgzdsf";
             //mw.DataContext = vw;
             DataContext = vw;
+
         }
     }
 }
