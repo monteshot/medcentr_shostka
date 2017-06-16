@@ -20,8 +20,25 @@ namespace kepkaSQL
 {
     class connect
     {
+        string server;
+        string database;
+        string UserID;
+        string Password;
         private string stat;
-
+        public connect()
+        {
+            server = "192.168.1.114";
+            database = "medcentr";
+            UserID = "monteshot";
+            Password = "a12345";
+        }
+        public connect(string Server, string Database, string userid, string pass)
+        {
+            server = Server;
+            database = Database;
+            UserID = userid;
+            Password = pass;
+        }
         private DataTable dtFbase;
         public string selectSTR(string field, string value)
         {
@@ -55,29 +72,23 @@ namespace kepkaSQL
             return result;
         }
 
-        //public DataRow selectARR(string field, string value)
-        //{
-
-        //    DataRow result=null;
-        //    DataRow[] DR;
-
-        //    DR = dtFbase.Select(field + "='" + value + "'");
-
-        //        result = DR[0].ItemArray;
+        public string Server;
 
 
-        //    return result;
-
-        //}
         public DataTable query(string Statement)
         {
             stat = Statement;
             MySqlConnectionStringBuilder mysqlCSB;
             mysqlCSB = new MySqlConnectionStringBuilder();
-            mysqlCSB.Server = "shostka.mysql.ukraine.com.ua";
-            mysqlCSB.Database = "shostka_medcentr";
-            mysqlCSB.UserID = "shostka_medcentr";
-            mysqlCSB.Password = "Cpu25Pro";
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            //mysqlCSB.Server = "shostka.mysql.ukraine.com.ua";
+            //mysqlCSB.Database = "shostka_medcentr";
+            //mysqlCSB.UserID = "shostka_medcentr";
+            //mysqlCSB.Password = "Cpu25Pro";
 
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = mysqlCSB.ConnectionString;
