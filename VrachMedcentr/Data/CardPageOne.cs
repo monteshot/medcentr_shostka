@@ -11,14 +11,19 @@ namespace VrachMedcentr
     class CardPageOne : INotifyPropertyChanged
     {
 
-        public string Title { get; set; }
+        #region Data_page1
+
+        public string CodeZYCD { get; set; }
+        public string CodeZKPO { get; set; }
+        public string CodePacient { get; set; }
+        #endregion
         #region Helpers method
-    
+
         public void Setter()
         {
-            Title = "fasfasf";
+            CodeZYCD = "fasfasf";
         }
-      
+
         #endregion
         #region Event
         /// <summary>
