@@ -86,6 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\CardPageFive.cs" />
+    <Compile Include="Data\CardPageFour.cs" />
     <Compile Include="Data\CardPageOne.cs" />
     <Compile Include="Data\CardPageTwo.cs" />
     <Compile Include="HelpersClass\RelayCommand.cs" />
