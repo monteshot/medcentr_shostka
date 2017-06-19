@@ -25,6 +25,7 @@ namespace kepkaSQL
         string UserID;
         string Password;
         private string stat;
+        MySqlDataAdapter adapter;
         public connect()
         {
             server = "192.168.1.114";
@@ -93,6 +94,8 @@ namespace kepkaSQL
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = mysqlCSB.ConnectionString;
             MySqlCommand cmd = new MySqlCommand();
+            adapter = new MySqlDataAdapter(cmd);
+          
 
             con.Open();
             cmd.CommandText = stat;
@@ -106,7 +109,44 @@ namespace kepkaSQL
             dtFbase = dt;
             return dt;
         }
+        public DataTable Dpage3(string Statement) {
+            stat = Statement;
+            DataTable dt = new DataTable();
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+            
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand();
+            adapter = new MySqlDataAdapter(cmd);
 
+            adapter.InsertCommand = new MySqlCommand("sp_listDiagn",con);
+            adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@dataZvern", MySqlDbType.Date,50, "DataZvern"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@text_diag", MySqlDbType.VarChar, 50, "ZaklDiagn"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagFirst", MySqlDbType.Binary, 50, "FDiagn"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagProf", MySqlDbType.Binary, 50, "PDiag"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@pidpLik", MySqlDbType.Binary, 50, "Sign"));
+            MySqlParameter par = adapter.InsertCommand.Parameters.Add("@ID",MySqlDbType.Int32,0,"Id");
+            par.Direction = ParameterDirection.Output;
+            con.Open();
+            //cmd.CommandText = stat;
+            cmd.Connection = con;
+            
+            adapter.Fill(dt);
+            //cmd.ExecuteNonQuery();
+
+            //
+            
+            dt.Load(cmd.ExecuteReader());
+            con.Close();
+            dtFbase = dt;
+            return dt;
+        }
         //public string Name
         //{
         //    get { return stat; }

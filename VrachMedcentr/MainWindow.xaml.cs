@@ -31,8 +31,12 @@ namespace WPF_Hospital
 
 
             connect con = new connect();
+
             Page1.DataContext = new CardPageOne();
+            DPage3.DataContext = new CardPageThree();
+          //  con.query(-)
             //this.DataContext = new CardPageOne();
+
 
 
             //   DataContext = new test1();
@@ -59,7 +63,7 @@ namespace WPF_Hospital
         connect con = new connect();
 
 
-       
+
 
         private void MenuFile_Click(object sender, RoutedEventArgs e)
         {
@@ -93,18 +97,9 @@ namespace WPF_Hospital
             int count = PacientCard.SelectedIndex;
             PacientCard.Items.RemoveAt(count);
         }
-       // CardPageOne one = new CardPageOne();
+        // CardPageOne one = new CardPageOne();
 
-          
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            test1 vw = new test1();
-            vw.title = "8szdgzdsf";
-            //mw.DataContext = vw;
-            DataContext = vw;
-            
-        }
+
     }
+    
 }
