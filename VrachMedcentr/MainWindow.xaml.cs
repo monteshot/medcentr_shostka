@@ -31,9 +31,9 @@ namespace WPF_Hospital
 
 
             connect con = new connect();
-
-            Page1.DataContext = new CardPageOne();
-            DPage3.DataContext = new CardPageThree();
+            page1.DataContext = new CardPageOne();
+            page2.DataContext = new CardPageTwo();
+                DPage3.DataContext = new CardPageThree();
           //  con.query(-)
             //this.DataContext = new CardPageOne();
 

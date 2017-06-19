@@ -10,7 +10,7 @@
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
 
 
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="True" x:Name="page1">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" ></RowDefinition>
             <RowDefinition ></RowDefinition>
@@ -24,7 +24,7 @@
             </Menu>
             <DockPanel Margin="0,0,0,10">
                 <WrapPanel Height="34" VerticalAlignment="Top"  Margin="0,38,0,0">
-                    <Button  Margin="5" Click="AddNewPage" >
+                    <Button Command="{Binding }" Margin="5" Click="AddNewPage" >
                         <TextBlock>Додати запис</TextBlock>
                     </Button>
                     <Button  Margin="5">
@@ -33,7 +33,7 @@
                     <Button  Margin="5" Click="Delate" >
                         <TextBlock>Видалити сторінку</TextBlock>
                     </Button>
-                   
+                    <Button  Command="{Binding AddCommand}">Тест</Button>
                 </WrapPanel>
 
 
@@ -44,7 +44,7 @@
 
         <TabControl Grid.Row="1" x:Name="PacientCard" >
 
-            <TabItem  x:Name="page1" >
+            <TabItem   >
                 <TabItem.Header>
                     <StackPanel>
                         <TextBlock TextAlignment ="Center"><Run Text="Титульний"/></TextBlock>
@@ -71,7 +71,7 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="0.4*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Command="{Binding Test}">Тест</Button>
+                       
                         <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1.55" BorderBrush="Black" ></Border>
 
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
@@ -250,10 +250,10 @@
                     <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
                         <Grid>
 
-                            <TextBox  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox  Margin="253,88,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox  Margin="253,57,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
+                            <TextBox Text="{Binding Shugar}"  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox Text="{Binding InfectiousDis}"  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox Text="{Binding AlergiAnam}" Margin="253,88,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox Text="{Binding IntoleranceToDrugs}" Margin="253,57,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
                             <TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Цукровий діабет" VerticalAlignment="Top"/>
                             <TextBlock HorizontalAlignment="Left" Margin="5,62,0,0" TextWrapping="Wrap" Text="Алергічний анамнез" VerticalAlignment="Top"/>
                             <TextBlock HorizontalAlignment="Left" Margin="5,31,0,0" TextWrapping="Wrap" Text="Інфекційні захворювання" VerticalAlignment="Top"/>
