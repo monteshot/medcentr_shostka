@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace VrachMedcentr
 {
@@ -14,12 +15,12 @@ namespace VrachMedcentr
         #region Helpers Class Object
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
-        
+        private string codeZYCD;
+
         #endregion
 
         #region Data_page1
-
-        public string CodeZYCD { get; set; }
+              
         public string CodeZKPO { get; set; }
         public string NumberPacient { get; set; }
         public string CodePacient { get; set; }       
@@ -36,14 +37,26 @@ namespace VrachMedcentr
         public bool DispersedGroupNo { get; set; }
         public string PreferentNumber { get; set; }
         public DataTable AccountingTable { get; set; }
+        public string CodeZYCD1 { get => codeZYCD; set => codeZYCD = value; } 
+
         #endregion
 
         #region Helpers method
 
+        public ICommand Test
+        {
+            get
+            {
+                 return new ActionCommand(() =>
+                {
+                    Adress = "fasfasf";
+                });
+            }
+        }
         public void Setter()
         {
-            CodeZYCD = "fasfasf";
-            // DateTime Now = new DateTime();
+
+            Adress = "fasfasf";
         }
 
         #endregion
@@ -58,4 +71,26 @@ namespace VrachMedcentr
         #endregion
     }
 
+    public class ActionCommand : ICommand
+    {
+        private readonly Action action;
+
+        public ActionCommand(Action action)
+        {
+            this.action = action;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            action();
+        }
+    }
 }
+

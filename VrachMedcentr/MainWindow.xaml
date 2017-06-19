@@ -33,9 +33,7 @@
                     <Button  Margin="5" Click="Delate" >
                         <TextBlock>Видалити сторінку</TextBlock>
                     </Button>
-                    <Button Click="sadada" Margin="5" >
-                        <TextBlock>Тест</TextBlock>
-                    </Button>
+                   
                 </WrapPanel>
 
 
@@ -73,12 +71,12 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="0.4*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
+                        <Button  Command="{Binding Test}">Тест</Button>
                         <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1.55" BorderBrush="Black" ></Border>
                         
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="{Binding CodeZYCD,UpdateSourceTrigger=PropertyChanged}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                            <TextBox  Text="{Binding CodeZYCD, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
+                            <TextBlock Text="{Binding CodeZYCD, UpdateSourceTrigger=Explicit}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                            <TextBox  Text="{Binding CodeZYCD1 }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
                             
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
@@ -363,7 +361,7 @@
                     <DataGrid ItemsSource="{Binding Title}"  x:Name="dataDich"/>
                     <TextBox Text="{Binding Title, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="78" Margin="229,54,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="228"/>
                     <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Margin="229,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="46" Width="228"/>
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="229,196,0,0" VerticalAlignment="Top" Width="228" Height="93" Click="Button_Click"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="229,196,0,0" VerticalAlignment="Top" Width="228" Height="93" />
 
                 </Grid>
             </TabItem>
