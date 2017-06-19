@@ -95,7 +95,7 @@ namespace kepkaSQL
             con.ConnectionString = mysqlCSB.ConnectionString;
             MySqlCommand cmd = new MySqlCommand();
             adapter = new MySqlDataAdapter(cmd);
-          
+
 
             con.Open();
             cmd.CommandText = stat;
@@ -109,7 +109,9 @@ namespace kepkaSQL
             dtFbase = dt;
             return dt;
         }
-        public DataTable Dpage3(string Statement) {
+  
+        public DataView Dpage3(string Statement)
+        {
             stat = Statement;
             DataTable dt = new DataTable();
             MySqlConnectionStringBuilder mysqlCSB;
@@ -118,34 +120,49 @@ namespace kepkaSQL
             mysqlCSB.Database = database;
             mysqlCSB.UserID = UserID;
             mysqlCSB.Password = Password;
-            
+
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = mysqlCSB.ConnectionString;
-            MySqlCommand cmd = new MySqlCommand();
+            MySqlCommand cmd = new MySqlCommand(stat);
             adapter = new MySqlDataAdapter(cmd);
 
-            adapter.InsertCommand = new MySqlCommand("sp_listDiagn",con);
+            adapter.InsertCommand = new MySqlCommand("sp_listDiagn", con);
             adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
-            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@dataZvern", MySqlDbType.Date,50, "DataZvern"));
-            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@text_diag", MySqlDbType.VarChar, 50, "ZaklDiagn"));
-            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagFirst", MySqlDbType.Binary, 50, "FDiagn"));
-            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagProf", MySqlDbType.Binary, 50, "PDiag"));
-            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@pidpLik", MySqlDbType.Binary, 50, "Sign"));
-            MySqlParameter par = adapter.InsertCommand.Parameters.Add("@ID",MySqlDbType.Int32,0,"Id");
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@dataZvern", MySqlDbType.Date, 0, "DataZvern"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@text_diag", MySqlDbType.VarChar, 1000, "ZaklDiagn"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagFirst", MySqlDbType.Binary, 1, "FDiagn"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagProf", MySqlDbType.Binary, 1, "PDiag"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@pidpLik", MySqlDbType.Binary, 100, "Sign"));
+            MySqlParameter par = adapter.InsertCommand.Parameters.Add("@ID", MySqlDbType.Int32, 0, "Id");
+
             par.Direction = ParameterDirection.Output;
             con.Open();
-            //cmd.CommandText = stat;
+            //           cmd.CommandText = stat;
             cmd.Connection = con;
-            
+
             adapter.Fill(dt);
             //cmd.ExecuteNonQuery();
 
             //
-            
-            dt.Load(cmd.ExecuteReader());
+
+            //  dt.Load(cmd.ExecuteReader());
             con.Close();
             dtFbase = dt;
-            return dt;
+            //dt.Columns[0].Caption = "azazaza231zaz";
+            dt.Columns[2].ColumnName = "DataZvern";
+            dt.Columns[3].ColumnName = "ZaklDiagn";
+            dt.Columns[4].ColumnName = "FDiagn";
+            //            dt.Columns[4]
+            dt.Columns[5].ColumnName = "PDiag";
+            dt.Columns[6].ColumnName = "Sign";
+            return dt.DefaultView;
+            //arr = new object[dt.Rows.Count];
+            //for (int k = 0; k <= dt.Rows.Count - 1; k++)
+            //{
+            //    arr[k] = dt.Rows[k].ItemArray;
+
+            //}
+            //return arr;
         }
         //public string Name
         //{

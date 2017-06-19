@@ -295,17 +295,17 @@
                         <TextBlock TextAlignment ="Center"><Run Text="Заключних діагнозів"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <Grid DataContext="{Binding CardPageThree}" Background="#FFE5E5E5">
-                    <DataGrid x:Name="DPage3" ItemsSource="{Binding page3}" AutoGenerateColumns="False">
+                <Grid x:Name="Card3" Background="#FFE5E5E5">
+                    <DataGrid x:Name="DPage3" ItemsSource="{Binding page3}"  AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding DataZvern}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
+                            <DataGridTextColumn Binding="{Binding DataZvern }" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
                             <DataGridTextColumn Binding="{Binding ZaklDiagn}" ClipboardContentBinding="{x:Null}" Header="Заключні (уточнені) діагнози"/>
-                            <DataGridTextColumn Binding="{Binding FDiagn}" ClipboardContentBinding="{x:Null}" Header="Вперше встаовлений діагноз (Так/Ні)"/>
-                            <DataGridTextColumn Binding="{Binding PDiag}" ClipboardContentBinding="{x:Null}" Header="в т.ч. встановлений вперше при профогляді (Так/Ні)"/>
+                            <DataGridCheckBoxColumn Binding="{Binding FDiagn}" ClipboardContentBinding="{x:Null}" Header="Вперше встаовлений діагноз (Так/Ні)"/>
+                            <DataGridCheckBoxColumn Binding="{Binding PDiag}" ClipboardContentBinding="{x:Null}" Header="в т.ч. встановлений вперше при профогляді (Так/Ні)"/>
                             <DataGridTextColumn Binding="{Binding Sign}" ClipboardContentBinding="{x:Null}" Header="Підпис"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Button" Command="{Binding Test3}" HorizontalAlignment="Left" Margin="420,120,0,0" VerticalAlignment="Top" Width="159" Height="133"/>
+                    <Button Content="Button" Command="{Binding AddCommand3}" HorizontalAlignment="Left" Margin="420,120,0,0" VerticalAlignment="Top" Width="159" Height="133"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="page4">
