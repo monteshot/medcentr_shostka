@@ -59,11 +59,7 @@ namespace WPF_Hospital
         connect con = new connect();
 
 
-        private void Button1_Click(object sender, RoutedEventArgs e)
-        {
-
-
-        }
+       
 
         private void MenuFile_Click(object sender, RoutedEventArgs e)
         {
@@ -97,12 +93,7 @@ namespace WPF_Hospital
             int count = PacientCard.SelectedIndex;
             PacientCard.Items.RemoveAt(count);
         }
-
-        private void sadada(object sender, RoutedEventArgs e)
-        {
-            CardPageOne one = new CardPageOne();
-            one.Setter();
-            //one.Title = "TEst";
+       // CardPageOne one = new CardPageOne();
 
           
         }

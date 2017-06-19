@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,31 +15,50 @@ namespace VrachMedcentr
     {
         #region Helpers Class Object
         private DateTime thisDay = DateTime.Today;
+        private DataTable TestTable = new DataTable();
+        private string codeZYCD;
 
         #endregion
-        #region Data_page1
 
-        public string CodeZYCD { get; set; }
+        #region Data_page1
+              
         public string CodeZKPO { get; set; }
         public string NumberPacient { get; set; }
-        public string CodePacient { get; set; }
-        // public DateTime DateCardWriten { get; set; }
+        public string CodePacient { get; set; }       
         public DateTime DateCardWriten { get => thisDay; set => thisDay = value; }
         public string Sername { get; set; }
         public string Name { get; set; }
         public string FathersName { get; set; }
         public bool SexFaMale { get; set; }
-       
-        #endregion
-        #region Helpers method
-        
-       
+        public bool SexMale { get; set; }
+        public string Adress { get; set; }
+        public string LeavingPlace { get; set; }
+        public string WorkingPlace { get; set; }
+        public bool DispersedGroupYes { get; set; }
+        public bool DispersedGroupNo { get; set; }
+        public string PreferentNumber { get; set; }
+        public DataTable AccountingTable { get; set; }
+        public string CodeZYCD1 { get => codeZYCD; set => codeZYCD = value; } 
 
+        #endregion
+
+        #region Helpers method
+
+        public ICommand Test
+        {
+            get
+            {
+                 return new ActionCommand(() =>
+                {
+                    Adress = "fasfasf";
+                });
+            }
+        }
         public void Setter()
 
         {
-            
 
+            Adress = "fasfasf";
         }
 
         #endregion
@@ -53,4 +73,26 @@ namespace VrachMedcentr
         #endregion
     }
 
+    public class ActionCommand : ICommand
+    {
+        private readonly Action action;
+
+        public ActionCommand(Action action)
+        {
+            this.action = action;
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            action();
+        }
+    }
 }
+

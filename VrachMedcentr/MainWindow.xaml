@@ -33,9 +33,7 @@
                     <Button  Margin="5" Click="Delate" >
                         <TextBlock>Видалити сторінку</TextBlock>
                     </Button>
-                    <Button Click="sadada" Margin="5" >
-                        <TextBlock>Тест</TextBlock>
-                    </Button>
+                   
                 </WrapPanel>
 
 
@@ -73,13 +71,13 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="0.4*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
+                        <Button  Command="{Binding Test}">Тест</Button>
                         <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1.55" BorderBrush="Black" ></Border>
 
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="{Binding CodeZYCD,UpdateSourceTrigger=PropertyChanged}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                            <TextBox  Text="{Binding CodeZYCD, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
-
+                            <TextBlock Text="{Binding CodeZYCD, UpdateSourceTrigger=Explicit}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                            <TextBox  Text="{Binding CodeZYCD1 }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
+                            
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                             <TextBlock   Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код закладу за ЗКПО</TextBlock>
@@ -188,25 +186,21 @@
                         </StackPanel>
                         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">4. Адереса</TextBlock>
-                            <TextBox x:Name="CardAdress" Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
+                            <TextBox Text="{Binding Adress}" x:Name="CardAdress" Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
                         </StackPanel>
                         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">5. Проживає постійно (в місті, селі) -</TextBlock>
-                            <TextBox x:Name="CardLivePlace" Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
+                            <TextBox Text="{Binding LeavingPlace}" x:Name="CardLivePlace" Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
                         </StackPanel>
                         <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,10,0,0">
-
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">6. Місце і адреса роботи</TextBlock>
-                            <TextBox Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
-
+                            <TextBox  Text="{Binding WorkingPlace}"  Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
                         </StackPanel>
                         <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">7. Диспансерна група (так -</TextBlock>
-                            <CheckBox x:Name="GroupYes" Margin="5,0,0,0" VerticalAlignment="Bottom"></CheckBox>
+                            <CheckBox IsChecked="{Binding DispersedGroupYes}" x:Name="GroupYes" Margin="5,0,0,0" VerticalAlignment="Bottom"></CheckBox>
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">ні -</TextBlock>
-
-                            <CheckBox Margin="5,0,0,0" VerticalAlignment="Bottom">)</CheckBox>
-
+                            <CheckBox IsChecked="{Binding DispersedGroupNo}" Margin="5,0,0,0" VerticalAlignment="Bottom">)</CheckBox>
                         </StackPanel>
                         <Grid Grid.Row="6" >
                             <Grid.RowDefinitions>
@@ -228,16 +222,17 @@
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman" TextWrapping="Wrap">
                                 9. Номер пільгового посвідчення
                             </TextBlock>
-                            <TextBox x:Name="CardBenefitsNamber" Margin="10,0,0,0" Background="LightGray"  MinWidth="150"  VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBox>
+                            <TextBox Text="{Binding PreferentNumber}" x:Name="CardBenefitsNamber" Margin="10,0,0,0" Background="LightGray"  MinWidth="150"  VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBox>
                         </StackPanel>
                         <Grid Grid.Row="8" Grid.RowSpan="4" Margin="5">
-                            <DataGrid x:Name="Grid_Oblick">
+                            <DataGrid DataContext="{Binding AccountingTable}" x:Name="Grid_Oblick">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn x:Name="Grid_Oblick_Taken_Date" Header="Взятий на облік"/>
                                     <DataGridTextColumn x:Name="Grid_Oblick_Occasion" Header="Зприводу"/>
                                     <DataGridTextColumn x:Name="Grid_Oblick_derecognised_Date" Header="Знятий з обліку"/>
                                     <DataGridTextColumn x:Name="Oblick_Date_Given" Header="Причина"/>
                                 </DataGrid.Columns>
+                                
                             </DataGrid>
                         </Grid>
 
@@ -366,7 +361,7 @@
                     <DataGrid ItemsSource="{Binding Title}"  x:Name="dataDich"/>
                     <TextBox Text="{Binding Title, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="78" Margin="229,54,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="228"/>
                     <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Margin="229,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="46" Width="228"/>
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="229,196,0,0" VerticalAlignment="Top" Width="228" Height="93" Click="Button_Click"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="229,196,0,0" VerticalAlignment="Top" Width="228" Height="93" />
 
                 </Grid>
             </TabItem>
