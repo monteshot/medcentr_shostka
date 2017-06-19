@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+
 
 namespace VrachMedcentr
 {
@@ -16,6 +12,7 @@ namespace VrachMedcentr
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
         private string codeZYCD;
+        CardPageTwo PageTwo = new CardPageTwo();
 
         #endregion
 
@@ -37,22 +34,25 @@ namespace VrachMedcentr
         public bool DispersedGroupNo { get; set; }
         public string PreferentNumber { get; set; }
         public DataTable AccountingTable { get; set; }
-        public string CodeZYCD1 { get => codeZYCD; set => codeZYCD = value; } 
+        public string CodeZYCD1 { get => codeZYCD; set => codeZYCD = value; }
 
         #endregion
 
         #region Helpers method
-
-        public ICommand Test
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand
         {
             get
             {
-                 return new ActionCommand(() =>
-                {
-                    Adress = "fasfasf";
-                });
+                return addCommand ??
+                  (addCommand = new RelayCommand(obj =>
+                  {
+                      Setter();
+                  }));
             }
         }
+
+       
         public void Setter()
         {
 
@@ -69,28 +69,9 @@ namespace VrachMedcentr
         };
 
         #endregion
+
+       
     }
 
-    public class ActionCommand : ICommand
-    {
-        private readonly Action action;
-
-        public ActionCommand(Action action)
-        {
-            this.action = action;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            action();
-        }
-    }
 }
 

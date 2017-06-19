@@ -87,6 +87,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\CardPageOne.cs" />
+    <Compile Include="Data\CardPageTwo.cs" />
+    <Compile Include="HelpersClass\RelayCommand.cs" />
     <Compile Include="ViewModel\CardOne.cs" />
     <Compile Include="test1.cs" />
     <Page Include="MainWindow.xaml">
