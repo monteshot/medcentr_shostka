@@ -8,7 +8,7 @@
         xmlns:local1="clr-namespace:VrachMedcentr"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1280"  WindowStyle="SingleBorderWindow">
-    
+
 
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
-       
+
         <DockPanel>
             <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
                 <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
@@ -55,7 +55,7 @@
                 </TabItem.Header>
 
                 <Grid x:Name="Page1" Background="#FFE5E5E5">
-                   
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.20*"></RowDefinition>
                         <RowDefinition Height="0.25*"></RowDefinition>
@@ -75,19 +75,19 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1.55" BorderBrush="Black" ></Border>
-                        
+
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
                             <TextBlock Text="{Binding CodeZYCD,UpdateSourceTrigger=PropertyChanged}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
                             <TextBox  Text="{Binding CodeZYCD, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
-                            
+
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                             <TextBlock   Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center">Код закладу за ЗКПО</TextBlock>
 
                             <TextBox Text="{Binding CodeZKPO,UpdateSourceTrigger=PropertyChanged}" x:Name="CodeZKPO" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  MinWidth="150" ></TextBox>
-                        </StackPanel>                            
-                        </Grid>
-                    
+                        </StackPanel>
+                    </Grid>
+
 
                     <Grid  Grid.Row="1">
 
@@ -146,7 +146,7 @@
                             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
                                 <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman">Дата заповнення карти</TextBlock>
 
-                                <DatePicker SelectedDate="{Binding DateCardWriten}" SelectedDateFormat="Short" VerticalAlignment="Center" Margin="10,0,0,0"></DatePicker>
+                                <DatePicker SelectedDate="{Binding DateCardWriten,Mode=TwoWay}" SelectedDateFormat="Short" VerticalAlignment="Center" Margin="10,0,0,0"></DatePicker>
                             </StackPanel>
 
 
@@ -176,7 +176,7 @@
                             <TextBox Text="{Binding Sername}" Background="LightGray"  MinWidth="150" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
                             <TextBox Text="{Binding Name}" Background="LightGray"  MinWidth="150" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
                             <TextBox Text="{Binding FathersName}" Background="LightGray"  MinWidth="150" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"></TextBox>
-                            
+
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">2. Стать: чоловіча -</TextBlock>
@@ -184,7 +184,7 @@
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">жіноча -</TextBlock>
                             <CheckBox  IsChecked="{Binding SexMale}" Margin="5,0,0,0" VerticalAlignment="Bottom"></CheckBox>
                             <TextBlock x:Name="SexMale"  Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">3. Дата народження</TextBlock>
-                            <DatePicker SelectedDate="{Binding DateCardWriten}" SelectedDateFormat="Short" x:Name="BornDate" VerticalAlignment="Center" Margin="10,0,0,0"></DatePicker>
+                            <DatePicker SelectedDate="{Binding DateCardWriten,Mode=TwoWay}" SelectedDateFormat="Short" x:Name="BornDate" VerticalAlignment="Center" Margin="10,0,0,0"></DatePicker>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman">4. Адереса</TextBlock>

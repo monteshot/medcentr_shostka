@@ -113,7 +113,7 @@ namespace WPF_Hospital
             vw.title = "8szdgzdsf";
             //mw.DataContext = vw;
             DataContext = vw;
-
+            
         }
     }
 }

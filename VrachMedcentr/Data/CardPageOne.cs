@@ -5,7 +5,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using WPF_Hospital;
+using System.Data;
+using System.Windows.Input;
 namespace VrachMedcentr
 {
     class CardPageOne : INotifyPropertyChanged
@@ -26,13 +28,17 @@ namespace VrachMedcentr
         public string Name { get; set; }
         public string FathersName { get; set; }
         public bool SexFaMale { get; set; }
+       
         #endregion
         #region Helpers method
+        
+       
 
         public void Setter()
+
         {
-            CodeZYCD = "fasfasf";
-            // DateTime Now = new DateTime();
+            
+
         }
 
         #endregion

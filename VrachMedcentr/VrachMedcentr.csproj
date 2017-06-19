@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\CardPageOne.cs" />
+    <Compile Include="nano.cs" />
     <Compile Include="ViewModel\CardOne.cs" />
     <Compile Include="test1.cs" />
     <Page Include="MainWindow.xaml">
