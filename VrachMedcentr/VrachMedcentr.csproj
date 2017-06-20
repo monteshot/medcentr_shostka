@@ -86,10 +86,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\CardPages.cs" />
+    <Compile Include="Data\CardPageFive.cs" />
+    <Compile Include="Data\CardPageFour.cs" />
+    <Compile Include="Data\CardPageOne.cs" />
     <Compile Include="Data\CardPageTwo.cs" />
     <Compile Include="Data\TablesData\OblickTable.cs" />
     <Compile Include="HelpersClass\RelayCommand.cs" />
+    <Compile Include="Data\CardPageThree.cs" />
+    <Compile Include="nano.cs" />
     <Compile Include="ViewModel\CardOne.cs" />
     <Compile Include="test1.cs" />
     <Page Include="MainWindow.xaml">

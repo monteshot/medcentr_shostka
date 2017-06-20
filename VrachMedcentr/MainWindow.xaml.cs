@@ -31,8 +31,15 @@ namespace WPF_Hospital
 
 
             connect con = new connect();
-            page1.DataContext = new CardPages();
-       
+            page1.DataContext = new CardPageOne();
+            page2.DataContext = new CardPageTwo();
+            Card3.DataContext= new CardPageThree();
+            Card4.DataContext = new CardPageFour();
+            Card5.DataContext = new CardPageFive();
+            // DPage3.DataContext = new CardPageThree();
+            //  con.query(-)
+            //this.DataContext = new CardPageOne();
+
 
 
             //   DataContext = new test1();
@@ -59,7 +66,7 @@ namespace WPF_Hospital
         connect con = new connect();
 
 
-       
+
 
         private void MenuFile_Click(object sender, RoutedEventArgs e)
         {
@@ -93,8 +100,9 @@ namespace WPF_Hospital
             int count = PacientCard.SelectedIndex;
             PacientCard.Items.RemoveAt(count);
         }
-       // CardPageOne one = new CardPageOne();
+        // CardPageOne one = new CardPageOne();
 
-       
+
     }
+    
 }

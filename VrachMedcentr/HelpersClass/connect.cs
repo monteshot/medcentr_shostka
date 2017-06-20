@@ -11,6 +11,7 @@ namespace kepkaSQL
         string UserID;
         string Password;
         private string stat;
+        MySqlDataAdapter adapter;
         public connect()
         {
             server = "192.168.1.114";
@@ -79,6 +80,8 @@ namespace kepkaSQL
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = mysqlCSB.ConnectionString;
             MySqlCommand cmd = new MySqlCommand();
+            adapter = new MySqlDataAdapter(cmd);
+
 
             con.Open();
             cmd.CommandText = stat;
@@ -93,6 +96,115 @@ namespace kepkaSQL
             return dt;
         }
 
+        public DataView Dpage3(string Statement)
+        {
+            stat = Statement;
+            DataTable dt = new DataTable();
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand(stat);
+            adapter = new MySqlDataAdapter(cmd);
+
+            adapter.InsertCommand = new MySqlCommand("sp_listDiagn", con);
+            adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@dataZvern", MySqlDbType.Date, 0, "DataZvern"));
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@text_diag", MySqlDbType.VarChar, 1000, "ZaklDiagn"));
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagFirst", MySqlDbType.Binary, 1, "FDiagn"));
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagProf", MySqlDbType.Binary, 1, "PDiag"));
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@pidpLik", MySqlDbType.Binary, 100, "Sign"));
+            //MySqlParameter par = adapter.InsertCommand.Parameters.Add("@ID", MySqlDbType.Int32, 0, "Id");
+
+            //par.Direction = ParameterDirection.Output;
+            con.Open();
+            cmd.Connection = con;
+
+            adapter.Fill(dt);
+
+            con.Close();
+            dtFbase = dt;
+            dt.Columns[2].ColumnName = "DataZvern";
+            dt.Columns[3].ColumnName = "ZaklDiagn";
+            dt.Columns[4].ColumnName = "FDiagn";
+            dt.Columns[5].ColumnName = "PDiag";
+            dt.Columns[6].ColumnName = "Sign";
+            return dt.DefaultView;
+
+        }
+        public DataView Dpage4(string Statement)
+        {
+            stat = Statement;
+            DataTable dt = new DataTable();
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand(stat);
+            adapter = new MySqlDataAdapter(cmd);
+
+            adapter.InsertCommand = new MySqlCommand("sp_listRentg", con);
+            adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
+
+            con.Open();
+            cmd.Connection = con;
+
+            adapter.Fill(dt);
+
+            con.Close();
+            dtFbase = dt;
+            dt.Columns[0].ColumnName = "nomZver";
+            dt.Columns[2].ColumnName = "dataZver";
+            dt.Columns[3].ColumnName = "VydDosl";
+            dt.Columns[4].ColumnName = "doza";
+            dt.Columns[5].ColumnName = "mitka";
+            return dt.DefaultView;
+
+        }
+        public DataView Dpage5(string Statement)
+        {
+            stat = Statement;
+            DataTable dt = new DataTable();
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand(stat);
+            adapter = new MySqlDataAdapter(cmd);
+
+            adapter.InsertCommand = new MySqlCommand("sp_listDiary", con);
+            adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
+
+            con.Open();
+            cmd.Connection = con;
+
+            adapter.Fill(dt);
+
+            con.Close();
+            dtFbase = dt;
+            //dt.Columns[0].ColumnName = "dataZver";
+            dt.Columns[2].ColumnName = "dataZver";
+            dt.Columns[3].ColumnName = "misceLik";
+            dt.Columns[4].ColumnName = "skarga";
+            dt.Columns[5].ColumnName = "Lechen";
+            return dt.DefaultView;
+
+        }
         //public string Name
         //{
         //    get { return stat; }

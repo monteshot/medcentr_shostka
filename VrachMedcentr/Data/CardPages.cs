@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
-
-
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using WPF_Hospital;
+using System.Data;
+using System.Windows.Input;
 namespace VrachMedcentr
 {
     class CardPages : INotifyPropertyChanged
@@ -84,6 +89,7 @@ namespace VrachMedcentr
 
 
         public void Setter()
+
         {
 
             Adress = "fasfasf";
