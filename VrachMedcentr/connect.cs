@@ -109,6 +109,8 @@ namespace kepkaSQL
             dtFbase = dt;
             return dt;
         }
+
+#region
         DataTable dt = new DataTable();
         public DataView Dpage3(/*string Statement*/)
         {
@@ -193,47 +195,7 @@ namespace kepkaSQL
             adapter.Update(dt);
             dt.AcceptChanges();
 
-
-            //MySqlConnectionStringBuilder mysqlCSB;
-            //mysqlCSB = new MySqlConnectionStringBuilder();
-            //mysqlCSB.Server = server;
-            //mysqlCSB.Database = database;
-            //mysqlCSB.UserID = UserID;
-            //mysqlCSB.Password = Password;
-
-            //MySqlConnection con = new MySqlConnection();
-            //con.ConnectionString = mysqlCSB.ConnectionString;
-
-            //MySqlCommand cmd = new MySqlCommand();
-
-
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@dataZvern", MySqlDbType.Date, 0, "DataZvern"));
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@text_diag", MySqlDbType.VarChar, 1000, "ZaklDiagn"));
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagFirst", MySqlDbType.Binary, 1, "FDiagn"));
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagProf", MySqlDbType.Binary, 1, "PDiag"));
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@pidpLik", MySqlDbType.Binary, 100, "Sign"));
-            //adapter.InsertCommand = new MySqlCommand("INSERT INTO diagnoz (ID, ID_pat, dataZvern,text_diag, diagFirst, diagProf, pidpLik) VALUES (null,'99',dataZvern=@dataZvern,text_diag=@text_diag,diagFirst=@diagFirst,diagProf=@diagProf,pidpLik=@pidpLik)");
-
-            // dt.AcceptChanges();
-            //MySqlConnectionStringBuilder mysqlCSB;
-            //mysqlCSB = new MySqlConnectionStringBuilder();
-            //mysqlCSB.Server = server;
-            //mysqlCSB.Database = database;
-            //mysqlCSB.UserID = UserID;
-            //mysqlCSB.Password = Password;
-
-            //MySqlConnection con = new MySqlConnection();
-            //con.ConnectionString = mysqlCSB.ConnectionString;
-
-            //MySqlCommand cmd = new MySqlCommand();
-            //{
-            //    con.Open();
-            //    cmd.CommandText = "INSERT INTO diagnoz (ID, ID_pat) VALUES (null,'99')";
-            //    cmd.Connection = con;
-
-            //    cmd.ExecuteNonQuery();
-            //    con.Close();
-            //}
+                  
 
         }
         public DataView Dpage4(string Statement)
@@ -304,6 +266,8 @@ namespace kepkaSQL
             return dt.DefaultView;
 
         }
+#endregion 
+
         //public string Name
         //{
         //    get { return stat; }
