@@ -22,7 +22,23 @@
             <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
                 <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
             </Menu>
-            <DockPanel Margin="0,0,0,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.4*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="2">
+                    <TextBox VerticalAlignment="Center" MinWidth="100" Margin="10,0,0,0">Прізвище</TextBox>
+                    <TextBox VerticalAlignment="Center" MinWidth="100" Margin="10,0,0,0">Ім'я</TextBox>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" >Дата народження</TextBlock>
+                    <DatePicker  MinWidth="100" Margin="10,0,0,0" SelectedDateFormat="Short"></DatePicker>
+                    <Button VerticalAlignment="Center"  Margin="10,0,0,0" Content="Пошук пацієнта"></Button>
+                </StackPanel>
+
+            </Grid>
+            <!--<DockPanel Margin="0,0,0,10">
                 <WrapPanel Height="34" VerticalAlignment="Top"  Margin="0,38,0,0">
                     <Button Command="{Binding }" Margin="5" Click="AddNewPage" >
                         <TextBlock>Додати запис</TextBlock>
@@ -35,9 +51,7 @@
                     </Button>
                     <Button  Command="{Binding AddCommand}">Тест</Button>
                 </WrapPanel>
-
-
-            </DockPanel>
+            </DockPanel>-->
         </DockPanel>
         <GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
         HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
@@ -76,7 +90,7 @@
 
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
                             <TextBlock Text="{Binding CodeZYCD, UpdateSourceTrigger=Explicit}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                            <TextBox  Text="{Binding CodeZYCD1 }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
+                            <TextBox  Text="{Binding CodeZYCD }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
 
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
@@ -224,17 +238,21 @@
                             </TextBlock>
                             <TextBox Text="{Binding PreferentNumber}" x:Name="CardBenefitsNamber" Margin="10,0,0,0" Background="LightGray"  MinWidth="150"  VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBox>
                         </StackPanel>
-                        <Grid Grid.Row="8" Grid.RowSpan="4" Margin="5">
-                            <DataGrid DataContext="{Binding AccountingTable}" x:Name="Grid_Oblick">
+                        <Grid Grid.Row="8" Grid.RowSpan="3" Margin="5">
+                            <DataGrid  ItemsSource="{Binding Phones}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn x:Name="Grid_Oblick_Taken_Date" Header="Взятий на облік"/>
-                                    <DataGridTextColumn x:Name="Grid_Oblick_Occasion" Header="Зприводу"/>
-                                    <DataGridTextColumn x:Name="Grid_Oblick_derecognised_Date" Header="Знятий з обліку"/>
-                                    <DataGridTextColumn x:Name="Oblick_Date_Given" Header="Причина"/>
+                                    <DataGridTextColumn Binding="{Binding TakenDate}"  Header="Взятий на облік"/>
+                                    <DataGridTextColumn Binding="{Binding TakenReason}"  Header="Зприводу"/>
+                                    <DataGridTextColumn Binding="{Binding RemovedDate}"  Header="Знятий з обліку"/>
+                                    <DataGridTextColumn Binding="{Binding RemovedReason}" Header="Причина"/>
                                 </DataGrid.Columns>
 
                             </DataGrid>
                         </Grid>
+                        <StackPanel Grid.Row="11" Orientation="Horizontal">
+                            <Button Margin="10,0,0,5">Видалити запис</Button>
+                            <Button Margin="10,0,0,5">Зберегти</Button>
+                        </StackPanel>
 
                     </Grid>
                 </Grid>
@@ -247,11 +265,12 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
+
                     <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
                         <Grid>
 
-                            <TextBox Text="{Binding Shugar}"  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox Text="{Binding InfectiousDis}"  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox Text="{Binding Shugar, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox Text="{Binding Shugar}"  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
                             <TextBox Text="{Binding AlergiAnam}" Margin="253,88,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
                             <TextBox Text="{Binding IntoleranceToDrugs}" Margin="253,57,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
                             <TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Цукровий діабет" VerticalAlignment="Top"/>
@@ -344,15 +363,25 @@
                     </WrapPanel>
                 </TabItem.Header>
                 <Grid x:Name="Card5">
-                    <DataGrid x:Name="DPage5" ItemsSource="{Binding page5}" AutoGenerateColumns="False">
+                    <!--<DataGrid  ItemsSource="{Binding Phones}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding dataZver}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
-                            <DataGridTextColumn Binding="{Binding misceLik}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
-                            <DataGridTextColumn Binding="{Binding skarga}" ClipboardContentBinding="{x:Null}" Header="Скарги хворого,об'єктивні дані, діагноз, перебіг хвороби"/>
-                            <DataGridTextColumn Binding="{Binding Lechen}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
+                            <DataGridTextColumn Binding="{Binding TakenDate}"  Header="Взятий на облік"/>
+                            <DataGridTextColumn Binding="{Binding TakenReason}"  Header="Зприводу"/>
+                            <DataGridTextColumn Binding="{Binding RemovedDate}"  Header="Знятий з обліку"/>
+                            <DataGridTextColumn Binding="{Binding RemovedReason}" Header="Причина"/>
+                        </DataGrid.Columns>
+
+                    </DataGrid>-->
+                    <DataGrid x:Name="DPage5" ItemsSource="{Binding Dinery}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding ComingDate}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
+                            <DataGridTextColumn Binding="{Binding HealingPlace}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
+                            <DataGridTextColumn Binding="{Binding Diagnosis}" ClipboardContentBinding="{x:Null}" Header="Скарги хворого,об'єктивні дані, діагноз, перебіг хвороби"/>
+                            <DataGridTextColumn Binding="{Binding Stamp}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Button" Command="{Binding AddCommand5}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                    <Button Content="Button1" Command="{Binding Insert}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                    <Button Content="Button2" Command="{Binding Read}" HorizontalAlignment="Left" Margin="210,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
                     <!--<WindowsFormsHost>
                         <wf:ScrollableControl/>
                     </WindowsFormsHost>-->
@@ -361,6 +390,29 @@
 
             </TabItem>
 
+            <TabItem>
+                <TabItem.Header>
+                    <WrapPanel>
+                        <TextBlock TextAlignment ="Center"><Run Text="Тестовое название"/></TextBlock>
+                    </WrapPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>                        
+                        <RowDefinition Height="12*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TabControl Grid.Row="2">
+                        <TabItem>
+                            <TabItem.Header>
+                                <WrapPanel>
+                                    <TextBlock TextAlignment ="Center"><Run Text="Тестовое название"/></TextBlock>
+                                </WrapPanel>
+                            </TabItem.Header>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
