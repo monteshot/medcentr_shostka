@@ -76,7 +76,7 @@
                         
                         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
                             <TextBlock Text="{Binding CodeZYCD, UpdateSourceTrigger=Explicit}"  Margin="10,0,0,0" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                            <TextBox  Text="{Binding CodeZYCD1 }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
+                            <TextBox  Text="{Binding CodeZYCD }" Margin="10,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" MinWidth="150" />
                             
                         </StackPanel>
                         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
@@ -224,17 +224,22 @@
                             </TextBlock>
                             <TextBox Text="{Binding PreferentNumber}" x:Name="CardBenefitsNamber" Margin="10,0,0,0" Background="LightGray"  MinWidth="150"  VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBox>
                         </StackPanel>
-                        <Grid Grid.Row="8" Grid.RowSpan="4" Margin="5">
-                            <DataGrid DataContext="{Binding AccountingTable}" x:Name="Grid_Oblick">
+                        <Grid Grid.Row="8" Grid.RowSpan="3" Margin="5">                           
+                            <DataGrid  ItemsSource="{Binding Phones}" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn x:Name="Grid_Oblick_Taken_Date" Header="Взятий на облік"/>
-                                    <DataGridTextColumn x:Name="Grid_Oblick_Occasion" Header="Зприводу"/>
-                                    <DataGridTextColumn x:Name="Grid_Oblick_derecognised_Date" Header="Знятий з обліку"/>
-                                    <DataGridTextColumn x:Name="Oblick_Date_Given" Header="Причина"/>
+                                    <DataGridTextColumn Binding="{Binding TakenDate}"  Header="Взятий на облік"/>
+                                    <DataGridTextColumn Binding="{Binding TakenReason}"  Header="Зприводу"/>
+                                    <DataGridTextColumn Binding="{Binding RemovedDate}"  Header="Знятий з обліку"/>
+                                    <DataGridTextColumn Binding="{Binding RemovedReason}" Header="Причина"/>
                                 </DataGrid.Columns>
                                 
                             </DataGrid>
                         </Grid>
+                        <StackPanel Grid.Row="11" Orientation="Horizontal">
+                            <Button Margin="5">Додати запис</Button>
+                            <Button Margin="5">Видалити запис</Button>
+                            <Button Margin="5">Зберегти</Button>
+                        </StackPanel>
 
                     </Grid>
                 </Grid>
@@ -247,11 +252,12 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
+                    
                     <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
                         <Grid>
 
-                            <TextBox Text="{Binding Shugar}"  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                            <TextBox Text="{Binding InfectiousDis}"  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox Text="{Binding Shugar, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                            <TextBox Text="{Binding Shugar}"  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
                             <TextBox Text="{Binding AlergiAnam}" Margin="253,88,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
                             <TextBox Text="{Binding IntoleranceToDrugs}" Margin="253,57,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
                             <TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Цукровий діабет" VerticalAlignment="Top"/>

@@ -8,11 +8,11 @@ using System.Windows.Input;
 
 namespace VrachMedcentr
 {
-    class CardPageTwo : INotifyPropertyChanged
+    class CardPageTwo //: INotifyPropertyChanged
     {
         #region VuiwData_page2
 
-        public string Shugar { get; set; } 
+        public string Shugar { get; set; } = "gsdgsgdg";
         public string InfectiousDis { get; set; }
         public string AlergiAnam { get; set; }
         public string IntoleranceToDrugs { get; set; }
@@ -23,6 +23,19 @@ namespace VrachMedcentr
         public void TesterMethod()
         {
             Shugar = "sfafasfaf";
+            //PropertyChanged
+        }
+        private RelayCommand saveToBase;
+        public RelayCommand SaveToBase
+        {
+            get
+            {
+                return saveToBase ??
+                  (saveToBase = new RelayCommand(obj =>
+                  {
+                      TesterMethod();
+                  }));
+            }
         }
 
         #endregion

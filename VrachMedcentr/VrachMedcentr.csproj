@@ -86,8 +86,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\CardPageOne.cs" />
+    <Compile Include="Data\CardPages.cs" />
     <Compile Include="Data\CardPageTwo.cs" />
+    <Compile Include="Data\TablesData\OblickTable.cs" />
     <Compile Include="HelpersClass\RelayCommand.cs" />
     <Compile Include="ViewModel\CardOne.cs" />
     <Compile Include="test1.cs" />
@@ -99,7 +100,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="connect.cs" />
+    <Compile Include="HelpersClass\connect.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
