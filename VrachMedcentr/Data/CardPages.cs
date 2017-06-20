@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using WPF_Hospital;
 using System.Data;
 using System.Windows.Input;
+using kepkaSQL;
+
 namespace VrachMedcentr
 {
     class CardPages : INotifyPropertyChanged
@@ -18,19 +20,18 @@ namespace VrachMedcentr
 
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
-
+        private connect con = new connect();
         //CardPageTwo PageTwo = new CardPageTwo();
 
         #endregion
 
         public CardPages()
         {
-            Phones = new ObservableCollection<OblickTable>
+            //Phones = con.Tetslist();
+            //con.Tetslist1();
+            Dinery = new ObservableCollection<CardPageFive>
             {
-                new OblickTable { TakenDate="iPhone 7", TakenReason="Apple", RemovedDate="56000", RemovedReason ="fasfasf"},
-                new OblickTable {TakenDate="Galaxy S7 Edge", TakenReason="Samsung", RemovedDate ="60000", RemovedReason="fsdfsdfs"},
-                new OblickTable {TakenDate="Elite x3", TakenReason="HP", RemovedDate="56000",RemovedReason= "fdsfdsfd"},
-                new OblickTable {TakenDate="Mi5S", TakenReason="Xiaomi", RemovedDate="35000" ,RemovedReason="fsdfsdf"}
+                new CardPageFive{ ComingDate  = "fasfafsa", HealingPlace="fasfas", Diagnosis="podox", Stamp="fasdfas"}
             };
         }
         #region Data_pages
@@ -56,6 +57,8 @@ namespace VrachMedcentr
         public DataTable AccountingTable { get; set; }
 
         public ObservableCollection<OblickTable> Phones { get; set; }
+        public ObservableCollection<CardPageFive> Dinery { get; set; }
+
 
 
         /// <summary>
@@ -70,10 +73,17 @@ namespace VrachMedcentr
         #endregion
 
         #region Helpers method
+
+
+
+
         /// <summary>
         /// Command From View
         /// </summary>
+        private RelayCommand insert;
+        private RelayCommand read;
         private RelayCommand addCommand;
+
         public RelayCommand AddCommand
         {
             get
@@ -83,6 +93,30 @@ namespace VrachMedcentr
                   {
                       Setter();
                       CodeZYCD = "jk;j;k";
+                  }));
+            }
+        }
+        public RelayCommand Insert
+        {
+            get
+            {
+                return insert ??
+                  (insert = new RelayCommand(obj =>
+                  {
+                      Dinery.Add(new CardPageFive { ComingDate = "0.10231", HealingPlace = "hospital", Diagnosis = "live", Stamp = "podps" });
+                      con.Tetslist1(Dinery);
+                  }));
+            }
+        }
+        public RelayCommand Read
+        {
+            get
+            {
+                return read ??
+                  (read = new RelayCommand(obj =>
+                  {
+                      
+                      Dinery=con.Tetslist();
                   }));
             }
         }

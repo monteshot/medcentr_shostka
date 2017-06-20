@@ -31,11 +31,11 @@ namespace WPF_Hospital
 
 
             connect con = new connect();
-            page1.DataContext = new CardPageOne();
+            page1.DataContext = new CardPages();
             page2.DataContext = new CardPageTwo();
             Card3.DataContext= new CardPageThree();
             Card4.DataContext = new CardPageFour();
-            Card5.DataContext = new CardPageFive();
+           // Card5.DataContext = new CardPageFive();
             // DPage3.DataContext = new CardPageThree();
             //  con.query(-)
             //this.DataContext = new CardPageOne();

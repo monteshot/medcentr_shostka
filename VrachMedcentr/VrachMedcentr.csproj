@@ -88,7 +88,7 @@
     </ApplicationDefinition>
     <Compile Include="Data\CardPageFive.cs" />
     <Compile Include="Data\CardPageFour.cs" />
-    <Compile Include="Data\CardPageOne.cs" />
+    <Compile Include="Data\CardPages.cs" />
     <Compile Include="Data\CardPageTwo.cs" />
     <Compile Include="Data\TablesData\OblickTable.cs" />
     <Compile Include="HelpersClass\RelayCommand.cs" />

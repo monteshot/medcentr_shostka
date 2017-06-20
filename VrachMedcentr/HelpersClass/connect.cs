@@ -1,6 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
-
+using VrachMedcentr;
 
 namespace kepkaSQL
 {
@@ -95,6 +98,132 @@ namespace kepkaSQL
             dtFbase = dt;
             return dt;
         }
+
+        #region ObservableCollection 
+        public ObservableCollection<CardPageFive> Tetslist()
+        {
+            ObservableCollection<CardPageFive> InlIst = new ObservableCollection<CardPageFive>();
+            DataTable dt = new DataTable();
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+            mysqlCSB.ConvertZeroDateTime = true;
+
+            string queryString = "SELECT * FROM diary";
+            using (MySqlConnection con = new MySqlConnection())
+            {
+                con.ConnectionString = mysqlCSB.ConnectionString;
+                MySqlCommand com = new MySqlCommand(queryString, con);
+                var da = new MySqlDataAdapter(com);
+
+                con.Open();
+                using (MySqlDataReader dr = com.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        InlIst.Add(new CardPageFive
+                        {
+                            ComingDate = dr.GetDateTime("dataZvern").ToString(), HealingPlace = dr.GetString("misceLik"), Diagnosis = dr.GetString("diagnoz"), Stamp = dr.GetString("pryznLik")
+                        });
+                    }
+                }
+                con.Close();
+
+
+
+
+            }
+
+
+
+            //InlIst = new ObservableCollection<OblickTable>
+            //{
+            //    new OblickTable { TakenDate="iPhone 7", TakenReason="Apple", RemovedDate="56000", RemovedReason ="fasfasf"},
+            //    new OblickTable {TakenDate="Galaxy S7 Edge", TakenReason="Samsung", RemovedDate ="60000", RemovedReason="fsdfsdfs"},
+            //    new OblickTable {TakenDate="Elite x3", TakenReason="HP", RemovedDate="56000",RemovedReason= "fdsfdsfd"},
+            //    new OblickTable {TakenDate="Mi5S", TakenReason="Xiaomi", RemovedDate="35000" ,RemovedReason="fsdfsdf"}
+            //};
+
+            return InlIst;
+        }
+        public void Tetslist1(ObservableCollection<CardPageFive> temp)
+        {
+            ObservableCollection<CardPageFive> InlIst = temp;
+
+          
+            DataTable dt = new DataTable();
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+
+
+            using (MySqlConnection con = new MySqlConnection(mysqlCSB.ConnectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = con;
+
+                    con.Open();
+                    foreach (var result in InlIst)
+                    {
+                        
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = @"INSERT INTO diary(ID, ID_pat, dataZvern, misceLik, diagnoz, pryznLik) 
+                           VALUES(null, 13, @one, @two, @three, @four)";
+
+                        cmd.Parameters.AddWithValue("@one", result.ComingDate);
+                        cmd.Parameters.AddWithValue("@two", result.HealingPlace);
+                        cmd.Parameters.AddWithValue("@three", result.Diagnosis);
+                        cmd.Parameters.AddWithValue("@four", result.Stamp);
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
+                    }
+
+
+                }
+            }
+            //using (MySqlConnection con = new MySqlConnection())
+            //{
+            //    con.ConnectionString = mysqlCSB.ConnectionString;
+            //    //MySqlCommand com = con.CreateCommand();
+            //    MySqlCommand command = con.CreateCommand();
+
+            //        con.Open();
+
+            //        foreach (var result in InlIst)
+            //        {
+
+            //            command.CommandText =
+            //               @"INSERT INTO diary (ID, ID_pat, dataZvern, misceLik, diagnoz, pryznLik) VALUES(null, 13, @one, @two, @three, @four)";
+            //            command.Parameters.AddWithValue("@one", result.TakenDate);
+            //            command.Parameters.AddWithValue("@two", result.TakenReason);
+            //            command.Parameters.AddWithValue("@three", result.RemovedDate);
+            //            command.Parameters.AddWithValue("@four", result.RemovedReason);
+            //            command.ExecuteNonQuery();
+            //        }
+
+            //        con.Close();
+
+
+
+            //}
+
+
+
+
+
+
+        }
+
+        #endregion
+
 
         public DataView Dpage3(string Statement)
         {
