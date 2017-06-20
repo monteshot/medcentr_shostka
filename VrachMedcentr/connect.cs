@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Data;
-
+using WPF_Hospital;
 
 namespace kepkaSQL
 {
@@ -109,52 +109,137 @@ namespace kepkaSQL
             dtFbase = dt;
             return dt;
         }
-
-        public DataView Dpage3(string Statement)
+        DataTable dt = new DataTable();
+        public DataView Dpage3(/*string Statement*/)
         {
-            stat = Statement;
-            DataTable dt = new DataTable();
+            // stat = Statement;
+          
+            
+            try { dt.Columns.Clear(); } catch (Exception) { }
+            
             MySqlConnectionStringBuilder mysqlCSB;
             mysqlCSB = new MySqlConnectionStringBuilder();
             mysqlCSB.Server = server;
             mysqlCSB.Database = database;
             mysqlCSB.UserID = UserID;
             mysqlCSB.Password = Password;
-
+          
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = mysqlCSB.ConnectionString;
-            MySqlCommand cmd = new MySqlCommand(stat);
+            MySqlCommand cmd = new MySqlCommand(/*stat*/);
+           
             adapter = new MySqlDataAdapter(cmd);
+            ///добавляем в базу новую строку
+           
+            adapter.FillLoadOption = LoadOption.OverwriteChanges;
 
-            adapter.InsertCommand = new MySqlCommand("sp_listDiagn", con);
-            adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@dataZvern", MySqlDbType.Date, 0, "DataZvern"));
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@text_diag", MySqlDbType.VarChar, 1000, "ZaklDiagn"));
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagFirst", MySqlDbType.Binary, 1, "FDiagn"));
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagProf", MySqlDbType.Binary, 1, "PDiag"));
-            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@pidpLik", MySqlDbType.Binary, 100, "Sign"));
-            //MySqlParameter par = adapter.InsertCommand.Parameters.Add("@ID", MySqlDbType.Int32, 0, "Id");
+            adapter.SelectCommand.CommandText = "SELECT * FROM diagnoz";
+           
+           
+    
 
-            //par.Direction = ParameterDirection.Output;
+            adapter.InsertCommand = new MySqlCommand("INSERT INTO diagnoz (ID, ID_pat, dataZvern, text_diag, diagFirst, diagProf, pidpLik) VALUES (null,'99',@dataZvern1,@text_diag1,@diagFirst1,@diagProf1,@pidpLik1)");
+            //  adapter.InsertCommand = new MySqlCommand("INSERT INTO diagnoz (ID, ID_pat, dataZvern, text_diag, diagFirst, diagProf, pidpLik) VALUES (null,'99',dataZvern=@dataZvern,text_diag=@text_diag,diagFirst=@diagFirst,diagProf=@diagProf,pidpLik=@pidpLik)");
+            //  adapter.InsertCommand = new MySqlCommand("INSERT INTO diagnoz (ID, ID_pat) VALUES (null,'99')");
+           
+            adapter.InsertCommand.CommandType = CommandType.Text;
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@dataZvern1", MySqlDbType.Date, 0, "DataZvern"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@text_diag1", MySqlDbType.VarChar, 1000, "ZaklDiagn"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagFirst1", MySqlDbType.Binary, 1, "FDiagn"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagProf1", MySqlDbType.Binary, 1, "PDiag"));
+            adapter.InsertCommand.Parameters.Add(new MySqlParameter("@pidpLik1", MySqlDbType.VarChar, 100, "Sign"));
+            adapter.InsertCommand.Parameters.Add("@ID_pat", MySqlDbType.Int32, 0, "Id_pat");
+
+            adapter.SelectCommand.Parameters.Add("@ID_pat", MySqlDbType.Int32, 0, "Id_pat");
+            adapter.SelectCommand.Parameters.Add(new MySqlParameter("@dataZvern1", MySqlDbType.Date, 0, "DataZvern"));
+            adapter.SelectCommand.Parameters.Add(new MySqlParameter("@text_diag1", MySqlDbType.VarChar, 1000, "ZaklDiagn"));
+            adapter.SelectCommand.Parameters.Add(new MySqlParameter("@diagFirst1", MySqlDbType.Binary, 1, "FDiagn"));
+            adapter.SelectCommand.Parameters.Add(new MySqlParameter("@diagProf1", MySqlDbType.Binary, 1, "PDiag"));
+            adapter.SelectCommand.Parameters.Add(new MySqlParameter("@pidpLik1", MySqlDbType.VarChar, 100, "Sign"));
+            MySqlParameter par = adapter.InsertCommand.Parameters.Add("@ID", MySqlDbType.Int32, 0, "Id");
+            
+            
+
+            par.Direction = ParameterDirection.Output;
+            // dt = null;
+           // dt.Columns.Clear();
+           
             con.Open();
+            
             cmd.Connection = con;
+            ///читаем с базы 
 
-            adapter.Fill(dt);
+            try { adapter.Fill(dt); } catch (Exception) { }
+           
 
             con.Close();
             dtFbase = dt;
+      
             dt.Columns[2].ColumnName = "DataZvern";
             dt.Columns[3].ColumnName = "ZaklDiagn";
             dt.Columns[4].ColumnName = "FDiagn";
             dt.Columns[5].ColumnName = "PDiag";
             dt.Columns[6].ColumnName = "Sign";
+            dt.Columns[2].DataType.Equals(typeof(DatePicker));
+
             return dt.DefaultView;
+
+        }
+        public void UpdateDB()
+        {
+          //  dt = null;
+            MySqlCommandBuilder comandbuilder = new MySqlCommandBuilder(adapter);
+
+            adapter.Update(dt);
+            dt.AcceptChanges();
+
+
+            //MySqlConnectionStringBuilder mysqlCSB;
+            //mysqlCSB = new MySqlConnectionStringBuilder();
+            //mysqlCSB.Server = server;
+            //mysqlCSB.Database = database;
+            //mysqlCSB.UserID = UserID;
+            //mysqlCSB.Password = Password;
+
+            //MySqlConnection con = new MySqlConnection();
+            //con.ConnectionString = mysqlCSB.ConnectionString;
+
+            //MySqlCommand cmd = new MySqlCommand();
+
+
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@dataZvern", MySqlDbType.Date, 0, "DataZvern"));
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@text_diag", MySqlDbType.VarChar, 1000, "ZaklDiagn"));
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagFirst", MySqlDbType.Binary, 1, "FDiagn"));
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@diagProf", MySqlDbType.Binary, 1, "PDiag"));
+            //adapter.InsertCommand.Parameters.Add(new MySqlParameter("@pidpLik", MySqlDbType.Binary, 100, "Sign"));
+            //adapter.InsertCommand = new MySqlCommand("INSERT INTO diagnoz (ID, ID_pat, dataZvern,text_diag, diagFirst, diagProf, pidpLik) VALUES (null,'99',dataZvern=@dataZvern,text_diag=@text_diag,diagFirst=@diagFirst,diagProf=@diagProf,pidpLik=@pidpLik)");
+
+            // dt.AcceptChanges();
+            //MySqlConnectionStringBuilder mysqlCSB;
+            //mysqlCSB = new MySqlConnectionStringBuilder();
+            //mysqlCSB.Server = server;
+            //mysqlCSB.Database = database;
+            //mysqlCSB.UserID = UserID;
+            //mysqlCSB.Password = Password;
+
+            //MySqlConnection con = new MySqlConnection();
+            //con.ConnectionString = mysqlCSB.ConnectionString;
+
+            //MySqlCommand cmd = new MySqlCommand();
+            //{
+            //    con.Open();
+            //    cmd.CommandText = "INSERT INTO diagnoz (ID, ID_pat) VALUES (null,'99')";
+            //    cmd.Connection = con;
+
+            //    cmd.ExecuteNonQuery();
+            //    con.Close();
+            //}
 
         }
         public DataView Dpage4(string Statement)
         {
             stat = Statement;
-            DataTable dt = new DataTable();
+            //  DataTable dt = new DataTable();
             MySqlConnectionStringBuilder mysqlCSB;
             mysqlCSB = new MySqlConnectionStringBuilder();
             mysqlCSB.Server = server;
@@ -188,7 +273,7 @@ namespace kepkaSQL
         public DataView Dpage5(string Statement)
         {
             stat = Statement;
-            DataTable dt = new DataTable();
+            //   DataTable dt = new DataTable();
             MySqlConnectionStringBuilder mysqlCSB;
             mysqlCSB = new MySqlConnectionStringBuilder();
             mysqlCSB.Server = server;
