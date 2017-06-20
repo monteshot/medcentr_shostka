@@ -29,7 +29,7 @@ namespace VrachMedcentr
         {
             //Phones = con.Tetslist();
             //con.Tetslist1();
-            Dinery = new ObservableCollection<CardPageFive>
+            Dilery = new ObservableCollection<CardPageFive>
             {
                 new CardPageFive{ ComingDate  = "fasfafsa", HealingPlace="fasfas", Diagnosis="podox", Stamp="fasdfas"}
             };
@@ -57,7 +57,7 @@ namespace VrachMedcentr
         public DataTable AccountingTable { get; set; }
 
         public ObservableCollection<OblickTable> Phones { get; set; }
-        public ObservableCollection<CardPageFive> Dinery { get; set; }
+        public ObservableCollection<CardPageFive> Dilery { get; set; }
 
 
 
@@ -76,14 +76,16 @@ namespace VrachMedcentr
 
 
 
-
+        #region Private Command
         /// <summary>
         /// Command From View
         /// </summary>
+
         private RelayCommand insert;
         private RelayCommand read;
         private RelayCommand addCommand;
-
+        #endregion
+        //какаето тестовая команда
         public RelayCommand AddCommand
         {
             get
@@ -91,37 +93,42 @@ namespace VrachMedcentr
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      Setter();
+                      //Setter();
                       CodeZYCD = "jk;j;k";
                   }));
             }
         }
-        public RelayCommand Insert
+
+        /// <summary>
+        /// Command for Dilery
+        /// </summary>
+        public RelayCommand DileryInsert
         {
             get
             {
                 return insert ??
                   (insert = new RelayCommand(obj =>
                   {
-                      Dinery.Add(new CardPageFive { ComingDate = "0.10231", HealingPlace = "hospital", Diagnosis = "live", Stamp = "podps" });
-                      con.Tetslist1(Dinery);
+                      Dilery.Add(new CardPageFive { ComingDate = "0.10231", HealingPlace = "hospital", Diagnosis = "live", Stamp = "podps" });
+                      con.UpdateDileryBase(Dilery);
+                      Setter();
                   }));
             }
         }
-        public RelayCommand Read
+        public RelayCommand DileryRead
         {
             get
             {
                 return read ??
                   (read = new RelayCommand(obj =>
                   {
-                      
-                      Dinery=con.Tetslist();
+
+                      Dilery = con.ReadDileryList();
                   }));
             }
         }
 
-
+        //тестовая команда
         public void Setter()
 
         {

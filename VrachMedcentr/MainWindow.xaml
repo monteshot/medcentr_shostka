@@ -364,7 +364,7 @@
                         </DataGrid.Columns>
 
                     </DataGrid>-->
-                    <DataGrid x:Name="DPage5" ItemsSource="{Binding Dinery}" AutoGenerateColumns="False">
+                    <DataGrid x:Name="DPage5" ItemsSource="{Binding Dilery}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding ComingDate}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
                             <DataGridTextColumn Binding="{Binding HealingPlace}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
@@ -372,8 +372,8 @@
                             <DataGridTextColumn Binding="{Binding Stamp}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Button1" Command="{Binding Insert}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
-                    <Button Content="Button2" Command="{Binding Read}" HorizontalAlignment="Left" Margin="210,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                    <Button Content="Button1" Command="{Binding DileryInsert}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                    <Button Content="Button2" Command="{Binding DileryRead}" HorizontalAlignment="Left" Margin="210,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
                     <!--<WindowsFormsHost>
                         <wf:ScrollableControl/>
                     </WindowsFormsHost>-->

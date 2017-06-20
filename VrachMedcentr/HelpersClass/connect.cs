@@ -100,7 +100,7 @@ namespace kepkaSQL
         }
 
         #region ObservableCollection 
-        public ObservableCollection<CardPageFive> Tetslist()
+        public ObservableCollection<CardPageFive> ReadDileryList()
         {
             ObservableCollection<CardPageFive> InlIst = new ObservableCollection<CardPageFive>();
             DataTable dt = new DataTable();
@@ -126,34 +126,22 @@ namespace kepkaSQL
                     {
                         InlIst.Add(new CardPageFive
                         {
-                            ComingDate = dr.GetDateTime("dataZvern").ToString(), HealingPlace = dr.GetString("misceLik"), Diagnosis = dr.GetString("diagnoz"), Stamp = dr.GetString("pryznLik")
+                            ComingDate = dr.GetDateTime("dataZvern").ToString(),
+                            HealingPlace = dr.GetString("misceLik"),
+                            Diagnosis = dr.GetString("diagnoz"),
+                            Stamp = dr.GetString("pryznLik")
                         });
                     }
                 }
                 con.Close();
-
-
-
-
             }
-
-
-
-            //InlIst = new ObservableCollection<OblickTable>
-            //{
-            //    new OblickTable { TakenDate="iPhone 7", TakenReason="Apple", RemovedDate="56000", RemovedReason ="fasfasf"},
-            //    new OblickTable {TakenDate="Galaxy S7 Edge", TakenReason="Samsung", RemovedDate ="60000", RemovedReason="fsdfsdfs"},
-            //    new OblickTable {TakenDate="Elite x3", TakenReason="HP", RemovedDate="56000",RemovedReason= "fdsfdsfd"},
-            //    new OblickTable {TakenDate="Mi5S", TakenReason="Xiaomi", RemovedDate="35000" ,RemovedReason="fsdfsdf"}
-            //};
-
             return InlIst;
         }
-        public void Tetslist1(ObservableCollection<CardPageFive> temp)
+        public void UpdateDileryBase(ObservableCollection<CardPageFive> temp)
         {
             ObservableCollection<CardPageFive> InlIst = temp;
 
-          
+
             DataTable dt = new DataTable();
             MySqlConnectionStringBuilder mysqlCSB;
             mysqlCSB = new MySqlConnectionStringBuilder();
@@ -173,9 +161,9 @@ namespace kepkaSQL
                     con.Open();
                     foreach (var result in InlIst)
                     {
-                        
+
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = @"INSERT INTO diary(ID, ID_pat, dataZvern, misceLik, diagnoz, pryznLik) 
+                        cmd.CommandText = @"UPDATE diary(ID, ID_pat, dataZvern, misceLik, diagnoz, pryznLik) 
                            VALUES(null, 13, @one, @two, @three, @four)";
 
                         cmd.Parameters.AddWithValue("@one", result.ComingDate);
