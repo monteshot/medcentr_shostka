@@ -149,6 +149,60 @@ namespace kepkaSQL
 
             return InlIst;
         }
+        public ObservableCollection<CardPageThree> DiagList()
+        {
+            ObservableCollection<CardPageThree> InlIst = new ObservableCollection<CardPageThree>();
+            DataTable dt = new DataTable();
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+            mysqlCSB.ConvertZeroDateTime = true;
+
+            string queryString = "SELECT * FROM diagnoz";
+            using (MySqlConnection con = new MySqlConnection())
+            {
+                con.ConnectionString = mysqlCSB.ConnectionString;
+                MySqlCommand com = new MySqlCommand(queryString, con);
+                var da = new MySqlDataAdapter(com);
+
+                con.Open();
+                using (MySqlDataReader dr = com.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        InlIst.Add(new CardPageThree
+                        {
+                            DataZvern = dr.GetDateTime("dataZvern"),
+                            ZaklDiagn = dr.GetString("text_diag"),
+                            FDiagn = dr.GetBoolean("diagFirst"),
+                            PDiag = dr.GetBoolean("diagProf"),
+                            Sign = dr.GetString("pidpLik")
+                        });
+                    }
+                }
+                con.Close();
+
+
+
+
+            }
+
+
+
+            //InlIst = new ObservableCollection<OblickTable>
+            //{
+            //    new OblickTable { TakenDate="iPhone 7", TakenReason="Apple", RemovedDate="56000", RemovedReason ="fasfasf"},
+            //    new OblickTable {TakenDate="Galaxy S7 Edge", TakenReason="Samsung", RemovedDate ="60000", RemovedReason="fsdfsdfs"},
+            //    new OblickTable {TakenDate="Elite x3", TakenReason="HP", RemovedDate="56000",RemovedReason= "fdsfdsfd"},
+            //    new OblickTable {TakenDate="Mi5S", TakenReason="Xiaomi", RemovedDate="35000" ,RemovedReason="fsdfsdf"}
+            //};
+
+            return InlIst;
+        }
+
         public void Tetslist1(ObservableCollection<CardPageFive> temp)
         {
             ObservableCollection<CardPageFive> InlIst = temp;

@@ -55,9 +55,12 @@ namespace VrachMedcentr
         public bool DispersedGroupNo { get; set; }
         public string PreferentNumber { get; set; }
         public DataTable AccountingTable { get; set; }
-
+        /// <summary>
+        /// data ObservableCollection
+        /// </summary>
         public ObservableCollection<OblickTable> Phones { get; set; }
         public ObservableCollection<CardPageFive> Dinery { get; set; }
+        public ObservableCollection<CardPageThree> Diagnosis { get; set; }
 
 
 
@@ -82,6 +85,7 @@ namespace VrachMedcentr
         /// </summary>
         private RelayCommand insert;
         private RelayCommand read;
+        private RelayCommand readP3;
         private RelayCommand addCommand;
 
         public RelayCommand AddCommand
@@ -120,7 +124,31 @@ namespace VrachMedcentr
                   }));
             }
         }
+      
+        public RelayCommand ReadP3
+        {
+            get
+            {
+                return readP3 ??
+                  (read = new RelayCommand(obj =>
+                  {
 
+                      Diagnosis = con.DiagList();
+                  }));
+            }
+        }
+        //public RelayCommand InsertP3
+        //{
+        //    get
+        //    {
+        //        return insert ??
+        //          (insert = new RelayCommand(obj =>
+        //          {
+        //              Dinery.Add(new CardPageThree { ComingDate = "0.10231", HealingPlace = "hospital", Diagnosis = "live", Stamp = "podps" });
+        //              con.Tetslist1(Dinery);
+        //          }));
+        //    }
+        //}
 
         public void Setter()
 
@@ -128,6 +156,7 @@ namespace VrachMedcentr
 
             Adress = "fasfasf";
         }
+
 
         #endregion
 

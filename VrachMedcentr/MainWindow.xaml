@@ -315,7 +315,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid x:Name="Card3" Background="#FFE5E5E5">
-                    <DataGrid x:Name="DPage3" ItemsSource="{Binding page3}"  AutoGenerateColumns="False">
+                    <DataGrid x:Name="DPage3" ItemsSource="{Binding Diagnosis}"  AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Дата Звернення">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -331,7 +331,7 @@
                             <DataGridTextColumn Binding="{Binding Sign}" ClipboardContentBinding="{x:Null}" Header="Підпис"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="чтен" Command="{Binding AddCommand3}" HorizontalAlignment="Left" Margin="756,582,0,0" VerticalAlignment="Top" Width="160" Height="133"/>
+                    <Button Content="чтен" Command="{Binding ReadP3}" HorizontalAlignment="Left" Margin="756,582,0,0" VerticalAlignment="Top" Width="160" Height="133"/>
                     <Button Content="зап" Command="{Binding UpdateComm3}" HorizontalAlignment="Left" Margin="990,567,0,0" VerticalAlignment="Top" Width="268" Height="148"/>
                 </Grid>
             </TabItem>
