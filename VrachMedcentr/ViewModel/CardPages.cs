@@ -137,6 +137,19 @@ namespace VrachMedcentr
                   }));
             }
         }
+
+        public RelayCommand UpdateP3
+        {
+            get
+            {
+                return readP3 ??
+                  (read = new RelayCommand(obj =>
+                  {
+                      con.UpdateP3(Diagnosis);
+                      
+                  }));
+            }
+        }
         //public RelayCommand InsertP3
         //{
         //    get

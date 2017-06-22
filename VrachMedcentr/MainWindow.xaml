@@ -155,7 +155,7 @@
                             <TextBox  FontSize="25" TextAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" MinWidth="100"></TextBox>
                             <StackPanel Grid.Row="1" Orientation="Horizontal" >
                                 <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman">Код хворого</TextBlock>
-                                <TextBox x:Name="CodePacient" VerticalAlignment="Center" Margin="20,0,0,0" Width="100"></TextBox>
+                                <TextBox Text="{Binding CodePacient}"  VerticalAlignment="Center" Margin="20,0,0,0" Width="100"></TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
                                 <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman">Дата заповнення карти</TextBlock>
@@ -322,7 +322,7 @@
                             <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Дата Звернення">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <DatePicker SelectedDate="{Binding DataZvern}" BorderThickness="0" />
+                                        <DatePicker  SelectedDate="{Binding DataZvern}" BorderThickness="0" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -334,7 +334,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Content="чтен" Command="{Binding ReadP3}" HorizontalAlignment="Left" Margin="756,582,0,0" VerticalAlignment="Top" Width="160" Height="133"/>
-                    <Button Content="зап" Command="{Binding UpdateComm3}" HorizontalAlignment="Left" Margin="990,567,0,0" VerticalAlignment="Top" Width="268" Height="148"/>
+                    <Button Content="зап" Command="{Binding UpdateP3}" HorizontalAlignment="Left" Margin="990,567,0,0" VerticalAlignment="Top" Width="268" Height="148"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="page4">

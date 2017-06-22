@@ -62,7 +62,7 @@ namespace kepkaSQL
             return result;
         }
 
-       // public string Server;
+        // public string Server;
 
 
         public DataTable query(string Statement)
@@ -173,24 +173,71 @@ namespace kepkaSQL
                 }
                 con.Close();
 
+            }
+            //copyP3 = InlIst;
+            return InlIst;
+        }
+        private ObservableCollection<CardPageThree> copyP3;
+        public void UpdateP3(ObservableCollection<CardPageThree> temp)
+        {
+            copyP3 = DiagList();
+            ObservableCollection<CardPageThree> InlIst = new ObservableCollection<CardPageThree>();
 
+            
+            foreach (var orig in temp)
+            {
+                foreach (var copy in copyP3)
+                {
+                    if (copyP3.IndexOf(copy)!= temp.IndexOf(orig))
+                    {
+                        InlIst.Add(orig);
+                    }
+                    //if (orig != copy) 
+                }
+                //{
+                //    InlIst.Add(orig);
+                //}
 
 
             }
 
 
+            
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
 
-            //InlIst = new ObservableCollection<OblickTable>
-            //{
-            //    new OblickTable { TakenDate="iPhone 7", TakenReason="Apple", RemovedDate="56000", RemovedReason ="fasfasf"},
-            //    new OblickTable {TakenDate="Galaxy S7 Edge", TakenReason="Samsung", RemovedDate ="60000", RemovedReason="fsdfsdfs"},
-            //    new OblickTable {TakenDate="Elite x3", TakenReason="HP", RemovedDate="56000",RemovedReason= "fdsfdsfd"},
-            //    new OblickTable {TakenDate="Mi5S", TakenReason="Xiaomi", RemovedDate="35000" ,RemovedReason="fsdfsdf"}
-            //};
+            using (MySqlConnection con = new MySqlConnection(mysqlCSB.ConnectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = con;
 
-            return InlIst;
+                    con.Open();
+                    foreach (var result in InlIst)
+                    {
+
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "INSERT INTO diagnoz(ID, ID_pat, dataZvern, text_diag, diagFirst, diagProf, pidpLik) VALUES(null, 99, @dataZvern, @text_diag, @diagFirst, @diagProf,@pidpLik)";
+
+                        cmd.Parameters.AddWithValue("@dataZvern", result.DataZvern);
+                        cmd.Parameters.AddWithValue("@text_diag", result.ZaklDiagn);
+                        cmd.Parameters.AddWithValue("@diagFirst", result.FDiagn);
+                        cmd.Parameters.AddWithValue("@diagProf", result.PDiag);
+                        cmd.Parameters.AddWithValue("@pidpLik", result.Sign);
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
+                    }
+
+
+                }
+            }
+
+
         }
-
         public void Tetslist1(ObservableCollection<CardPageFive> temp)
         {
             ObservableCollection<CardPageFive> InlIst = temp;
