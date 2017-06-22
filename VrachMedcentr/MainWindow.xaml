@@ -29,6 +29,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="0.4*"></RowDefinition>
                 </Grid.RowDefinitions>
+
                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                     <TextBox VerticalAlignment="Center" MinWidth="100" Margin="10,0,0,0">Прізвище</TextBox>
                     <TextBox VerticalAlignment="Center" MinWidth="100" Margin="10,0,0,0">Ім'я</TextBox>
@@ -148,8 +149,9 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-
-                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="25" FontFamily="Times New Roman">МЕДИЧНА КАРТКА АМБУЛАТОРНОГО ХВОРОГО №</TextBlock>
+                            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="25" FontFamily="Times New Roman">МЕДИЧНА КАРТКА АМБУЛАТОРНОГО ХВОРОГО №</TextBlock>
+                            </Grid>
                             <TextBox  FontSize="25" TextAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" MinWidth="100"></TextBox>
                             <StackPanel Grid.Row="1" Orientation="Horizontal" >
                                 <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman">Код хворого</TextBlock>
@@ -372,7 +374,7 @@
                         </DataGrid.Columns>
 
                     </DataGrid>-->
-                    <DataGrid x:Name="DPage5" ItemsSource="{Binding Dinery}" AutoGenerateColumns="False">
+                    <DataGrid x:Name="DPage5" ItemsSource="{Binding Dilery}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding ComingDate}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
                             <DataGridTextColumn Binding="{Binding HealingPlace}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
@@ -380,8 +382,8 @@
                             <DataGridTextColumn Binding="{Binding Stamp}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Button1" Command="{Binding Insert}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
-                    <Button Content="Button2" Command="{Binding Read}" HorizontalAlignment="Left" Margin="210,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                    <Button Content="Button1" Command="{Binding DileryInsert}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                    <Button Content="Button2" Command="{Binding DileryRead}" HorizontalAlignment="Left" Margin="210,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
                     <!--<WindowsFormsHost>
                         <wf:ScrollableControl/>
                     </WindowsFormsHost>-->
@@ -390,7 +392,8 @@
 
             </TabItem>
 
-            <TabItem>
+            <TabItem x:Name="Testersitem">
+               
                 <TabItem.Header>
                     <WrapPanel>
                         <TextBlock TextAlignment ="Center"><Run Text="Тестовое название"/></TextBlock>
@@ -398,19 +401,72 @@
                 </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>                        
+                        <RowDefinition></RowDefinition>
                         <RowDefinition Height="12*"></RowDefinition>
                     </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="TestAdd" Command="{Binding AddCommand}"></Button>
+                        
+                    </StackPanel>
+                    <TabControl  Grid.Row="2" ItemsSource="{Binding Diag}" >
+                        <TabControl.Resources>
+                            <DataTemplate x:Key="TemplateOne">
+                                <TextBlock></TextBlock>
+                            </DataTemplate>
+                            <DataTemplate x:Key="TemplateTwo">
+                                <TextBlock></TextBlock>
+                            </DataTemplate>
+                        </TabControl.Resources>
+                        <TabControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Galobu}"/>
+                            </DataTemplate>
+                        </TabControl.ItemTemplate>
+                        <TabControl.ContentTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                        <TextBlock Text="{Binding Galobu}"></TextBlock>
+                                        <TextBlock Text="{Binding Galobu}"></TextBlock>
+                                        <TextBlock Text="{Binding Shugar}"></TextBlock>
+                                        <TextBlock Text="{Binding Galobu}"></TextBlock>
 
-                    <TabControl Grid.Row="2">
-                        <TabItem>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </TabControl.ContentTemplate>
+
+                    </TabControl>
+
+                    <!--<TabItem>
                             <TabItem.Header>
                                 <WrapPanel>
                                     <TextBlock TextAlignment ="Center"><Run Text="Тестовое название"/></TextBlock>
                                 </WrapPanel>
                             </TabItem.Header>
-                        </TabItem>
-                    </TabControl>
+                            <Grid Background="Azure">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.2*"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBox Margin="10,0,0,0" MinWidth="100"></TextBox>
+                                    <TextBox Margin="10,0,0,0" MinWidth="100"></TextBox>
+                                </StackPanel>
+                                
+
+                            </Grid>
+                        </TabItem>-->
+
                 </Grid>
             </TabItem>
         </TabControl>

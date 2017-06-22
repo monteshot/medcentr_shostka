@@ -24,7 +24,7 @@ namespace WPF_Hospital
     /// </summary>
     public partial class MainWindow : Window
     {
-        // Card First = new Card("Valera");
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -33,8 +33,9 @@ namespace WPF_Hospital
             connect con = new connect();
             page1.DataContext = new CardPages();
             page2.DataContext = new CardPageTwo();
-            //Card3.DataContext= new CardPageThree();
-            //Card4.DataContext = new CardPageFour();
+            Card3.DataContext= new CardPageThree();
+            Card4.DataContext = new CardPageFour();
+            Testersitem.DataContext = new DiagnosesViewModel();
            // Card5.DataContext = new CardPageFive();
             // DPage3.DataContext = new CardPageThree();
             //  con.query(-)

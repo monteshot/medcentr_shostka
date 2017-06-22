@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace VrachMedcentr
 {
-    class CardOne
+    class TestDiagnoz
     {
-
+        public string Galobu { get; set; }
+        public string AnMorbi { get; set; }
     }
 }

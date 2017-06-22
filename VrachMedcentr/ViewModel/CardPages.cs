@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using WPF_Hospital;
-using System.Data;
-using System.Windows.Input;
 using kepkaSQL;
 
 namespace VrachMedcentr
@@ -21,19 +13,21 @@ namespace VrachMedcentr
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
         private connect con = new connect();
+               
         //CardPageTwo PageTwo = new CardPageTwo();
 
         #endregion
+        #region Constructor
 
         public CardPages()
         {
-            //Phones = con.Tetslist();
-            //con.Tetslist1();
-            Dinery = new ObservableCollection<CardPageFive>
+            Dilery = new ObservableCollection<CardPageFive>
             {
                 new CardPageFive{ ComingDate  = "fasfafsa", HealingPlace="fasfas", Diagnosis="podox", Stamp="fasdfas"}
             };
         }
+        #endregion
+      
         #region Data_pages
         /// <summary>
         /// Page 1
@@ -59,10 +53,9 @@ namespace VrachMedcentr
         /// data ObservableCollection
         /// </summary>
         public ObservableCollection<OblickTable> Phones { get; set; }
-        public ObservableCollection<CardPageFive> Dinery { get; set; }
+        public ObservableCollection<CardPageFive> Dilery { get; set; }
+        
         public ObservableCollection<CardPageThree> Diagnosis { get; set; }
-
-
 
         /// <summary>
         /// Page 2
@@ -79,15 +72,17 @@ namespace VrachMedcentr
 
 
 
-
+        #region Private Command
         /// <summary>
         /// Command From View
         /// </summary>
+
         private RelayCommand insert;
         private RelayCommand read;
         private RelayCommand readP3;
         private RelayCommand addCommand;
-
+        #endregion
+        //какаето тестовая команда
         public RelayCommand AddCommand
         {
             get
@@ -95,32 +90,37 @@ namespace VrachMedcentr
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      Setter();
+                      //Setter();
                       CodeZYCD = "jk;j;k";
                   }));
             }
         }
-        public RelayCommand Insert
+
+        /// <summary>
+        /// Command for Dilery
+        /// </summary>
+        public RelayCommand DileryInsert
         {
             get
             {
                 return insert ??
                   (insert = new RelayCommand(obj =>
                   {
-                      Dinery.Add(new CardPageFive { ComingDate = "0.10231", HealingPlace = "hospital", Diagnosis = "live", Stamp = "podps" });
-                      con.Tetslist1(Dinery);
+                      Dilery.Add(new CardPageFive { ComingDate = "0.10231", HealingPlace = "hospital", Diagnosis = "live", Stamp = "podps" });
+                      con.UpdateDileryBase(Dilery);
+                      Setter();
                   }));
             }
         }
-        public RelayCommand Read
+        public RelayCommand DileryRead
         {
             get
             {
                 return read ??
                   (read = new RelayCommand(obj =>
                   {
-                      
-                      Dinery=con.Tetslist();
+
+                      Dilery = con.ReadDileryList();
                   }));
             }
         }
