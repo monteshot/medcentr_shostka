@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
-using System.Data;
+
 using kepkaSQL;
 using WPF_Hospital;
 namespace VrachMedcentr

@@ -107,7 +107,7 @@ namespace VrachMedcentr
                   (insert = new RelayCommand(obj =>
                   {
                       Dilery.Add(new CardPageFive { ComingDate = "0.10231", HealingPlace = "hospital", Diagnosis = "live", Stamp = "podps" });
-                      con.UpdateDileryBase(Dilery);
+                    //  con.UpdateDileryBase(Dilery);
                       Setter();
                   }));
             }

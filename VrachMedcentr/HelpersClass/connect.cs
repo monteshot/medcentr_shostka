@@ -62,7 +62,7 @@ namespace kepkaSQL
             return result;
         }
 
-        public string Server;
+       // public string Server;
 
 
         public DataTable query(string Statement)
