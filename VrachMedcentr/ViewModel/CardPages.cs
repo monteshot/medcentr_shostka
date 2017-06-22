@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using WPF_Hospital;
-using System.Data;
-using System.Windows.Input;
 using kepkaSQL;
 
 namespace VrachMedcentr
@@ -21,19 +13,21 @@ namespace VrachMedcentr
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
         private connect con = new connect();
+               
         //CardPageTwo PageTwo = new CardPageTwo();
 
         #endregion
+        #region Constructor
 
         public CardPages()
         {
-            //Phones = con.Tetslist();
-            //con.Tetslist1();
             Dilery = new ObservableCollection<CardPageFive>
             {
                 new CardPageFive{ ComingDate  = "fasfafsa", HealingPlace="fasfas", Diagnosis="podox", Stamp="fasdfas"}
             };
         }
+        #endregion
+      
         #region Data_pages
         /// <summary>
         /// Page 1
@@ -58,8 +52,6 @@ namespace VrachMedcentr
 
         public ObservableCollection<OblickTable> Phones { get; set; }
         public ObservableCollection<CardPageFive> Dilery { get; set; }
-
-
 
         /// <summary>
         /// Page 2

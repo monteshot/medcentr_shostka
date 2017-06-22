@@ -88,14 +88,15 @@
     </ApplicationDefinition>
     <Compile Include="Data\CardPageFive.cs" />
     <Compile Include="Data\CardPageFour.cs" />
-    <Compile Include="Data\CardPages.cs" />
+    <Compile Include="Data\Diagnoses\TestDiagnoz.cs" />
+    <Compile Include="ViewModel\CardPages.cs" />
     <Compile Include="Data\CardPageTwo.cs" />
     <Compile Include="Data\TablesData\OblickTable.cs" />
     <Compile Include="HelpersClass\RelayCommand.cs" />
     <Compile Include="Data\CardPageThree.cs" />
     <Compile Include="nano.cs" />
-    <Compile Include="ViewModel\CardOne.cs" />
     <Compile Include="test1.cs" />
+    <Compile Include="ViewModel\DiagnosesViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
