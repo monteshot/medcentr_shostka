@@ -89,6 +89,7 @@
     <Compile Include="Data\CardPageFive.cs" />
     <Compile Include="Data\CardPageFour.cs" />
     <Compile Include="Data\Diagnoses\TestDiagnoz.cs" />
+    <Compile Include="Data\DoctorsList.cs" />
     <Compile Include="ViewModel\CardPages.cs" />
     <Compile Include="Data\CardPageTwo.cs" />
     <Compile Include="Data\TablesData\OblickTable.cs" />

@@ -393,7 +393,7 @@
             </TabItem>
 
             <TabItem x:Name="Testersitem">
-               
+
                 <TabItem.Header>
                     <WrapPanel>
                         <TextBlock TextAlignment ="Center"><Run Text="Тестовое название"/></TextBlock>
@@ -406,7 +406,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <Button Content="TestAdd" Command="{Binding AddCommand}"></Button>
-                        
+
                     </StackPanel>
                     <TabControl  Grid.Row="2" ItemsSource="{Binding Diag}" >
                         <TabControl.Resources>
@@ -467,6 +467,27 @@
                             </Grid>
                         </TabItem>-->
 
+                </Grid>
+            </TabItem>
+            <TabItem Header="Регистратура(переместить)" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" >
+                <Grid Background="#FFE5E5E5">
+                    <TreeView x:Name="ListLikary" HorizontalAlignment="Left" Width="340">
+                        <!--<TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding ListOfDoctors}">
+                                <TextBlock Text="{Binding SpecLik}"/>
+                                
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                        --><!--<TreeViewItem Header="Лікарі" ItemsSource="{Binding ListOfDoctors}" Margin="0,5,0,0">--><!--
+
+                        </TreeViewItem>-->
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding SpecLikar}">
+                                <TextBlock Text="{Binding Likar}"/>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+
+                    </TreeView>
                 </Grid>
             </TabItem>
         </TabControl>

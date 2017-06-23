@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using kepkaSQL;
+using System.Collections.Generic;
 
 namespace VrachMedcentr
 {
@@ -56,6 +57,7 @@ namespace VrachMedcentr
         public ObservableCollection<CardPageFive> Dilery { get; set; }
         
         public ObservableCollection<CardPageThree> Diagnosis { get; set; }
+    
 
         /// <summary>
         /// Page 2
@@ -163,6 +165,18 @@ namespace VrachMedcentr
         //    }
         //}
 
+        public RelayCommand LoadListOfDoc
+        {
+            get
+            {
+                return readP3 ??
+                  (read = new RelayCommand(obj =>
+                  {
+                     // ListOfDoctors = con.UpdateP3();
+
+                  }));
+            }
+        }
         public void Setter()
 
         {
