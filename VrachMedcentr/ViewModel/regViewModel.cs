@@ -135,7 +135,7 @@ namespace VrachMedcentr
                     {
                         //int i = 0;
                         ObservableCollection<Times> temp = new ObservableCollection<Times>();
-                       
+
                         foreach (var a in DoctorTimes)
                         {
                             i++;
@@ -147,7 +147,7 @@ namespace VrachMedcentr
 
                     catch (Exception)
                     {
-                        MessageBox.Show("Для вибраного лікаря розклад відсутній");
+                        MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній");
                     }
                 }
                 else
@@ -174,18 +174,16 @@ namespace VrachMedcentr
             }
             set
             {
+                dateDoctorAcepting = value;
+               
                 try
                 {
-                    dateDoctorAcepting = value;
-
-
-
-                    Appointments = con.GetAppointments(SelectedDocNames.docID, value);
-
                     RefreshDocTimes();
-
+                    Appointments = con.GetAppointments(SelectedDocNames.docID, value);
+                    
                 }
                 catch { }
+
 
             }
         }
@@ -220,24 +218,14 @@ namespace VrachMedcentr
                     //if (SelectedDocNames.docTimeId == "0" && SelectedDocNames.docTimeId == null || WorkingDays.Contains(DateDoctorAcepting)==false)
                     RefreshDocTimes();
                     Appointments = con.GetAppointments(SelectedDocNames.docID, DateDoctorAcepting);
-                    //if (SelectedDocNames.docTimeId == "0" || SelectedDocNames.docTimeId == null)
-                    //{
-                    //    DoctorTimes = null;
-                    //}
-                    //else
-                    //{
-                    //    DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
-                    //}
-                    //Appointments = con.GetAppointments(SelectedDocNames.docID, DateDoctorAcepting);
-
                     // TimeHour = value.docBool; // присваивать значение с статуса врача
                     // КОСТІЛЬ ПЕРЕДЕЛАТЬ ИЗМЕНИТЬ СЧИТІВАНЬЕ ЛИСТА С СПЕЦИФИКАЦИЯМИ И ВРАЧАМИ (Спросить у ИЛЬИ)
-                    //TimeHour = con.GetDocTimeTalon(Convert.ToInt32(value.docID));
+
                 }
                 catch { }
             }
         }
-        
+
 
         #endregion
 
@@ -255,7 +243,7 @@ namespace VrachMedcentr
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();
             ListOfUsers = con.GetUsers();
-
+           
             foreach (var a in ListOfUsers)
             {
                 OneTimeUsers.Add(a.userFIO);
@@ -286,17 +274,40 @@ namespace VrachMedcentr
         /// </summary>
         private void RefreshDocTimes()
         {
-            if (SelectedDocNames.docTimeId == "0" || WorkingDays.Contains(DateDoctorAcepting) == false)
+            try
             {
-                // DoctorTimes.Clear();
-                DoctorTimes = new ObservableCollection<Times>();
-                DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "green" });
+
+                if (con.CheckDoctorList(SelectedDocNames.docTimeId))
+                {
+                    if (SelectedDocNames.docTimeId == "0" || WorkingDays.Contains(DateDoctorAcepting) == false)
+                    {
+
+                        DoctorTimes = new ObservableCollection<Times>();
+                        DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "green" });
+                    }
+                    else
+                    {
+                        DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                    }
+                }
+                else
+                {
+                    DoctorTimes = null;
+                    if (SelectedDocNames != null )
+                    {
+                        MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній");
+                    }
+                }
+
             }
-            else
+            catch (Exception e)
             {
-                DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                //Розкомнетить для отладки
+                //MessageBox.Show(e.ToString());
             }
         }
+
+
 
 
         private RelayCommand _conf;
@@ -371,7 +382,7 @@ namespace VrachMedcentr
                               BackUPdocTimes.Add(new Times { Time = a.Time, Status = a.Status });
                           }
 
-                          VMEditTime.docTimes = BackUPdocTimes;
+                          VMEditTime.docTimes = DoctorTimes;
                           //DoctorTimes = VMEditTime.temperory;
 
                       }
@@ -386,7 +397,25 @@ namespace VrachMedcentr
                       {
                           WorkingDays = con.GetListOfWorkingDays(Convert.ToInt32(SelectedDocNames.docID));
 
-                          RefreshDocTimes();
+                          if (con.CheckDoctorList(SelectedDocNames.docTimeId))
+                          {
+                              if (SelectedDocNames.docTimeId == "0" || WorkingDays.Contains(DateDoctorAcepting) == false)
+                              {
+
+                                  DoctorTimes = new ObservableCollection<Times>();
+                                  DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "green" });
+                              }
+                              else
+                              {
+                                  DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                              }
+                          }
+                          else
+                          {
+                              DoctorTimes = null;
+                             
+                          }
+
                           TimeHour = SelectedDocNames.docBool;
                           //DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
                       }

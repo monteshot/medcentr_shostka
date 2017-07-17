@@ -104,7 +104,7 @@ namespace VrachMedcentr
                 {
                     temp.Add(new DocNames
                     {
-                        
+
                         docName = dr.GetString("name"),
                         docID = dr.GetString("id"),
                         docBool = GetDocTimeTalonStatus(Convert.ToInt32(dr.GetString("id"))),
@@ -143,7 +143,7 @@ namespace VrachMedcentr
             {
                 while (dr.Read())
                 {
-                    if(dr.GetInt32("parametr")==0)
+                    if (dr.GetInt32("parametr") == 0)
                     {
                         parametr = false;
                     }
@@ -168,11 +168,17 @@ namespace VrachMedcentr
             mysqlCSB.Database = database;
             mysqlCSB.UserID = UserID;
             mysqlCSB.Password = Password;
-            string getDocTime = null;
+            // string getDocTime = null;
+
+            List<string> getDocPubTime = null;
+            List<string> getDocPrivateTime = null;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = mysqlCSB.ConnectionString;
             MySqlCommand cmd = new MySqlCommand();
+
             ObservableCollection<Times> temp = new ObservableCollection<Times>();
+
+
             con.Open();
             cmd.CommandText = "SELECT * FROM ekfgq_ttfsp_sprtime WHERE id = @docId";//',9,'
             cmd.Parameters.AddWithValue("@docId", docTimeId);
@@ -182,31 +188,86 @@ namespace VrachMedcentr
             {
                 while (dr.Read())
                 {
-                    getDocTime = (dr.GetString("timehm"));
+                    //getDocTime = dr.GetString("timehm");
+                    getDocPubTime = getParseTime(dr.GetString("timehm"));
+                    getDocPrivateTime = getParseTime(dr.GetString("timeprv"));
                     // getDocTimes= dr.GetString("timehm");
 
                 }
             }
+
+
             con.Close();
-            List<string> getDocT;
-            getDocT = getParseTime(getDocTime);
-            foreach (var a in getDocT) { temp.Add(new Times { Time = a, Status = GetStat(a, date, docId) }); }
 
-            //temp.Add(new Times
-            //{
-            //    Time = getDocTimes(dr.GetString("timehm")),
-            //    Status = GetStat(dr.GetString("timehm"), date, docId)
 
-            //});
-            updateCurrList = getDocT;
+
+            foreach (var a in getDocPubTime)
+            {
+                if (a != "" && a != null)
+                {
+                    temp.Add(new Times { Time = a, Status = GetStat(a, date, docId), PublickPrivate = true });
+                }
+            }
+            
+            foreach (var a in getDocPrivateTime)
+            {
+                if (a != "" && a != null)
+                {
+                    temp.Add(new Times { Time = a, Status = GetStat(a, date, docId), PublickPrivate = false });
+                }
+            }
+
+
+            updateCurrList = getDocPubTime;
             DocID = docId;
+            return temp;
+        }
+        /// <summary>
+        /// Function for check aveliable list of doctors shedule
+        /// </summary>
+        /// <param name="_doctimeid"></param>
+        /// <returns></returns>
+        public bool CheckDoctorList(string _doctimeid)
+        {
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+            // string getDocTime = null;
+
+            bool temp;
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand();
+            
+
+
+            con.Open();
+            cmd.CommandText = "SELECT EXISTS (SELECT * FROM ekfgq_ttfsp_sprtime WHERE id = @docId)";//',9,'
+            cmd.Parameters.AddWithValue("@docId", _doctimeid);
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            var i = cmd.ExecuteScalar();
+            if(Convert.ToInt32(i)==1)
+            {
+                temp = true;
+            }
+            else
+            {
+                temp = false;
+            }
+
+            con.Close();
+
             return temp;
         }
 
         List<string> updateCurrList;
         string DocID;
 
-        public void updateCurr(string resTime, string DocID)
+        public void updateCurr(string publickTime, string privaTetime, string DocID)
         {
             MySqlConnectionStringBuilder mysqlCSB;
             mysqlCSB = new MySqlConnectionStringBuilder();
@@ -220,28 +281,23 @@ namespace VrachMedcentr
             MySqlCommand cmd = new MySqlCommand();
 
 
-            //var result=  updateCurrList.Find(x => updateCurrList.==time);
-            //foreach (var a in updateCurrList)
-            //{
-            //    if (a != selTime) { resTime = a + "\r"; }
-            //    if (a == selTime)
-            //    {
-            //        resTime = time + "\r";
-            //    }
-            //}
-
-
             con.Open();
-            cmd.CommandText = "UPDATE ekfgq_ttfsp_sprtime SET timehm=@resTime WHERE id = @docId";//',9,'
-            cmd.Parameters.AddWithValue("@resTime", resTime);
+            //Recording publick times to base
+            cmd.CommandText = "UPDATE ekfgq_ttfsp_sprtime SET timehm=@publickTime WHERE id = @docId";//',9,'
+            cmd.Parameters.AddWithValue("@publickTime", publickTime);
             cmd.Parameters.AddWithValue("@docId", DocID);
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
 
-            //updateCurrList =;
-
+            //Recording  private times to base
+            cmd.CommandText = "UPDATE ekfgq_ttfsp_sprtime SET timeprv=@privaTetime WHERE id = @docId";//',9,'
+            cmd.Parameters.AddWithValue("@privaTetime", privaTetime);
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
 
         }
+
+
         public List<string> getParseTime(string time)
         {
             List<string> tempTime = new List<string>();
@@ -288,11 +344,11 @@ namespace VrachMedcentr
             return result;
         }
         #endregion
-        public  ObservableCollection<DateTime> GetListOfWorkingDays(int _docId)
+        public ObservableCollection<DateTime> GetListOfWorkingDays(int _docId)
         {
             MySqlConnectionStringBuilder mysqlCSB;
             mysqlCSB = new MySqlConnectionStringBuilder();
-            mysqlCSB.Server =  server;
+            mysqlCSB.Server = server;
             mysqlCSB.Database = database;
             mysqlCSB.UserID = UserID;
             mysqlCSB.Password = Password;
@@ -305,11 +361,11 @@ namespace VrachMedcentr
             int i = 0;
 
             ObservableCollection<DateTime> temp = new ObservableCollection<DateTime>();
-          
+
             con.Open();
             cmd.CommandText = "SELECT dttime FROM ekfgq_ttfsp WHERE idspec = @DocID";
             cmd.Parameters.AddWithValue("@DocID", _docId);
-         
+
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             using (MySqlDataReader dr = cmd.ExecuteReader())
@@ -318,10 +374,10 @@ namespace VrachMedcentr
                 {
                     i++;
                     temp.Add(dr.GetDateTime("dttime"));
-                    
-                       
 
-                  
+
+
+
                 }
             }
             con.Close();

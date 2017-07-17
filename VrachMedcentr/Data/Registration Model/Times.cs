@@ -10,8 +10,36 @@ namespace VrachMedcentr
     /// </summary>
     class Times
     {
+        private bool _PublickPrivate;
+
         public string Time { get; set; }
         public string Status { get; set; }// Отображает занято время или нет с помощью цвета задаваемого стрингом
-        public BitmapImage TimeProperties { get; set; } = new BitmapImage(new Uri("/Resources/Hospital.jpg",UriKind.Relative)) { CreateOptions = BitmapCreateOptions.IgnoreImageCache };
+
+        //public bool PublickPrivate { get; set; }
+        public bool PublickPrivate
+        {
+            get
+            {
+                return _PublickPrivate;
+            }
+            set
+            {
+                _PublickPrivate = value;
+                if(value==true)
+                {
+                    TimeProperties = "На сайті";
+                }
+                else
+                {
+                    TimeProperties = "В регістратурі";
+                }
+
+            }
+        }
+
+
+        public string TimeProperties { get; set; }
+
+       
     }
 }

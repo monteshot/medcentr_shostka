@@ -250,15 +250,25 @@
                                 <RowDefinition Height="0.2*"/>
                             </Grid.RowDefinitions>
 
-                            <ListBox Grid.Row="0" ItemsSource="{Binding DoctorTimes, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,5"
+                            <ListBox Grid.Row="0" ItemsSource="{Binding DoctorTimes , UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,5"
                  SelectedItem="{Binding SelectedTime}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Foreground="{Binding Status}"  FontSize="18" Text="{Binding Time, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Foreground="{Binding Status}"  FontSize="18" Text="{Binding Time, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                                            <TextBlock Grid.Column="1" FontSize="18" Text="{Binding TimeProperties, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
 
-                                            <Image Height="20" Width="20" Source="{Binding TimeProperties}"/>
-                                        </StackPanel>
+                                        </Grid>
+                                        <!--<StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                                           
+                                            
+                                           
+
+                                        </StackPanel>-->
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>

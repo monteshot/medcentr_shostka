@@ -19,6 +19,7 @@ namespace VrachMedcentr
         public DocNames docSelected { get; set; }
         public Times SelectedTime { get; set; }
 
+
         #endregion
 
         #region Halpers object
@@ -41,38 +42,72 @@ namespace VrachMedcentr
                 return _submitTimes ??
                   (_submitTimes = new RelayCommand(obj =>
                   {
+
                       string result = "";
                       string z = "";
+                      string prive = "";
                       bool permitToBase = true;
-                      foreach (var a in docTimes)
+
+                      try
                       {
 
-                          //if (a.Time.Count<char>() < 5 && a.Time.Count<char>()>3)
-                          //{
-                          //    permitToBase = false;
-                          //    break;
-                          //}
-                          if (a.Time == "0:00") { continue; }
-
-                          z += a.Time + "\r";
-
-                          if (a.Time == null || a.Time == "")
+                          foreach (var a in docTimes)
                           {
-                              z = z.Substring(0, z.Length - 1);
+
+                              //if (a.Time.Count<char>() < 5 && a.Time.Count<char>()>3)
+                              //{
+                              //    permitToBase = false;
+                              //    break;
+                              //}
+                              if (a.Time == "") { continue; }
+                              if (a.PublickPrivate == true)
+                              {
+
+                                  z += a.Time + "\r";
+
+                                  if (a.Time == null || a.Time == "")
+                                  {
+                                      z = z.Substring(0, z.Length - 1);
+                                  }
+                              }
+                              else
+                              {
+
+                                  prive += a.Time + "\r";
+
+                                  if (a.Time == null || a.Time == "")
+                                  {
+                                      prive = prive.Substring(0, z.Length - 1);
+                                  }
+                              }
+
                           }
-
                       }
+                      catch
+                      {
+                          MessageBox.Show("Перевірте пральність введення данних");
+                      }
+                      
+                      //Проверка на наличие времени
+                      //if (prive != "" && prive != null)
+                      //{
+                      //    prive = prive.Substring(0, prive.Length - 1);
+                      //}
+                      //if (z != "" && z != null)
+                      //{
+                      //    z = z.Substring(0, z.Length - 1);
+                      //}
 
-                      z = z.Substring(0, z.Length - 1);
                       if (permitToBase == true)
                       {
-                          con.updateCurr(z, docSelected.docTimeId);
+                          con.updateCurr(z, prive, docSelected.docTimeId);
                           MessageBox.Show("Розклад лікаря " + docSelected.docName + " змінено", "Розклад змінено", MessageBoxButton.OK, MessageBoxImage.Question);
                       }
                       else
                       {
                           MessageBox.Show("Розклад лікаря " + docSelected.docName + " НЕ змінено.\nПеревірте правильність данних та спробуйте ще раз", "Помилка", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                       }
+
 
 
 
