@@ -64,11 +64,11 @@
               
             </Grid.ColumnDefinitions>
             
-            <Button Grid.Column="1"  UseLayoutRounding="True"  Style="{DynamicResource ButtonBlue}" Command="{Binding addTimes}"  FontSize="14" Padding="5"  Margin="5">Додати час</Button>
+            <Button Grid.Column="0"  UseLayoutRounding="True"  Style="{DynamicResource ButtonBlue}" Command="{Binding addTimes}"  FontSize="14" Padding="5"  Margin="5">Додати час</Button>
 
             <!--<xctk:TimePicker Foreground="#FF615D5D" AllowDrop="False" Background="#FFEEEEEE"  Grid.Column="1" Format="ShortTime" Style="{DynamicResource GrayTimePickerStyle}" Kind="Local" TimeInterval="0:5:0" IsManipulationEnabled="True" MouseWheelActiveTrigger="MouseOver" ShowButtonSpinner="False"    />-->
           
-            <Button Grid.Column="0"  UseLayoutRounding="True"  Style="{DynamicResource ButtonOrange}" Command="{Binding SubmitTimes}"  FontSize="14" Padding="5"  Margin="5">Зберегти розклад</Button>
+            <Button Grid.Column="1"  UseLayoutRounding="True"  Style="{DynamicResource ButtonOrange}" Command="{Binding SubmitTimes}"  FontSize="14" Padding="5"  Margin="5">Зберегти розклад</Button>
         </Grid>
 
     </Grid>
