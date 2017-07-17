@@ -1,0 +1,71 @@
+﻿<Window xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        x:Class="VrachMedcentr.EditTime"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"       
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" 
+        xmlns:local="clr-namespace:VrachMedcentr"
+        mc:Ignorable="d"
+        Title="Редагування розкладу" MinHeight="500" Height="500" Width="500" MinWidth="500" WindowStartupLocation="CenterScreen" >
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="5,0,0,0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Row="0">
+            <TextBlock  FontSize="20" VerticalAlignment="Bottom">Редагуання розкладу лікаря:</TextBlock>
+            <TextBlock Text="{Binding  docSelected.docName}" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center"></TextBlock>
+        </StackPanel>
+
+
+
+        <ListBox Grid.Row="1" x:Name="lv" SelectedItem="{Binding SelectedTime}"  ItemsSource="{Binding docTimes,UpdateSourceTrigger=PropertyChanged}"  >
+           
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel   HorizontalAlignment="Center"  Margin="10" Orientation="Horizontal">
+                        <TextBlock Padding="5" FontSize="15" Text="Час: "/>
+
+                        <!--<TextBox Padding="10,0,10,0"  Text="{ Binding Time, UpdateSourceTrigger=PropertyChanged}"/>-->
+                        <xctk:TimePicker Foreground="#FF615D5D" Background="#FFEEEEEE" Padding="10,0,10,0"   Style="{DynamicResource GrayTimePickerStyle}" Format="ShortTime" TimeInterval="0:5:0" Text="{ Binding Time, UpdateSourceTrigger=PropertyChanged}"  ShowButtonSpinner="False" Kind="Local" MouseWheelActiveTrigger="MouseOver" AllowSpin="True" IsManipulationEnabled="True" />
+                        <Button Margin="10,0,0,0" Style="{DynamicResource ButtonGreen}" Padding="5" Command="{Binding ElementName=lv,Path=DataContext.remTimes}" CommandParameter="{Binding}">Видалити час    </Button>
+
+
+                        <!--<TextBox  Text="{Binding Status}"/>-->
+                        <!--<WindowsFormsHost >
+                            <wf:MaskedTextBox Text="{Binding Time}"  Mask="00:00" />
+                        </WindowsFormsHost>-->
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+              
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0"  UseLayoutRounding="True"  Style="{DynamicResource ButtonBlue}" Command="{Binding addTimes}"  FontSize="14" Padding="5"  Margin="5">Додати час</Button>
+
+            <!--<xctk:TimePicker Foreground="#FF615D5D" AllowDrop="False" Background="#FFEEEEEE"  Grid.Column="1" Format="ShortTime" Style="{DynamicResource GrayTimePickerStyle}" Kind="Local" TimeInterval="0:5:0" IsManipulationEnabled="True" MouseWheelActiveTrigger="MouseOver" ShowButtonSpinner="False"    />-->
+          
+            <Button Grid.Column="1"  UseLayoutRounding="True"  Style="{DynamicResource ButtonOrange}" Command="{Binding SubmitTimes}"  FontSize="14" Padding="5"  Margin="5">Зберегти розклад</Button>
+        </Grid>
+
+    </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ClosingWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+</Window>

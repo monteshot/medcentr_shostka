@@ -1,0 +1,63 @@
+﻿<Window x:Class="VrachMedcentr.editDays"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"      
+        xmlns:local="clr-namespace:VrachMedcentr"
+        mc:Ignorable="d"
+        Title="Редагувати робочі дні" Height="500" Background="#FFE5E5E5" Width="500" MinHeight="500" MinWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            
+
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+           
+            
+           
+        </Grid>
+        <!--<Button Margin="5" Grid.Row="2" Style="{DynamicResource ButtonOrange}" Content="Зберегти зміни" Height="Auto" />-->
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="0.65*" />
+                <RowDefinition Height="0.35*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Margin="5" FontSize="15"  Style="{DynamicResource ButtonBlue }" Command="{Binding checkDays}"  Content="Відмітити як робочі"  />
+                <Button Grid.Column="0" Margin="5" FontSize="15"   Style="{DynamicResource ButtonGreen }" Command="{Binding uncheckDays}" Content="Відмітити як неробочі" />
+            </Grid>
+   
+            <!--<ListBox Grid.Column="1" ItemsSource="{Binding DoctorTimes , UpdateSourceTrigger=PropertyChanged}"                  SelectedItem="{Binding SelectedTime}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <TextBlock Foreground="{Binding Status}"  FontSize="18" Text="{Binding Time, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>-->
+            <Calendar Grid.Column="0" x:Name="Cal" Style="{DynamicResource MyCalendar}"
+                                   CalendarButtonStyle="{DynamicResource MyCalendarButtonStyle}"
+                                   CalendarDayButtonStyle="{DynamicResource MyCalendarDayButtonStyle}"
+                                   CalendarItemStyle="{DynamicResource MyCalendarItem}" SelectedDate="{Binding selectedDays , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayDate="{Binding selectedDays,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectionMode="MultipleRange" >
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger  EventName="SelectedDatesChanged">
+                        <i:InvokeCommandAction CommandParameter="{Binding SelectedDates, ElementName=Cal}" Command="{Binding setSelectedDays }"/>
+
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Calendar>
+
+        </Grid>
+
+    </Grid>
+</Window>
