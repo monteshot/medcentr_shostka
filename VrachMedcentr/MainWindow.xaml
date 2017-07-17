@@ -411,9 +411,9 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <!--<RowDefinition/>-->
-                            <RowDefinition Height="0.3*"/>
+                            <RowDefinition Height="0.5*"/>
                             <RowDefinition Height="0.7*"/>
-                            <RowDefinition  Height="0.3*"/>
+                         
                         </Grid.RowDefinitions>
 
                         <StackPanel Margin="-1" Orientation="Horizontal" Grid.Row="1">
@@ -421,7 +421,7 @@
                             <TextBox VerticalAlignment="Center"  MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0" Text="Ім'я"/>
                             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" ><Run Text="Дата народження:"/></TextBlock>
                             <DatePicker  MinWidth="100" MinHeight="35" Height="35" Margin="5,0,0,0" SelectedDateFormat="Short"/>
-                            <Button  Style="{DynamicResource ButtonGreen}" VerticalAlignment="Center" Padding="50" Margin="10,0,0,0" Content="Пошук пацієнта"/>
+                            <Button  Style="{DynamicResource ButtonGreen}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" Content="Пошук пацієнта"/>
                         </StackPanel>
 
                     </Grid>
@@ -440,8 +440,8 @@
                 </WrapPanel>
             </DockPanel>-->
                 </DockPanel>
-                <GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
-                HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+                <!--<GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
+                HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />-->
 
                 <TabControl Grid.Row="1" x:Name="PacientCard" >
 
@@ -546,7 +546,7 @@
                                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
                                         <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman"><Run Text="Дата заповнення карти"/></TextBlock>
 
-                                        <DatePicker SelectedDate="{Binding DateCardWriten, Mode=TwoWay}" SelectedDateFormat="Short" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                        <DatePicker SelectedDate="{Binding DateCardWriten, Mode=TwoWay}" SelectedDateFormat="Short" VerticalAlignment="Center" Margin="10,0,0,0" Padding="5"/>
                                     </StackPanel>
 
 
@@ -631,14 +631,11 @@
 
                                     </DataGrid>
                                 </Grid>
-                                <Grid  Grid.Row="11" HorizontalAlignment="Center" >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                                <StackPanel  Grid.Row="11" HorizontalAlignment="Right" Orientation="Horizontal" >
+                                    
                                     <Button Grid.Column="0" Margin="10,-2,10,2"  Style="{DynamicResource ButtonOrange}" Content="Видалити запис"/>
                                     <Button  Grid.Column="1" Margin="10,-2,10,2" Style="{DynamicResource ButtonOrange}" Content="Зберегти" />
-                                </Grid>
+                                </StackPanel>
 
                             </Grid>
                         </Grid>
