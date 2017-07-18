@@ -150,6 +150,7 @@
       <DependentUpon>EditTime.xaml</DependentUpon>
     </Compile>
     <Compile Include="HelpersClass\conBD.cs" />
+    <Compile Include="HelpersClass\WorkingDays.cs" />
     <Compile Include="ViewModel\CardPages.cs" />
     <Compile Include="Data\CardPageTwo.cs" />
     <Compile Include="Data\TablesData\OblickTable.cs" />
@@ -212,6 +213,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

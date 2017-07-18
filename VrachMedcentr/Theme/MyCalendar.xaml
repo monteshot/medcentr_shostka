@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                   
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+                    xmlns:helpers="clr-namespace:MyHelpers"
+                    xmlns:local ="clr-namespace:VrachMedcentr.HelpersClass"
                     >
     <Style x:Key="MyCalendar" TargetType="{x:Type Calendar}">
         <Setter Property="Foreground" Value="Black"/>
@@ -137,7 +139,7 @@
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-     
+        <Setter Property="local:WorkingDays.Date" Value="Binding"></Setter>
 
         <Setter Property="Template">
             
