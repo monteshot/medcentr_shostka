@@ -17,7 +17,7 @@ using System.Data;
 using kepkaSQL;
 using VrachMedcentr;
 using System.Collections;
-
+using System.Reflection;
 
 namespace WPF_Hospital
 {
@@ -31,6 +31,8 @@ namespace WPF_Hospital
         {
             InitializeComponent();
 
+            var currVer = Assembly.GetExecutingAssembly().GetName().Version;
+            Title += " Версія: " + currVer; //не выпиливать! дает версию в заголовке аппы
 
             connect con = new connect();
             page1.DataContext = new CardPages();
@@ -40,7 +42,7 @@ namespace WPF_Hospital
             // Update.DataContext = new update();
             update updater = new update();
             //upd.GetVersion();
-
+          
             //Regis.DataContext = new regViewModel();// может еще нам нужно будет
             //Card3.DataContext= new CardPageThree();
             //Card4.DataContext = new CardPageFour();

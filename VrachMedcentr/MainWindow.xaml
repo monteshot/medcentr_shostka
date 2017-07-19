@@ -9,11 +9,12 @@
         xmlns:local="clr-namespace:WPF_Hospital"
         xmlns:local1="clr-namespace:VrachMedcentr"
         xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
+    
          xmlns:helpers="clr-namespace:VrachMedcentr.HelpersClass.MyHalpers"
    
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="WPF_Hospital.MainWindow"
         mc:Ignorable="d"
-        Title="Клієнт для роботи з реєстратурою та лікарем" Height="900" Width="1280"  WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Клієнт для роботи з реєстратурою та лікарем"  Height="900" Width="1280"  WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <TabControl >
 
@@ -284,7 +285,8 @@
                                 <RowDefinition />
                                 <RowDefinition Height="0.2*"/>
                             </Grid.RowDefinitions>
-                            <Calendar    SelectedDate="{Binding DateDoctorAcepting}" DisplayDate="{Binding DateDoctorAcepting}"                                   
+                            <Calendar    SelectedDate="{Binding DateDoctorAcepting}" DisplayDate="{Binding DateDoctorAcepting}"  
+                                         
                                    helpers:HolidayHelper.List ="{Binding Otemp}"          
                                    Style="{DynamicResource MyCalendar}"
                                    CalendarButtonStyle="{DynamicResource MyCalendarButtonStyle}"
