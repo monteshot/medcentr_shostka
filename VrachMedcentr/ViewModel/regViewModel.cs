@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using VrachMedcentr.HelpersClass.MyHalpers;
 
 namespace VrachMedcentr
 {
@@ -29,6 +30,7 @@ namespace VrachMedcentr
         private ObservableCollection<string> OneTimeUsers = new ObservableCollection<string>();// переменная для представления ФИО юзверей в комбобоксе  
         private ObservableCollection<Times> OneTimeDoctorTimes = new ObservableCollection<Times>();
         private ObservableCollection<Users> ListOfUsers;//переменная для считыванья списка юзверей единожди при запуске програмы
+        public ObservableCollection<DateTime> Otemp { get; set; }
         private Users SelectedUser;
         #endregion
 
@@ -43,7 +45,7 @@ namespace VrachMedcentr
 
         public ObservableCollection<Times> DoctorTimes { get; set; }
         // public ObservableCollection<Times> DoctorTimes { get; set; }
-        public ObservableCollection<string> Users { get; set; }
+        public ObservableCollection<string> Users { get; set; } 
         public ObservableCollection<DateTime> WorkingDays { get; set; }
 
 
@@ -139,7 +141,7 @@ namespace VrachMedcentr
                         foreach (var a in DoctorTimes)
                         {
                             i++;
-                            temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString() });
+                            temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(),TimeProperties =a.TimeProperties });
                         }
                         DoctorTimes = temp;
 
@@ -175,10 +177,41 @@ namespace VrachMedcentr
             set
             {
                 dateDoctorAcepting = value;
-
+                int i = 0;
                 try
                 {
-                    RefreshDocTimes();
+                    if (TimeHour == false )
+                    {
+                        RefreshDocTimes();
+                    }
+                   if(TimeHour==true)
+                    {
+                        if (WorkingDays.Contains(value))
+                        {
+                            try
+                            {
+                                //int i = 0;
+                                ObservableCollection<Times> temp = new ObservableCollection<Times>();
+                                ObservableCollection<Times> tempList = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                                foreach (var a in tempList)
+                                {
+                                    i++;
+                                    temp.Add(new Times { Status = a.Status, Time = "Талон №" + i.ToString(), TimeProperties = a.TimeProperties });
+                                }
+                                DoctorTimes = temp;
+
+                            }
+
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній");
+                            }
+                        }
+                        else
+                        {
+                            RefreshDocTimes();
+                        }
+                    }
                     Appointments = con.GetAppointments(SelectedDocNames.docID, value);
 
                 }
@@ -213,6 +246,7 @@ namespace VrachMedcentr
                 //подавляем екзепшены так как при выборе специальности DocNames становиться null
                 try
                 {
+                    Otemp = con.GetListOfWorkingDays(Convert.ToInt32(value.docID));
                     TimeHour = con.GetDocTimeTalonStatus(Convert.ToInt32(value.docID));
                     WorkingDays = con.GetListOfWorkingDays(Convert.ToInt32(value.docID));
                     //if (SelectedDocNames.docTimeId == "0" && SelectedDocNames.docTimeId == null || WorkingDays.Contains(DateDoctorAcepting)==false)
@@ -231,7 +265,7 @@ namespace VrachMedcentr
 
         #region Helpers object
         conBD con = new conBD();
-
+       
         #endregion
 
         #region Constructor
@@ -239,17 +273,19 @@ namespace VrachMedcentr
         public regViewModel()
         {
 
-
+            
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();
             ListOfUsers = con.GetUsers();
+           
 
+            Users = OneTimeUsers;
+           
+           
             foreach (var a in ListOfUsers)
             {
                 OneTimeUsers.Add(a.userFIO);
             }
-
-            Users = OneTimeUsers;
             DoctorTimes = new ObservableCollection<Times>();
             try
             {
@@ -293,7 +329,7 @@ namespace VrachMedcentr
                 else
                 {
                     DoctorTimes = null;
-                    if (SelectedDocNames != null)
+                    if (SelectedDocNames != null || con.CheckDoctorList(SelectedDocNames.docTimeId))
                     {
                         MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній");
                     }
@@ -477,6 +513,7 @@ namespace VrachMedcentr
                           }
 
                           VMEditDays.docTimes = BackUPdocTimes;
+                          VMEditDays.WorkDays = WorkingDays;
                           //DoctorTimes = VMEditTime.temperory;
 
                       }

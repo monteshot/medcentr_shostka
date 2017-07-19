@@ -151,6 +151,8 @@
       <DependentUpon>EditTime.xaml</DependentUpon>
     </Compile>
     <Compile Include="HelpersClass\conBD.cs" />
+    <Compile Include="HelpersClass\WorkingDays.cs" />
+    <Compile Include="HelpersClass\WorkingDaysList.cs" />
     <Compile Include="SearchUsersCard.xaml.cs">
       <DependentUpon>SearchUsersCard.xaml</DependentUpon>
     </Compile>
@@ -221,6 +223,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
