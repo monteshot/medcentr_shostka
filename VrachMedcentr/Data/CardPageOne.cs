@@ -25,37 +25,47 @@ namespace VrachMedcentr
               
         public string CodeZKPO { get; set; }
         public string NumberPacient { get; set; }
-        public string CodePacient { get; set; }       
+        public string CodePacient { get; set; }
+        public DateTime dateBirth { get; set; } = DateTime.Today;
         public DateTime DateCardWriten { get => thisDay; set => thisDay = value; }
         public string Sername { get; set; }
         public string Name { get; set; }
         public string FathersName { get; set; }
-        public bool SexFaMale { get; set; }
-        public bool SexMale { get; set; }
+        public bool Sex { get; set; }
+
+        //public bool SexFaMale { get; set; }
+        //public bool SexMale { get; set; }
+
         public string Adress { get; set; }
         public string LeavingPlace { get; set; }
         public string WorkingPlace { get; set; }
-        public bool DispersedGroupYes { get; set; }
-        public bool DispersedGroupNo { get; set; }
+        public bool Dispensary { get; set; }
+
+        //public bool DispersedGroupYes { get; set; }
+        //public bool DispersedGroupNo { get; set; }
+
         public string PreferentNumber { get; set; }
         public DataTable AccountingTable { get; set; }
         public string CodeZYCD1 { get => codeZYCD; set => codeZYCD = value; }
+        public string Contingency { get; set; }
 
         #endregion
 
         #region Helpers method
-        private RelayCommand addCommand;
-        public RelayCommand AddCommand
-        {
-            get
-            {
-                return addCommand ??
-                  (addCommand = new RelayCommand(obj =>
-                  {
-                      Setter();
-                  }));
-            }
-        }
+
+        //private RelayCommand addCommand;
+        //public RelayCommand AddCommand
+        //{
+        //    get
+        //    {
+        //        return addCommand ??
+        //          (addCommand = new RelayCommand(obj =>
+        //          {
+                     
+        //              // Setter();
+        //          }));
+        //    }
+        //}
 
        
         public void Setter()

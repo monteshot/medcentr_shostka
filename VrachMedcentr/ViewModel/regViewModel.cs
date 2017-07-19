@@ -175,12 +175,12 @@ namespace VrachMedcentr
             set
             {
                 dateDoctorAcepting = value;
-               
+
                 try
                 {
                     RefreshDocTimes();
                     Appointments = con.GetAppointments(SelectedDocNames.docID, value);
-                    
+
                 }
                 catch { }
 
@@ -243,7 +243,7 @@ namespace VrachMedcentr
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();
             ListOfUsers = con.GetUsers();
-           
+
             foreach (var a in ListOfUsers)
             {
                 OneTimeUsers.Add(a.userFIO);
@@ -293,7 +293,7 @@ namespace VrachMedcentr
                 else
                 {
                     DoctorTimes = null;
-                    if (SelectedDocNames != null )
+                    if (SelectedDocNames != null)
                     {
                         MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній");
                     }
@@ -403,7 +403,7 @@ namespace VrachMedcentr
                               {
 
                                   DoctorTimes = new ObservableCollection<Times>();
-                                  DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "green" });
+                                  DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
                               }
                               else
                               {
@@ -413,7 +413,7 @@ namespace VrachMedcentr
                           else
                           {
                               DoctorTimes = null;
-                             
+
                           }
 
                           TimeHour = SelectedDocNames.docBool;
@@ -425,6 +425,34 @@ namespace VrachMedcentr
             }
         }
 
+        private RelayCommand _SearchUsers;
+        public RelayCommand SearchUsers
+        {
+            get
+            {
+                return _SearchUsers ??
+                  (_SearchUsers = new RelayCommand(obj =>
+                  {
+                      SearchUsersCard SearchView = new SearchUsersCard();
+                      selectedSearchVM sSVM = new selectedSearchVM();
+
+
+                      SearchView.DataContext = sSVM;
+                     // sSVM = SelectedDocNames;
+
+                      ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
+                     
+                     
+                     
+                      try { SearchView.ShowDialog(); }
+                      catch { }
+
+
+
+
+                  }));
+            }
+        }
 
         private RelayCommand _editDays;
         public RelayCommand editDays

@@ -138,6 +138,7 @@
     </Compile>
     <Compile Include="Data\CardPageFive.cs" />
     <Compile Include="Data\CardPageFour.cs" />
+    <Compile Include="Data\CardPageOne.cs" />
     <Compile Include="Data\Diagnoses\TestDiagnoz.cs" />
     <Compile Include="Data\Registration Model\Appointments.cs" />
     <Compile Include="Data\Registration Model\DoctorsList.cs" />
@@ -150,6 +151,9 @@
       <DependentUpon>EditTime.xaml</DependentUpon>
     </Compile>
     <Compile Include="HelpersClass\conBD.cs" />
+    <Compile Include="SearchUsersCard.xaml.cs">
+      <DependentUpon>SearchUsersCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CardPages.cs" />
     <Compile Include="Data\CardPageTwo.cs" />
     <Compile Include="Data\TablesData\OblickTable.cs" />
@@ -159,6 +163,7 @@
     <Compile Include="ViewModel\EditDayViewModel.cs" />
     <Compile Include="ViewModel\EditTimesViewModel.cs" />
     <Compile Include="ViewModel\regViewModel.cs" />
+    <Compile Include="ViewModel\selectedSearchVM.cs" />
     <Compile Include="ViewModel\update.cs" />
     <Page Include="confirmation.xaml">
       <SubType>Designer</SubType>
@@ -185,6 +190,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SearchUsersCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme\MyCalendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

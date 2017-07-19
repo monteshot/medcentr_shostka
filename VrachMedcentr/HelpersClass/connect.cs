@@ -24,10 +24,10 @@ namespace kepkaSQL
         #region Constructors
         public connect()
         {
-            server = "192.168.1.114";
+            server = "localhost";
             database = "medcentr";
-            UserID = "monteshot";
-            Password = "a12345";
+            UserID = "root";
+            Password = "monteshot";
         }
         public connect(string Server, string Database, string userid, string pass)
         {
@@ -38,7 +38,70 @@ namespace kepkaSQL
         }
         #endregion
 
+        public ObservableCollection<CardPageOne>/*CardPageOne*/ karta(string Name, string LastName, DateTime bDate)
+        {
 
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand();
+            ObservableCollection<CardPageOne> temp = new ObservableCollection<CardPageOne>();
+            CardPageOne temp1 = new CardPageOne();
+            con.Open();
+            cmd.Parameters.AddWithValue("@name", Name);
+            cmd.Parameters.AddWithValue("@Lname", LastName);
+            cmd.Parameters.AddWithValue("@birthDate", bDate);
+            cmd.CommandText = "SELECT * FROM karta WHERE P=@Lname AND I=@name AND birthDate=@birthDate";
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            using (MySqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    temp.Add (new CardPageOne
+                    {
+                        Sername = dr.GetString("P"),
+                        Name = dr.GetString("I"),
+                        FathersName = dr.GetString("B"),
+                        Adress = dr.GetString("adres"),
+                        Sex = ConvSex(dr.GetString("sex")),
+                        dateBirth = (DateTime)dr.GetMySqlDateTime("birthDate"),
+                        LeavingPlace = dr.GetString("nasPunkt"),
+                        WorkingPlace = dr.GetString("robota"),
+                        Contingency = dr.GetString("konting"),
+                        Dispensary = dr.GetBoolean("dispans"),
+                        PreferentNumber = dr.GetString("npmPilg")
+                        // Likar = GetDoctrosNames(dr.GetString("id"))
+
+
+
+                    });
+                }
+            }
+            con.Close();
+
+            return temp; 
+        }
+        //bool ConvDispensary(bool num) {
+            
+        //    bool dispOut = false;
+        //    if (num == "1") { return dispOut = true; }
+        //    else if (num == "0") {return dispOut = false; }
+        //    return dispOut;
+        //}
+        bool ConvSex(string bukva)
+        {
+            bool sex=false;
+            if (bukva == "M") { return sex = false; }
+            else if (bukva == "F") { return sex = true; }
+            return sex;
+        }
         public DataTable query(string Statement)
         {
             stat = Statement;
@@ -73,7 +136,9 @@ namespace kepkaSQL
             return dt;
         }
 
-       
+
+
+
         #region ObservableCollection 
         /// <summary>
         /// Считывание дненвика с базы
@@ -417,7 +482,7 @@ namespace kepkaSQL
             return dt.DefaultView;
 
         }
-        
+
         //public string Name
         //{
         //    get { return stat; }

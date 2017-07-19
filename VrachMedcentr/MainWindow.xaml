@@ -18,7 +18,7 @@
         <TabItem MinHeight="30" x:Name="Registratyra" Header="Реєстратура">
             <Grid Background="#FFE5E5E5">
 
-                
+
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.3*"/>
@@ -207,7 +207,7 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                
+
                             </Grid.RowDefinitions>
                             <TextBlock FontSize="15" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Text="Підсумковий результат:" FontWeight="Bold"/>
                             <StackPanel Grid.Row="1" Orientation="Vertical">
@@ -221,15 +221,15 @@
                                     <TextBlock Text=" "/>
                                     <TextBlock FontSize="15" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding SelectedFIO, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
-                            
+
                             </StackPanel>
                             <StackPanel Grid.Row="3" Orientation="Vertical">
                                 <TextBlock FontSize="15" TextAlignment="Left" VerticalAlignment="Center" Text="Дата/Час:" />
                                 <StackPanel Orientation="Horizontal">
-                                   
+
                                     <TextBlock FontSize="15" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding SelectedTime.Time}" />
                                 </StackPanel>
-                                
+
                             </StackPanel>
                         </Grid>
                         <!--<Button x:Name="Update" Grid.Column="2" Grid.Row="1" Content="Update" Command="{Binding downloadPacket}" Style="{DynamicResource ButtonGreen}" />-->
@@ -413,15 +413,16 @@
                             <!--<RowDefinition/>-->
                             <RowDefinition Height="0.5*"/>
                             <RowDefinition Height="0.7*"/>
-                         
+
                         </Grid.RowDefinitions>
 
                         <StackPanel Margin="-1" Orientation="Horizontal" Grid.Row="1">
-                            <TextBox VerticalAlignment="Center" MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0"  Text="Прізвище"/>
-                            <TextBox VerticalAlignment="Center"  MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0" Text="Ім'я"/>
+
+                            <TextBox  VerticalAlignment="Center" MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0" Text="{Binding S_LastName}"/>
+                            <TextBox VerticalAlignment="Center"  MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0" Text="{Binding S_FirstName}"/>
                             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" ><Run Text="Дата народження:"/></TextBlock>
-                            <DatePicker  MinWidth="100" MinHeight="35" Height="35" Margin="5,0,0,0" SelectedDateFormat="Short"/>
-                            <Button  Style="{DynamicResource ButtonGreen}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" Content="Пошук пацієнта"/>
+                            <DatePicker  MinWidth="100" MinHeight="35" Height="35" Margin="5,0,0,0" Text="{Binding S_DateBorn}" SelectedDateFormat="Short"/>
+                            <Button  Style="{DynamicResource ButtonGreen}" Command="{Binding SearchUsers}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" Content="Пошук пацієнта"/>
                         </StackPanel>
 
                     </Grid>
@@ -453,7 +454,7 @@
                             </StackPanel>
                         </TabItem.Header>
 
-                        <Grid x:Name="Page1" Background="#FFE5E5E5">
+                        <Grid DataContext="{Binding KARTA}" x:Name="Page1" Background="#FFE5E5E5">
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.20*"/>
@@ -579,12 +580,11 @@
 
                                 </StackPanel>
                                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
-                                    <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="2. Стать: чоловіча -"/></TextBlock>
-                                    <CheckBox IsChecked="{Binding SexFaMale}" x:Name="SexFemale" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
-                                    <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="жіноча -"/></TextBlock>
-                                    <CheckBox  IsChecked="{Binding SexMale}" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
-                                    <TextBlock x:Name="SexMale"  Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="3. Дата народження"/></TextBlock>
-                                    <DatePicker  SelectedDate="{Binding DateCardWriten, Mode=TwoWay}" SelectedDateFormat="Short" x:Name="BornDate" VerticalAlignment="Center" Margin="10,-5,0,0"/>
+                                    <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="2. Стать: чоловіча"/></TextBlock>
+                                    <CheckBox Style="{DynamicResource CheckBoxSwitcher}" IsChecked="{Binding Sex}" x:Name="Sex" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
+                                    <TextBlock   Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="жіноча"/></TextBlock>
+                                       <TextBlock x:Name="SexMale"  Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="3. Дата народження"/></TextBlock>
+                                    <DatePicker  SelectedDate="{Binding dateBirth, Mode=TwoWay}" SelectedDateFormat="Short" x:Name="BornDate" VerticalAlignment="Center" Margin="10,-5,0,0"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="2" Orientation="Horizontal"  Margin="0,5,0,0">
                                     <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="4. Адереса"/></TextBlock>
@@ -599,10 +599,10 @@
                                     <TextBox  Text="{Binding WorkingPlace}"  Background="LightGray"  MinWidth="400" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,10,0,0">
-                                    <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="7. Диспансерна група (так -"/></TextBlock>
-                                    <CheckBox IsChecked="{Binding DispersedGroupYes}" x:Name="GroupYes" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
-                                    <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="ні -"/></TextBlock>
-                                    <CheckBox IsChecked="{Binding DispersedGroupNo}" Margin="5,0,0,0" VerticalAlignment="Bottom" Content=")"/>
+                                    <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="7. Диспансерна група (ні - "/></TextBlock>
+                                    <CheckBox Style="{DynamicResource CheckBoxSwitcher}" IsChecked="{Binding Dispensary}" x:Name="Group" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
+                                    <TextBlock   Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text=" -так)"/></TextBlock>
+                                    <!--<CheckBox IsChecked="{Binding DispersedGroupNo}" Margin="5,0,0,0" VerticalAlignment="Bottom" Content=")"/>-->
                                 </StackPanel>
                                 <Grid Grid.Row="6" >
                                     <Grid.RowDefinitions>
@@ -613,7 +613,7 @@
                                         <TextBlock    Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman" TextWrapping="Wrap"><Run Text="8. Контингенти: інваліди війни - 1; учасник війни - 2; учасник бойових дій - 3; інші інваліди - 4; ліквідатори аварії ЧАЕС - 5; евакуйовані - 6; жителі які проживають на території"/><LineBreak/><Run Text="радіоекологічного контролю - 7; діти які народились від батьків 1 - 3 групи, постраждалих від аварії на ЧАЕС - 8; інші пільгові категорії - 9 (впиcати нижче)"/></TextBlock>
 
                                     </StackPanel>
-                                    <TextBox Grid.Row="1" Margin="10,0,0,0" Background="LightGray"  MinWidth="400"  VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+                                    <TextBox Text="{Binding Contingency}" Grid.Row="1" Margin="10,0,0,0" Background="LightGray"  MinWidth="400"  VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
 
                                 </Grid>
                                 <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="0,5,0,0">
@@ -632,7 +632,7 @@
                                     </DataGrid>
                                 </Grid>
                                 <StackPanel  Grid.Row="11" HorizontalAlignment="Right" Orientation="Horizontal" >
-                                    
+
                                     <Button Grid.Column="0" Margin="10,-2,10,2"  Style="{DynamicResource ButtonOrange}" Content="Видалити запис"/>
                                     <Button  Grid.Column="1" Margin="10,-2,10,2" Style="{DynamicResource ButtonOrange}" Content="Зберегти" />
                                 </StackPanel>

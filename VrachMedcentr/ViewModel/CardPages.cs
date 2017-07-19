@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using kepkaSQL;
 using System.Collections.Generic;
+using System.Windows;
+using System.Linq;
 
 namespace VrachMedcentr
 {
@@ -14,7 +16,7 @@ namespace VrachMedcentr
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
         private connect con = new connect();
-
+        private ObservableCollection<CardPageOne> ListOfUsers;
         //CardPageTwo PageTwo = new CardPageTwo();
 
         #endregion
@@ -22,11 +24,12 @@ namespace VrachMedcentr
 
         public CardPages()
         {
-            Dilery = new ObservableCollection<CardPageFive>
-            {
-                new CardPageFive{ ComingDate  = "fasfafsa", HealingPlace="fasfas", Diagnosis="podox", Stamp="fasdfas"}
+           
+            //    Dilery = new ObservableCollection<CardPageFive>
+            //    {
+            //        new CardPageFive{ ComingDate  = "fasfafsa", HealingPlace="fasfas", Diagnosis="podox", Stamp="fasdfas"}
 
-        };
+            //};
 
         }
         #endregion
@@ -55,10 +58,67 @@ namespace VrachMedcentr
         /// <summary>
         /// data ObservableCollection
         /// </summary>
+        /// 
+        public ObservableCollection<CardPageOne> KARTA { get; set; }
         public ObservableCollection<OblickTable> Phones { get; set; }
         public ObservableCollection<CardPageFive> Dilery { get; set; }
         public ObservableCollection<CardPageThree> Diagnosis { get; set; }
-    
+        private ObservableCollection<string> OneTimeUsers = new ObservableCollection<string>();// переменная для представления ФИО юзверей в комбобоксе  
+        public ObservableCollection<string> Users { get; set; }
+        public string S_FirstName { get; set; }
+        public string S_LastName { get; set; }
+        public DateTime S_DateBorn { get; set; }
+        private Users SelectedUser;
+        private string s_name;
+        public string S_Name
+        {
+            get { return s_name; }
+            set
+            {
+                if (value != "")
+                {
+                    s_name = value;
+                    ObservableCollection<string> temps = new ObservableCollection<string>();
+                    var FiltredUsers = from Users in OneTimeUsers where Users.Contains(value) select Users;
+
+                    foreach (var a in FiltredUsers)
+                    {
+                        temps.Add(a);
+                    }
+                    Users = temps;
+                    if (!Users.Contains(value))
+                    {
+                        SelectedUser = new Users { userFIO = value, userId = "007", userMail = "registratura@coworking.com", userPhone = "8-800-555-35-35" };
+                    }
+                }
+                else
+                {
+                    s_name = value;
+                    //ComboBoxDropDown = false;
+                    // IsTextSearchEnabled = false;
+                    Users = OneTimeUsers;
+                }
+            }
+        }
+        public bool ComboBoxDropDown { get; set; } = false;
+
+        public bool IsTextSearchEnabled { get; set; } = false;
+        private RelayCommand _SearchPat;
+        public RelayCommand SearchPat
+        {
+            get
+            {
+                return _SearchPat ??
+                  (_SearchPat = new RelayCommand(obj =>
+                  {
+                    // KARTA= con.karta();
+                      //KARTA = con.karta(S_FirstName, S_LastName, S_DateBorn);
+                      //KARTA = con;
+                      //MessageBox.Show(S_FirstName+" "+ S_LastName);
+                  }));
+            }
+        }
+
 
         /// <summary>
         /// Page 2
@@ -164,7 +224,7 @@ namespace VrachMedcentr
                   (readP3 = new RelayCommand(obj =>
                   {
                       con.UpdateP3(Diagnosis);
-                      
+
                   }));
             }
         }
@@ -181,7 +241,7 @@ namespace VrachMedcentr
         //    }
         //}
 
-     
+
         public void Setter()
 
         {
