@@ -9,7 +9,8 @@
         xmlns:local="clr-namespace:WPF_Hospital"
         xmlns:local1="clr-namespace:VrachMedcentr"
         xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
-        xmlns:workdays="clr-namespace:VrachMedcentr.HelpersClass"
+         xmlns:helpers="clr-namespace:VrachMedcentr.HelpersClass.MyHalpers"
+   
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="WPF_Hospital.MainWindow"
         mc:Ignorable="d"
         Title="Клієнт для роботи з реєстратурою та лікарем" Height="900" Width="1280"  WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
@@ -197,7 +198,8 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.4*"/>
+                            <ColumnDefinition Width="0.3*"/>
                             <ColumnDefinition Width="0.3*"/>
 
 
@@ -210,7 +212,7 @@
                                 <RowDefinition/>
 
                             </Grid.RowDefinitions>
-                            <TextBlock FontSize="15" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Text="Підсумковий результат:" FontWeight="Bold"/>
+                            <!--<TextBlock FontSize="15" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Text="Підсумковий результат:" FontWeight="Bold"/>
                             <StackPanel Grid.Row="1" Orientation="Vertical">
                                 <TextBlock FontSize="15" TextAlignment="Left" VerticalAlignment="Center" Text="Лікар:" />
                                 <TextBlock FontSize="15" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding SelectedDocNames.docName}" />
@@ -231,7 +233,7 @@
                                     <TextBlock FontSize="15" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding SelectedTime.Time}" />
                                 </StackPanel>
 
-                            </StackPanel>
+                            </StackPanel>-->
                         </Grid>
                         <!--<Button x:Name="Update" Grid.Column="2" Grid.Row="1" Content="Update" Command="{Binding downloadPacket}" Style="{DynamicResource ButtonGreen}" />-->
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
@@ -283,11 +285,13 @@
                                 <RowDefinition Height="0.2*"/>
                             </Grid.RowDefinitions>
                             <Calendar    SelectedDate="{Binding DateDoctorAcepting}" DisplayDate="{Binding DateDoctorAcepting}"                                   
-                              
+                                   helpers:HolidayHelper.List ="{Binding Otemp}"          
                                    Style="{DynamicResource MyCalendar}"
                                    CalendarButtonStyle="{DynamicResource MyCalendarButtonStyle}"
-                                   
-                                   CalendarItemStyle="{DynamicResource MyCalendarItem}">                                
+                                   CalendarDayButtonStyle="{DynamicResource MyCalendarDayButtonStyle}"
+                                   CalendarItemStyle="{DynamicResource MyCalendarItem}"
+                                >
+
                             </Calendar>
                             <Button Margin="15,5,15,0" Padding="5" Grid.Row="1" UseLayoutRounding="True"  Style="{DynamicResource ButtonOrange}" Command="{Binding editDays}"  FontSize="14"  Content="Редагувати робочі дні"  />
                         </Grid>
@@ -304,20 +308,24 @@
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                 <TextBlock Margin="5,0,0,0" FontSize="15" VerticalAlignment="Bottom"><Run Text="Прізвище, Ім'я, По батькові Пацієнта"/></TextBlock>
                             </StackPanel>
-                            <Grid  Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <ComboBox Grid.Column="0" IsEditable="True"  IsTextSearchCaseSensitive="False"  IsTextSearchEnabled="False" Text="{Binding ComboboxText, UpdateSourceTrigger=PropertyChanged}"  IsDropDownOpen="{Binding ComboBoxDropDown}"  SelectedItem="{Binding SelectedFIO}"  ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" MinWidth="300" FontSize="15" VerticalAlignment="Center" Margin="5,0,5,0">
-
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,0,0,0">
+                                <ComboBox Grid.Column="0" IsEditable="True"  IsTextSearchCaseSensitive="False"  
+                                          IsTextSearchEnabled="False" Text="{Binding ComboboxText, UpdateSourceTrigger=PropertyChanged}"  
+                                          IsDropDownOpen="{Binding ComboBoxDropDown}"  SelectedItem="{Binding SelectedFIO}"  ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" 
+                                          MinWidth="300" FontSize="15" VerticalAlignment="Center" Margin="5,0,5,0">
                                 </ComboBox>
-                                <Button Grid.Column="1" UseLayoutRounding="True"  Style="{DynamicResource ButtonBlue}" Command="{Binding Conf}"  FontSize="14" Padding="5"  Margin="5,0,5,0" Content="Записати на прийом"/>
-                            </Grid>
+                                <Button Grid.Column="1" UseLayoutRounding="True"  Style="{DynamicResource ButtonBlue}" 
+                                        Command="{Binding Conf}"  FontSize="14" Padding="5"  Margin="5,0,5,0" Content="Записати на прийом"/>
+
+                            </StackPanel>
+                               
                         </Grid>
 
                     </Grid>
-                    <DataGrid  Margin="0,10,0,0" FontSize="15" Foreground="White" Grid.Row="1"   AutoGenerateColumns="False" ItemsSource="{Binding Appointments}" Style="{DynamicResource GrayDataGrid}" CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}">
+                    <DataGrid  Margin="0,10,0,0" FontSize="15" Foreground="White" Grid.Row="1"   
+                               AutoGenerateColumns="False" ItemsSource="{Binding Appointments}" Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}">
                         <DataGrid.Columns>
                             <DataGridTextColumn FontSize="20" Binding="{Binding NumberZP}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
                             <DataGridTextColumn FontSize="20" Binding="{Binding Pacient}" ClipboardContentBinding="{x:Null}" Header="Пацієнт"/>

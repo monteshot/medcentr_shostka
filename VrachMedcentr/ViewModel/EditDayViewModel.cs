@@ -15,6 +15,7 @@ namespace VrachMedcentr
         public DateTime selectedDays { get; set; } = DateTime.Today;
         public DocNames docSelected { get; set; }
         public ObservableCollection<Times> docTimes { get; set; }
+        public ObservableCollection<DateTime> WorkDays { get; set; }
         conBD con = new conBD();
         List<DateTime> selectedDaysCal = new List<DateTime>();
 
@@ -63,7 +64,7 @@ namespace VrachMedcentr
                                   con.addWorkDays(docSelected.docID, "0", false, true, a, parTime[0], parTime[1], "0", "0");
                               }
                           }
-
+                          WorkDays = con.GetListOfWorkingDays(Convert.ToInt32(docSelected.docID));
                       }
                       catch (Exception) { }
 
@@ -102,7 +103,7 @@ namespace VrachMedcentr
                               con.remWorkDays(docSelected.docID, a);
                               //   }
                           }
-
+                          WorkDays = con.GetListOfWorkingDays(Convert.ToInt32(docSelected.docID));
                       }
                       catch (Exception) { }
 

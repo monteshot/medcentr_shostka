@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="HelpersClass\conBD.cs" />
     <Compile Include="HelpersClass\WorkingDays.cs" />
+    <Compile Include="HelpersClass\WorkingDaysList.cs" />
     <Compile Include="ViewModel\CardPages.cs" />
     <Compile Include="Data\CardPageTwo.cs" />
     <Compile Include="Data\TablesData\OblickTable.cs" />
