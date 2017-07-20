@@ -120,6 +120,47 @@ namespace VrachMedcentr
             return temp;
         }
 
+        public ObservableCollection<DocNames> GetDoctorsNamesFORStartup()
+        {
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand();
+            ObservableCollection<DocNames> temp = new ObservableCollection<DocNames>();
+           DocNames temp1 = new DocNames();
+            con.Open();
+            cmd.CommandText = "SELECT * FROM ekfgq_ttfsp_spec";//',9,'
+           
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            using (MySqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    temp.Add(new DocNames
+                    {
+
+                        docName = dr.GetString("name"),
+                        docID = dr.GetString("id"),
+                        docBool = GetDocTimeTalonStatus(Convert.ToInt32(dr.GetString("id"))),
+                        docEmail = dr.GetString("specmail"),
+                        docTimeId = dr.GetString("idsprtime"),
+                        docCab = dr.GetString("number_cabinet")
+
+
+                    });
+                }
+            }
+            con.Close();
+            return temp;
+        }
         public bool GetDocTimeTalonStatus(int _docid)
         {
             MySqlConnectionStringBuilder mysqlCSB;

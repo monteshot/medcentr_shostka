@@ -1,0 +1,40 @@
+﻿<Window x:Class="VrachMedcentr.View.StartUPView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"            
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="http://wpfcontrols.com/"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:local="clr-namespace:WPF_Hospital"
+        
+        xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
+    
+         xmlns:helpers="clr-namespace:VrachMedcentr.HelpersClass.MyHalpers"
+   
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local1="clr-namespace:VrachMedcentr"
+        
+        mc:Ignorable="d"
+        Title="Виберіть додаток" Height="400" Width="500" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FFE5E5E5" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.2*" />
+
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" FontSize="20" TextWrapping="Wrap" Text="Виберіть варіант запуску додатку" TextAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Likar" Grid.Column="0" Margin="20" Style="{DynamicResource ButtonGreen}" Content="Додаток Лікаря" Command="{Binding Likar_app }" />
+            <Button x:Name="Reg" Grid.Column="1" Margin="20" Style="{DynamicResource ButtonBlue}" Content="Додаток Реєстратури" Command="{Binding Reg_app}" Click="Reg_Click" />
+        </Grid>
+        <ComboBox Grid.Row="2" Margin="20,0,20,0" Visibility="Visible" SelectedItem="{Binding SelectedDoc}" ItemsSource="{Binding Path=startupDocNames}" IsEditable="False" />
+        <Button x:Name="Close" Grid.Row="3" Margin="20,5,20,5" Style="{DynamicResource ButtonOrange}" Content="Закрити додаток" Command="{Binding Close_app}" Click="Close_Click" />
+    </Grid>
+</Window>

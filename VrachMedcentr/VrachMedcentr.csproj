@@ -133,6 +133,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Reg.cs" />
+    <Compile Include="ViewModel\StartUPViewModel.cs" />
     <Compile Include="View\confirmation.xaml.cs">
       <DependentUpon>confirmation.xaml</DependentUpon>
     </Compile>
@@ -144,6 +146,9 @@
     <Compile Include="Data\Registration Model\DoctorsList.cs" />
     <Compile Include="Data\Registration Model\Times.cs" />
     <Compile Include="Data\Registration Model\Users.cs" />
+    <Compile Include="View\DocView.xaml.cs">
+      <DependentUpon>DocView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\editDays.xaml.cs">
       <DependentUpon>editDays.xaml</DependentUpon>
     </Compile>
@@ -167,7 +172,14 @@
     <Compile Include="ViewModel\regViewModel.cs" />
     <Compile Include="ViewModel\selectedSearchVM.cs" />
     <Compile Include="ViewModel\update.cs" />
+    <Compile Include="View\StartUPView.xaml.cs">
+      <DependentUpon>StartUPView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\confirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DocView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,6 +215,10 @@
     <Page Include="Theme\MoonUICore.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\StartUPView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
