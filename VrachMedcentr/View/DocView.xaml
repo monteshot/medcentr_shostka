@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VrachMedcentr.View"
         mc:Ignorable="d"
-        Title="Клієнт для роботи з лікарем" Height="900" Width="1280"  WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Клієнт для роботи з лікарем - Нова Медицина" Height="900" Width="1280"  WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <Grid  ShowGridLines="False" Background="#FFE5E5E5"  x:Name="page1" >
             <Grid.RowDefinitions>
@@ -56,7 +56,7 @@
             <!--<GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />-->
 
-            <DataGrid  FontSize="15" Foreground="White"  Grid.Column="0" Grid.Row="1"    
+            <DataGrid BorderBrush="Black"  BorderThickness="1.5" FontSize="15" Foreground="White"  Grid.Column="0" Grid.Row="1"    
                                AutoGenerateColumns="False" ItemsSource="{Binding Appointments}" Style="{DynamicResource GrayDataGridInDocView}" 
                                CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridInDocView}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
                                ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyleInDocView}" >

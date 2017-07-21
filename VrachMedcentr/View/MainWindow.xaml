@@ -14,7 +14,7 @@
    
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="WPF_Hospital.MainWindow"
         mc:Ignorable="d"
-        Title="Клієнт для роботи з реєстратурою та лікарем"  Height="900" Width="1280"  WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Клієнт для роботи з реєстратурою та лікарем - Нова Медицина"  Height="900" Width="1280"  WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <TabControl >
 
