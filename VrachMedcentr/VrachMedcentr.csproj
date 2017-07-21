@@ -136,6 +136,7 @@
     <Compile Include="confirmation.xaml.cs">
       <DependentUpon>confirmation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Card Models\CardUsers.cs" />
     <Compile Include="Data\CardPageFive.cs" />
     <Compile Include="Data\CardPageFour.cs" />
     <Compile Include="Data\CardPageOne.cs" />

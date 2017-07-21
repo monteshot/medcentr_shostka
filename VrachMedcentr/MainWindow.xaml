@@ -429,11 +429,19 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Margin="-1" Orientation="Horizontal" Grid.Row="1">
-
-                            <TextBox  VerticalAlignment="Center" MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0" Text="{Binding S_LastName}"/>
-                            <TextBox VerticalAlignment="Center"  MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0" Text="{Binding S_FirstName}"/>
+                            <!--<ComboBox Grid.Column="0" IsEditable="True"  IsTextSearchCaseSensitive="False"  
+                                          IsTextSearchEnabled="False" Text="{Binding ComboboxText, UpdateSourceTrigger=PropertyChanged}"  
+                                          IsDropDownOpen="{Binding ComboBoxDropDown}"  SelectedItem="{Binding SelectedFIO}"  ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" 
+                                          MinWidth="300" FontSize="15" VerticalAlignment="Center" Margin="5,0,5,0">
+                            </ComboBox>-->
+                            <ComboBox IsEnabled="True" IsTextSearchCaseSensitive="False" IsTextSearchEnabled="False"
+                                      Text="{Binding ComboboxText, UpdateSourceTrigger=PropertyChanged}"
+                                       IsDropDownOpen="{Binding ComboBoxDropDown}"
+                                      SelectedItem="{Binding SelectedFIO}"  ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}"
+                                       MinWidth="300" FontSize="15" VerticalAlignment="Center" Margin="5,0,5,0">
+                            </ComboBox>
                             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" ><Run Text="Дата народження:"/></TextBlock>
-                            <DatePicker  MinWidth="100" MinHeight="35" Height="35" Margin="5,0,0,0" Text="{Binding S_DateBorn}" SelectedDateFormat="Short"/>
+                            <DatePicker  MinWidth="100" MinHeight="35" Height="35" Margin="5,0,0,0" SelectedDate="{Binding S_DateBorn}" />
                             <Button  Style="{DynamicResource ButtonGreen}" Command="{Binding SearchUsers}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" Content="Пошук пацієнта"/>
                         </StackPanel>
 
