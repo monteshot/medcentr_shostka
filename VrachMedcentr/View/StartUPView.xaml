@@ -35,6 +35,6 @@
             <Button x:Name="Reg" Grid.Column="1" Margin="20" Style="{DynamicResource ButtonBlue}" Content="Додаток Реєстратури" Command="{Binding Reg_app}" Click="Reg_Click" />
         </Grid>
         <ComboBox Grid.Row="2" Margin="20,0,20,0" Visibility="Visible" SelectedItem="{Binding SelectedDoc}" ItemsSource="{Binding Path=startupDocNames}" IsEditable="False" />
-        <Button x:Name="Close" Grid.Row="3" Margin="20,5,20,5" Style="{DynamicResource ButtonOrange}" Content="Закрити додаток" Command="{Binding Close_app}" Click="Close_Click" />
+        <Button x:Name="Close" Grid.Row="3" Margin="20,5,20,5" Style="{DynamicResource ButtonOrange}" Content="Закрити додаток"  Click="Close_Click" />
     </Grid>
 </Window>
