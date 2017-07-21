@@ -25,7 +25,7 @@ namespace VrachMedcentr
         public StartUPViewModel()
         {
             PresentationTraceSources.DataBindingSource.Listeners.Add(new BindingErrorTraceListener());
-            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Error;
+            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
             startupDocNames = con.GetDoctorsNamesFORStartup();
 
 

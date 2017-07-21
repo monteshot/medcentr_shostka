@@ -45,7 +45,7 @@ namespace VrachMedcentr
 
         public ObservableCollection<Times> DoctorTimes { get; set; }
         // public ObservableCollection<Times> DoctorTimes { get; set; }
-        public ObservableCollection<string> Users { get; set; } 
+        public ObservableCollection<string> Users { get; set; }
         public ObservableCollection<DateTime> WorkingDays { get; set; }
 
 
@@ -141,7 +141,7 @@ namespace VrachMedcentr
                         foreach (var a in DoctorTimes)
                         {
                             i++;
-                            temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(),TimeProperties =a.TimeProperties });
+                            temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(), TimeProperties = a.TimeProperties });
                         }
                         DoctorTimes = temp;
 
@@ -180,11 +180,11 @@ namespace VrachMedcentr
                 int i = 0;
                 try
                 {
-                    if (TimeHour == false )
+                    if (TimeHour == false)
                     {
                         RefreshDocTimes();
                     }
-                   if(TimeHour==true)
+                    if (TimeHour == true)
                     {
                         if (WorkingDays.Contains(value))
                         {
@@ -265,7 +265,7 @@ namespace VrachMedcentr
 
         #region Helpers object
         conBD con = new conBD();
-       
+
         #endregion
 
         #region Constructor
@@ -273,15 +273,15 @@ namespace VrachMedcentr
         public regViewModel()
         {
 
-            
+
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();
             ListOfUsers = con.GetUsers();
-           
+
 
             Users = OneTimeUsers;
-           
-           
+
+
             foreach (var a in ListOfUsers)
             {
                 OneTimeUsers.Add(a.userFIO);
@@ -319,7 +319,7 @@ namespace VrachMedcentr
                     {
 
                         DoctorTimes = new ObservableCollection<Times>();
-                        DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "green" });
+                        DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
                     }
                     else
                     {
@@ -331,7 +331,8 @@ namespace VrachMedcentr
                     DoctorTimes = null;
                     if (SelectedDocNames != null || con.CheckDoctorList(SelectedDocNames.docTimeId))
                     {
-                        MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній");
+                        MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній", "Прийом відсутній", MessageBoxButton.OK, MessageBoxImage.Information);
+                        edDaysMethod();
                     }
                 }
 
@@ -344,7 +345,61 @@ namespace VrachMedcentr
         }
 
 
+        public void edTimesMethod()
+        {
+            EditTime TimeEditing = new EditTime();
 
+            EditTimesViewModel VMEditTime = new EditTimesViewModel();
+            TimeEditing.DataContext = VMEditTime;
+            VMEditTime.docSelected = SelectedDocNames;
+            ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
+            try
+            {
+                DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                foreach (var a in DoctorTimes)
+                {
+                    BackUPdocTimes.Add(new Times { Time = a.Time, Status = a.Status });
+                }
+
+                VMEditTime.docTimes = DoctorTimes;
+                //DoctorTimes = VMEditTime.temperory;
+
+            }
+            catch (Exception) { }
+            try { TimeEditing.ShowDialog(); }
+            catch { }
+
+            //следующая команда срабатывает после закрытия диалогового окна
+            // СУПЕР КОСТЫЛЬ СДЕЛАТЬ БЫ ПОЛЮДСКИ (роботает по принцыпу -  строчка выполняеться после того как закрлось окно редактирвоанья)
+            // сделать бы нормлаьную передачу данных и команд между формами.
+            try
+            {
+                WorkingDays = con.GetListOfWorkingDays(Convert.ToInt32(SelectedDocNames.docID));
+
+                if (con.CheckDoctorList(SelectedDocNames.docTimeId))
+                {
+                    if (SelectedDocNames.docTimeId == "0" || WorkingDays.Contains(DateDoctorAcepting) == false)
+                    {
+
+                        DoctorTimes = new ObservableCollection<Times>();
+                        DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
+                    }
+                    else
+                    {
+                        DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                    }
+                }
+                else
+                {
+                    DoctorTimes = null;
+
+                }
+
+                TimeHour = SelectedDocNames.docBool;
+                //DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+            }
+            catch (Exception) { }
+        }
 
         private RelayCommand _conf;
 
@@ -404,59 +459,7 @@ namespace VrachMedcentr
                 return _EditTimes ??
                   (_EditTimes = new RelayCommand(obj =>
                   {
-                      EditTime TimeEditing = new EditTime();
-
-                      EditTimesViewModel VMEditTime = new EditTimesViewModel();
-                      TimeEditing.DataContext = VMEditTime;
-                      VMEditTime.docSelected = SelectedDocNames;
-                      ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
-                      try
-                      {
-                          DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
-                          foreach (var a in DoctorTimes)
-                          {
-                              BackUPdocTimes.Add(new Times { Time = a.Time, Status = a.Status });
-                          }
-
-                          VMEditTime.docTimes = DoctorTimes;
-                          //DoctorTimes = VMEditTime.temperory;
-
-                      }
-                      catch (Exception) { }
-                      try { TimeEditing.ShowDialog(); }
-                      catch { }
-
-                      //следующая команда срабатывает после закрытия диалогового окна
-                      // СУПЕР КОСТЫЛЬ СДЕЛАТЬ БЫ ПОЛЮДСКИ (роботает по принцыпу -  строчка выполняеться после того как закрлось окно редактирвоанья)
-                      // сделать бы нормлаьную передачу данных и команд между формами.
-                      try
-                      {
-                          WorkingDays = con.GetListOfWorkingDays(Convert.ToInt32(SelectedDocNames.docID));
-
-                          if (con.CheckDoctorList(SelectedDocNames.docTimeId))
-                          {
-                              if (SelectedDocNames.docTimeId == "0" || WorkingDays.Contains(DateDoctorAcepting) == false)
-                              {
-
-                                  DoctorTimes = new ObservableCollection<Times>();
-                                  DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
-                              }
-                              else
-                              {
-                                  DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
-                              }
-                          }
-                          else
-                          {
-                              DoctorTimes = null;
-
-                          }
-
-                          TimeHour = SelectedDocNames.docBool;
-                          //DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
-                      }
-                      catch (Exception) { }
-
+                      edTimesMethod();
                   }));
             }
         }
@@ -474,12 +477,12 @@ namespace VrachMedcentr
 
 
                       SearchView.DataContext = sSVM;
-                     // sSVM = SelectedDocNames;
+                      // sSVM = SelectedDocNames;
 
                       ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
-                     
-                     
-                     
+
+
+
                       try { SearchView.ShowDialog(); }
                       catch { }
 
@@ -489,7 +492,43 @@ namespace VrachMedcentr
                   }));
             }
         }
+        public void edDaysMethod() {
+            editDays daysEditing = new editDays();
 
+            EditDayViewModel VMEditDays = new EditDayViewModel();
+            daysEditing.DataContext = VMEditDays;
+            VMEditDays.docSelected = SelectedDocNames;
+
+            ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
+            try
+            {
+                foreach (var a in DoctorTimes)
+                {
+                    BackUPdocTimes.Add(new Times { Time = a.Time, Status = a.Status });
+                }
+
+                VMEditDays.docTimes = BackUPdocTimes;
+                VMEditDays.WorkDays = WorkingDays;
+                //DoctorTimes = VMEditTime.temperory;
+
+            }
+            catch (Exception) { }
+            // ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
+            //try
+            //{
+            //    foreach (var a in DoctorTimes)
+            //    {
+            //        BackUPdocTimes.Add(new Times { Time = a.Time, Status = a.Status });
+            //    }
+
+            //    VMEditTime.docTimes = BackUPdocTimes;
+            //    //DoctorTimes = VMEditTime.temperory;
+
+            //}
+            //catch (Exception) { }
+            try { daysEditing.ShowDialog(); }
+            catch { }
+        }
         private RelayCommand _editDays;
         public RelayCommand editDays
         {
@@ -498,43 +537,9 @@ namespace VrachMedcentr
                 return _editDays ??
                   (_editDays = new RelayCommand(obj =>
                   {
-                      editDays daysEditing = new editDays();
-
-                      EditDayViewModel VMEditDays = new EditDayViewModel();
-                      daysEditing.DataContext = VMEditDays;
-                      VMEditDays.docSelected = SelectedDocNames;
-
-                      ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
-                      try
-                      {
-                          foreach (var a in DoctorTimes)
-                          {
-                              BackUPdocTimes.Add(new Times { Time = a.Time, Status = a.Status });
-                          }
-
-                          VMEditDays.docTimes = BackUPdocTimes;
-                          VMEditDays.WorkDays = WorkingDays;
-                          //DoctorTimes = VMEditTime.temperory;
-
-                      }
-                      catch (Exception) { }
-                      // ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
-                      //try
-                      //{
-                      //    foreach (var a in DoctorTimes)
-                      //    {
-                      //        BackUPdocTimes.Add(new Times { Time = a.Time, Status = a.Status });
-                      //    }
-
-                      //    VMEditTime.docTimes = BackUPdocTimes;
-                      //    //DoctorTimes = VMEditTime.temperory;
-
-                      //}
-                      //catch (Exception) { }
-                      try { daysEditing.ShowDialog(); }
-                      catch { }
 
 
+                      edDaysMethod();
 
 
                   }));

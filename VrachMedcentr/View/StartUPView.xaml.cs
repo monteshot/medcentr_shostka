@@ -39,10 +39,22 @@ namespace VrachMedcentr.View
             
         }
 
+        public void exitFromApp()
+        {
+            string mess = "Ви дійсно хочете завершити роботу додатка?";
+            string capt = "Вийти з додатка?";
+            var result = MessageBox.Show(mess, capt, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes) { Environment.Exit(0); }
+            else { }
+        }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            
-            Environment.Exit(0);
+            exitFromApp();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            exitFromApp();
         }
     }
 }

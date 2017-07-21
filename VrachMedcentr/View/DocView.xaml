@@ -5,14 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VrachMedcentr.View"
         mc:Ignorable="d"
-        Title="Клієнт для роботи з лікарем" Height="900" Width="1280"  WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Клієнт для роботи з лікарем - Нова Медицина" Height="900" Width="1280"  WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        <Grid ShowGridLines="True" Background="#FFE5E5E5"  x:Name="page1" >
+        <Grid  ShowGridLines="False" Background="#FFE5E5E5"  x:Name="page1" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
+                <RowDefinition Height="100"  />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <DockPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.75*"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel HorizontalAlignment="Center"  Grid.ColumnSpan="2">
                 <!--<Menu VerticalAlignment="Top" DockPanel.Dock="Top">
                         <MenuItem x:Name="MenuFile" Click="MenuFile_Click" Header="File"/>
                     </Menu>-->
@@ -52,7 +56,21 @@
             <!--<GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />-->
 
-            <TabControl Grid.Row="1" x:Name="PacientCard" >
+            <DataGrid BorderBrush="Black"  BorderThickness="1.5" FontSize="15" Foreground="White"  Grid.Column="0" Grid.Row="1"    
+                               AutoGenerateColumns="False" ItemsSource="{Binding Appointments}" Style="{DynamicResource GrayDataGridInDocView}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridInDocView}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyleInDocView}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn FontSize="20" Binding="{Binding NumberZP}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
+                    <DataGridTextColumn FontSize="20" Binding="{Binding Pacient}" ClipboardContentBinding="{x:Null}" Header="Пацієнт"/>
+                    <DataGridTextColumn FontSize="20" Binding="{Binding TimeAppomination}" ClipboardContentBinding="{x:Null}" Header="Час прийому"/>
+                    <DataGridTextColumn FontSize="20" Binding="{Binding Comment}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
+                    <DataGridCheckBoxColumn  Binding="{Binding NotComing}" ClipboardContentBinding="{x:Null}" Header="Не прийшов"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Text="Пацієнти на прийомі:" FontSize="25"  VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+
+            <TabControl Grid.Row="1" Grid.Column="1" x:Name="PacientCard" >
 
                 <TabItem   >
                     <TabItem.Header>

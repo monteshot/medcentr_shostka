@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:VrachMedcentr"
          xmlns:helpers="clr-namespace:VrachMedcentr.HelpersClass.MyHalpers"
         mc:Ignorable="d"
-        Title="Редагувати робочі дні" Height="500" Background="#FFE5E5E5" Width="500" MaxHeight="500" MaxWidth="500">
+        Title="Редагувати робочі дні" Height="500" Background="#FFE5E5E5" Width="500" MaxHeight="500" MaxWidth="500" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
