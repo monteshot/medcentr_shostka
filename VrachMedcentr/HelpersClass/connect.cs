@@ -24,10 +24,10 @@ namespace kepkaSQL
         #region Constructors
         public connect()
         {
-            server = "localhost";
-            database = "medcentr";
-            UserID = "root";
-            Password = "monteshot";
+            server = "shostka.mysql.ukraine.com.ua";
+            database = "shostka_python";
+            UserID = "shostka_python";
+            Password = "4y8betnd";
         }
         public connect(string Server, string Database, string userid, string pass)
         {
@@ -53,11 +53,12 @@ namespace kepkaSQL
             MySqlCommand cmd = new MySqlCommand();
             ObservableCollection<CardPageOne> temp = new ObservableCollection<CardPageOne>();
             CardPageOne temp1 = new CardPageOne();
+            
             con.Open();
             cmd.Parameters.AddWithValue("@name", Name);
             cmd.Parameters.AddWithValue("@Lname", LastName);
             cmd.Parameters.AddWithValue("@birthDate", bDate);
-            cmd.CommandText = "SELECT * FROM karta WHERE P=@Lname AND I=@name AND birthDate=@birthDate";
+            cmd.CommandText = "SELECT * FROM karta";// WHERE P=@Lname AND I=@name AND birthDate=@birthDate
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             using (MySqlDataReader dr = cmd.ExecuteReader())

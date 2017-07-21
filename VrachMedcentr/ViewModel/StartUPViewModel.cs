@@ -14,6 +14,7 @@ using VrachMedcentr.View;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using MySql.Data;
 using static WPF_Hospital.MainWindow;
 
 namespace VrachMedcentr
@@ -22,8 +23,17 @@ namespace VrachMedcentr
     {
         public ObservableCollection<DocNames> startupDocNames { get; set; }
         conBD con = new conBD();
+        connect con1 = new connect();
         public StartUPViewModel()
         {
+            try
+            {
+                var a = con1.karta("Імя", "Прізвище", DateTime.Parse("1995-01-01"));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+            }
             PresentationTraceSources.DataBindingSource.Listeners.Add(new BindingErrorTraceListener());
             PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
             startupDocNames = con.GetDoctorsNamesFORStartup();
@@ -40,7 +50,7 @@ namespace VrachMedcentr
             set
             {
                 _SelectedDoc = value;
-                
+
                 //azazaz
             }
         }
@@ -55,7 +65,7 @@ namespace VrachMedcentr
                   (_Likar_app = new RelayCommand(obj =>
                   {
                       DocView docView = new DocView();
-                     
+
                       regViewModel reg = new regViewModel();
                       reg.SelectedDocNames = SelectedDoc;
                       docView.DataContext = reg;
