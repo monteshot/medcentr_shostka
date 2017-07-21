@@ -18,6 +18,7 @@ using kepkaSQL;
 using VrachMedcentr;
 using System.Collections;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace WPF_Hospital
 {
@@ -26,7 +27,34 @@ namespace WPF_Hospital
     /// </summary>
     public partial class MainWindow : Window
     {
+        VrachMedcentr.View.StartUPView start = new VrachMedcentr.View.StartUPView();
 
+        /// <summary>
+        /// ПОЛЕЗНЕЙШАЯ ХРЕНЬ! Выявляет ошибки байдиннга
+        /// </summary>
+
+        #region Binding Error Shower
+        public class BindingErrorTraceListener : TraceListener
+        {
+            private readonly StringBuilder _messageBuilder = new StringBuilder();
+
+            public override void Write(string message)
+            {
+                _messageBuilder.Append(message);
+            }
+
+            public override void WriteLine(string message)
+            {
+                Write(message);
+
+                MessageBox.Show(_messageBuilder.ToString(), "Binding error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                _messageBuilder.Clear();
+            }
+        }
+        // Вставлять в любой файл пригодный для компиляции 
+        //      PresentationTraceSources.DataBindingSource.Listeners.Add(new BindingErrorTraceListener());
+        //      PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Error;
+        #endregion
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +70,12 @@ namespace WPF_Hospital
             // Update.DataContext = new update();
             update updater = new update();
             //upd.GetVersion();
-          
+
+
+
+
+
+
             //Regis.DataContext = new regViewModel();// может еще нам нужно будет
             //Card3.DataContext= new CardPageThree();
             //Card4.DataContext = new CardPageFour();
@@ -86,6 +119,7 @@ namespace WPF_Hospital
         private void MenuFile_Click(object sender, RoutedEventArgs e)
         {
             //Textbox1.Text = First.Name;
+
         }
         int i = 5;
         private void AddNewPage(object sender, RoutedEventArgs e)

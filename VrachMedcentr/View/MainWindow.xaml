@@ -410,7 +410,7 @@
             </Grid>
 
         </TabItem>
-        <TabItem Header="Картка пацієнта">
+        <TabItem x:Name="Pacient" Header="Картка пацієнта">
             <Grid ShowGridLines="True" Background="#FFE5E5E5"  x:Name="page1" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />
