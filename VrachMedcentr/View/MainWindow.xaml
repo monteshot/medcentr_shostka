@@ -287,7 +287,7 @@
                             </Grid.RowDefinitions>
                             <Calendar    SelectedDate="{Binding DateDoctorAcepting}" DisplayDate="{Binding DateDoctorAcepting}"  
                                          
-                                   helpers:HolidayHelper.List ="{Binding Otemp}"          
+                                   helpers:HolidayHelper.List ="{Binding WorkingDays}"          
                                    Style="{DynamicResource MyCalendar}"
                                    CalendarButtonStyle="{DynamicResource MyCalendarButtonStyle}"
                                    CalendarDayButtonStyle="{DynamicResource MyCalendarDayButtonStyle}"
