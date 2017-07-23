@@ -11,10 +11,11 @@ namespace kepkaSQL
     {
         #region Private Variables
 
-        private string server;
-        private string database;
-        private string UserID;
-        private string Password;
+        public string server;
+        public string database;
+        public string UserID;
+        public string Password;
+
         private string stat;
         MySqlDataAdapter adapter;
         private DataTable dtFbase;
@@ -53,7 +54,7 @@ namespace kepkaSQL
             MySqlCommand cmd = new MySqlCommand();
             ObservableCollection<CardPageOne> temp = new ObservableCollection<CardPageOne>();
             CardPageOne temp1 = new CardPageOne();
-            
+
             con.Open();
             cmd.Parameters.AddWithValue("@name", Name);
             cmd.Parameters.AddWithValue("@Lname", LastName);
@@ -65,7 +66,7 @@ namespace kepkaSQL
             {
                 while (dr.Read())
                 {
-                    temp.Add (new CardPageOne
+                    temp.Add(new CardPageOne
                     {
                         Sername = dr.GetString("P"),
                         Name = dr.GetString("I"),
@@ -87,10 +88,10 @@ namespace kepkaSQL
             }
             con.Close();
 
-            return temp; 
+            return temp;
         }
         //bool ConvDispensary(bool num) {
-            
+
         //    bool dispOut = false;
         //    if (num == "1") { return dispOut = true; }
         //    else if (num == "0") {return dispOut = false; }
@@ -98,7 +99,7 @@ namespace kepkaSQL
         //}
         bool ConvSex(string bukva)
         {
-            bool sex=false;
+            bool sex = false;
             if (bukva == "M") { return sex = false; }
             else if (bukva == "F") { return sex = true; }
             return sex;
