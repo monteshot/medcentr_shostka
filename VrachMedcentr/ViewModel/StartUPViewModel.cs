@@ -26,17 +26,18 @@ namespace VrachMedcentr
         connect con1 = new connect();
         public StartUPViewModel()
         {
-            try
-            {
-                var a = con1.karta("Імя", "Прізвище", DateTime.Parse("1995-01-01"));
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message.ToString());
-            }
+            //try
+            //{
+            //    var a = con1.karta("Імя", "Прізвище", DateTime.Parse("1995-01-01"));
+            //}
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show(e.Message.ToString());
+            //}
             PresentationTraceSources.DataBindingSource.Listeners.Add(new BindingErrorTraceListener());
             PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
             startupDocNames = con.GetDoctorsNamesFORStartup();
+            
 
 
         }
@@ -91,7 +92,7 @@ namespace VrachMedcentr
                   (_Reg_app = new RelayCommand(obj =>
                   {
                       MainWindow regs = new MainWindow();
-                      StartUPView sUPv = new StartUPView();
+                    //  StartUPView sUPv = new StartUPView();
                       regViewModel reg = new regViewModel();
                       regs.DataContext = reg;
                       try

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using kepkaSQL;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 using System.Windows.Input;
 using VrachMedcentr.HelpersClass.MyHalpers;
 
@@ -47,7 +49,19 @@ namespace VrachMedcentr
         // public ObservableCollection<Times> DoctorTimes { get; set; }
         public ObservableCollection<string> Users { get; set; }
         public ObservableCollection<DateTime> WorkingDays { get; set; }
-
+        private Users _SSelectedUser;
+        public Users SSelectedUser
+        {
+            get
+            {
+                return _SSelectedUser;
+            }
+            set
+            {
+                _SSelectedUser = value;
+                MessageBox.Show(_SSelectedUser.userFIO);
+            }
+        }
 
         public string teststring { get; set; }//тесовый стринг
         /// <summary>
@@ -251,7 +265,7 @@ namespace VrachMedcentr
                     WorkingDays = con.GetListOfWorkingDays(Convert.ToInt32(value.docID));
                     //if (SelectedDocNames.docTimeId == "0" && SelectedDocNames.docTimeId == null || WorkingDays.Contains(DateDoctorAcepting)==false)
                     RefreshDocTimes();
-                    Appointments = con.GetAppointments(SelectedDocNames.docID, DateDoctorAcepting);
+                    Appointments = con.GetAppointments(SelectedDocNames.docID, DateDoctorAcepting);//  DateTime.Parse("2017-07-07"));
                     // TimeHour = value.docBool; // присваивать значение с статуса врача
                     // КОСТІЛЬ ПЕРЕДЕЛАТЬ ИЗМЕНИТЬ СЧИТІВАНЬЕ ЛИСТА С СПЕЦИФИКАЦИЯМИ И ВРАЧАМИ (Спросить у ИЛЬИ)
 
@@ -463,7 +477,10 @@ namespace VrachMedcentr
                   }));
             }
         }
-
+        connect localDB = new connect();
+        string S_LastName { get; set; }
+        string S_FirstName { get; set; }
+        DateTime S_DateBorn { get; set; }
         private RelayCommand _SearchUsers;
         public RelayCommand SearchUsers
         {
@@ -472,19 +489,23 @@ namespace VrachMedcentr
                 return _SearchUsers ??
                   (_SearchUsers = new RelayCommand(obj =>
                   {
-                      SearchUsersCard SearchView = new SearchUsersCard();
-                      selectedSearchVM sSVM = new selectedSearchVM();
+                     
+                      localDB.karta(S_FirstName, S_LastName, S_DateBorn);
 
 
-                      SearchView.DataContext = sSVM;
-                      // sSVM = SelectedDocNames;
-
-                      ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
+                      //SearchUsersCard SearchView = new SearchUsersCard();
+                      //selectedSearchVM sSVM = new selectedSearchVM();
 
 
+                      //SearchView.DataContext = sSVM;
+                      //// sSVM = SelectedDocNames;
 
-                      try { SearchView.ShowDialog(); }
-                      catch { }
+                      //ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
+
+
+
+                      //try { SearchView.ShowDialog(); }
+                      //catch { }
 
 
 
@@ -492,7 +513,8 @@ namespace VrachMedcentr
                   }));
             }
         }
-        public void edDaysMethod() {
+        public void edDaysMethod()
+        {
             editDays daysEditing = new editDays();
 
             EditDayViewModel VMEditDays = new EditDayViewModel();

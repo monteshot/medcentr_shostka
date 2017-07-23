@@ -134,10 +134,10 @@ namespace VrachMedcentr
             con.ConnectionString = mysqlCSB.ConnectionString;
             MySqlCommand cmd = new MySqlCommand();
             ObservableCollection<DocNames> temp = new ObservableCollection<DocNames>();
-           DocNames temp1 = new DocNames();
+         //   DocNames temp1 = new DocNames();
             con.Open();
             cmd.CommandText = "SELECT * FROM ekfgq_ttfsp_spec";//',9,'
-           
+
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             using (MySqlDataReader dr = cmd.ExecuteReader())
@@ -249,7 +249,7 @@ namespace VrachMedcentr
                     temp.Add(new Times { Time = a, Status = GetStat(a, date, docId), PublickPrivate = true });
                 }
             }
-            
+
             foreach (var a in getDocPrivateTime)
             {
                 if (a != "" && a != null)
@@ -282,7 +282,7 @@ namespace VrachMedcentr
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = mysqlCSB.ConnectionString;
             MySqlCommand cmd = new MySqlCommand();
-            
+
 
 
             con.Open();
@@ -291,7 +291,7 @@ namespace VrachMedcentr
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             var i = cmd.ExecuteScalar();
-            if(Convert.ToInt32(i)==1)
+            if (Convert.ToInt32(i) == 1)
             {
                 temp = true;
             }

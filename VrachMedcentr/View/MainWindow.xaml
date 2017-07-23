@@ -320,13 +320,32 @@
                                         Command="{Binding Conf}"  FontSize="14" Padding="5"  Margin="5,0,5,0" Content="Записати на прийом"/>
 
                             </StackPanel>
-                               
+
                         </Grid>
 
                     </Grid>
-                    <DataGrid  Margin="0,10,0,0" FontSize="15" Foreground="White" Grid.Row="1"   
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Appointments}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="20" Text="№"/>
+                                    <TextBlock FontSize="20" Text="{Binding NumberZP}"/>
+                                    <TextBlock FontSize="20" Text=" | ПІБ: "/>
+                                    <TextBlock FontSize="20" Text="{Binding Pacient}"/>
+                                    <TextBlock FontSize="20" Text=" | Час: "/>
+                                    <TextBlock FontSize="20" Text="{Binding TimeAppomination}"/>
+                                    <TextBlock FontSize="20" Text=" | Коментар: "/>
+                                    <TextBlock FontSize="20" Text="{Binding Comment}"/>
+                                    <TextBlock FontSize="20" Text=" | Не прийшов: "/>
+                                    <CheckBox FontSize="20" IsChecked="{Binding NotComing}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                    <!--<DataGrid  Margin="0,10,0,0" FontSize="15" Foreground="White" Grid.Row="1"   
                                AutoGenerateColumns="False" ItemsSource="{Binding Appointments}" Style="{DynamicResource GrayDataGrid}" 
-                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" SelectedValue="{Binding SSelectedUser}" SelectedItem="{Binding SSelectedUser}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
                                ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}">
                         <DataGrid.Columns>
                             <DataGridTextColumn FontSize="20" Binding="{Binding NumberZP}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
@@ -335,7 +354,7 @@
                             <DataGridTextColumn FontSize="20" Binding="{Binding Comment}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
                             <DataGridCheckBoxColumn  Binding="{Binding NotComing}" ClipboardContentBinding="{x:Null}" Header="Не прийшов"/>
                         </DataGrid.Columns>
-                    </DataGrid>
+                    </DataGrid>-->
 
                 </Grid>
 
@@ -595,7 +614,7 @@
                                     <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="2. Стать: чоловіча"/></TextBlock>
                                     <CheckBox Style="{DynamicResource CheckBoxSwitcher}" IsChecked="{Binding Sex}" x:Name="Sex" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
                                     <TextBlock   Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="жіноча"/></TextBlock>
-                                       <TextBlock x:Name="SexMale"  Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="3. Дата народження"/></TextBlock>
+                                    <TextBlock x:Name="SexMale"  Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="3. Дата народження"/></TextBlock>
                                     <DatePicker  SelectedDate="{Binding dateBirth, Mode=TwoWay}" SelectedDateFormat="Short" x:Name="BornDate" VerticalAlignment="Center" Margin="10,-5,0,0"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="2" Orientation="Horizontal"  Margin="0,5,0,0">
