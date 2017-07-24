@@ -324,7 +324,7 @@
                         </Grid>
 
                     </Grid>
-                    <ListBox Grid.Row="1" ItemsSource="{Binding Appointments}">
+                    <ListBox Grid.Row="1" SelectedItem="{Binding SSelectedUser}" ItemsSource="{Binding Appointments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -338,6 +338,8 @@
                                     <TextBlock FontSize="20" Text="{Binding Comment}"/>
                                     <TextBlock FontSize="20" Text=" | Не прийшов: "/>
                                     <CheckBox FontSize="20" IsChecked="{Binding NotComing}"/>
+                                    <TextBlock FontSize="20" Text=" | uID: "/>
+                                    <TextBlock FontSize="20" Text="{Binding IDUser}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -453,7 +455,7 @@
                             <TextBox VerticalAlignment="Center"  MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0" Text="{Binding S_FirstName}"/>
                             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" ><Run Text="Дата народження:"/></TextBlock>
                             <DatePicker  MinWidth="100" MinHeight="35" Height="35" Margin="5,0,0,0" Text="{Binding S_DateBorn}" SelectedDateFormat="Short"/>
-                            <Button  Style="{DynamicResource ButtonGreen}" Command="{Binding SearchUsers}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" Content="Пошук пацієнта"/>
+                            <Button  Style="{DynamicResource ButtonGreen}" Command="{Binding SearchPat}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" Content="Пошук пацієнта"/>
                         </StackPanel>
 
                     </Grid>

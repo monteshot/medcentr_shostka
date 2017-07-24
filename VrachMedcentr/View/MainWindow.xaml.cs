@@ -64,6 +64,7 @@ namespace WPF_Hospital
 
             connect con = new connect();
             page1.DataContext = new CardPages();
+            Page1.DataContext = new CardPageOne();
             page2.DataContext = new CardPageTwo();
             Registratyra.DataContext = new regViewModel();
             Testersitem.DataContext = new DiagnosesViewModel();
@@ -75,7 +76,7 @@ namespace WPF_Hospital
 
 
 
-
+           
             //Regis.DataContext = new regViewModel();// может еще нам нужно будет
             //Card3.DataContext= new CardPageThree();
             //Card4.DataContext = new CardPageFour();

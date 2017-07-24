@@ -527,6 +527,7 @@ namespace VrachMedcentr
                     temp.Add(new Appointments
                     {
                         NumberZP = i,
+                        IDUser = dr.GetString("iduser"),
                         Pacient = dr.GetString("rfio"),
                         TimeAppomination = dr.GetString("hours") + " : " + dr.GetString("minutes"),
                         Comment = "Коментар відсутній",// добавить коментарий при записис?

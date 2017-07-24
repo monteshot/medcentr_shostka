@@ -17,7 +17,7 @@ namespace VrachMedcentr
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
         private string codeZYCD;
-        CardPageTwo PageTwo = new CardPageTwo();
+        //CardPageTwo PageTwo = new CardPageTwo();
 
         #endregion
 

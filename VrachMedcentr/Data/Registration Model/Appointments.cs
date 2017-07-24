@@ -5,6 +5,8 @@
         /// <summary>
         ///  нужно поле для номера за порядком 
         /// </summary>
+        /// 
+        public string IDUser { get; set; }
         public int NumberZP { get; set; }
         public string Pacient { get; set; }
         public string TimeAppomination { get; set; }

@@ -26,9 +26,9 @@ namespace kepkaSQL
         public connect()
         {
             server = "shostka.mysql.ukraine.com.ua";
-            database = "shostka_python";
-            UserID = "shostka_python";
-            Password = "4y8betnd";
+            database = "shostka_medcen";
+            UserID = "shostka_medcen";
+            Password = "n5t7jzqv";
         }
         public connect(string Server, string Database, string userid, string pass)
         {
@@ -39,7 +39,7 @@ namespace kepkaSQL
         }
         #endregion
 
-        public ObservableCollection<CardPageOne>/*CardPageOne*/ karta(string Name, string LastName, DateTime bDate)
+        public /*ObservableCollection*/CardPageOne karta(/*string Name, string LastName, DateTime bDate*/string UID)
         {
 
             MySqlConnectionStringBuilder mysqlCSB;
@@ -56,17 +56,18 @@ namespace kepkaSQL
             CardPageOne temp1 = new CardPageOne();
 
             con.Open();
-            cmd.Parameters.AddWithValue("@name", Name);
-            cmd.Parameters.AddWithValue("@Lname", LastName);
-            cmd.Parameters.AddWithValue("@birthDate", bDate);
-            cmd.CommandText = "SELECT * FROM karta";// WHERE P=@Lname AND I=@name AND birthDate=@birthDate
+            cmd.Parameters.AddWithValue("@UserID", UID);
+            //cmd.Parameters.AddWithValue("@name", Name);
+            //cmd.Parameters.AddWithValue("@Lname", LastName);
+            //cmd.Parameters.AddWithValue("@birthDate", bDate);
+            cmd.CommandText = "SELECT * FROM karta WHERE ID_pat=@UserID";// WHERE P=@Lname AND I=@name AND birthDate=@birthDate
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             using (MySqlDataReader dr = cmd.ExecuteReader())
             {
                 while (dr.Read())
                 {
-                    temp.Add(new CardPageOne
+                    temp1 = (new CardPageOne
                     {
                         Sername = dr.GetString("P"),
                         Name = dr.GetString("I"),
@@ -88,7 +89,7 @@ namespace kepkaSQL
             }
             con.Close();
 
-            return temp;
+            return temp1;
         }
         //bool ConvDispensary(bool num) {
 

@@ -24,7 +24,7 @@ namespace VrachMedcentr
 
         public CardPages()
         {
-           
+
             //    Dilery = new ObservableCollection<CardPageFive>
             //    {
             //        new CardPageFive{ ComingDate  = "fasfafsa", HealingPlace="fasfas", Diagnosis="podox", Stamp="fasdfas"}
@@ -39,27 +39,38 @@ namespace VrachMedcentr
         /// Page 1
         /// </summary>
         public string CodeZYCD { get; set; }
+
+
+
+
+        public string PreferentNumber { get; set; }
+        public DataTable AccountingTable { get; set; }
+
         public string CodeZKPO { get; set; }
         public string NumberPacient { get; set; }
         public string CodePacient { get; set; }
+        public DateTime dateBirth { get; set; } = DateTime.Today;
         public DateTime DateCardWriten { get => thisDay; set => thisDay = value; }
         public string Sername { get; set; }
         public string Name { get; set; }
         public string FathersName { get; set; }
-        public bool SexFaMale { get; set; }
-        public bool SexMale { get; set; }
+        public bool Sex { get; set; }
+
+        //public bool SexFaMale { get; set; }
+        //public bool SexMale { get; set; }
+
         public string Adress { get; set; }
         public string LeavingPlace { get; set; }
         public string WorkingPlace { get; set; }
-        public bool DispersedGroupYes { get; set; }
-        public bool DispersedGroupNo { get; set; }
-        public string PreferentNumber { get; set; }
-        public DataTable AccountingTable { get; set; }
+        public bool Dispensary { get; set; }
+
+        //public bool DispersedGroupYes { get; set; }
+        //public bool DispersedGroupNo { get; set; }
         /// <summary>
         /// data ObservableCollection
         /// </summary>
         /// 
-        public ObservableCollection<CardPageOne> KARTA { get; set; }
+        public CardPageOne KARTA { get; set; }
         public ObservableCollection<OblickTable> Phones { get; set; }
         public ObservableCollection<CardPageFive> Dilery { get; set; }
         public ObservableCollection<CardPageThree> Diagnosis { get; set; }
@@ -111,14 +122,48 @@ namespace VrachMedcentr
                 return _SearchPat ??
                   (_SearchPat = new RelayCommand(obj =>
                   {
-                    // KARTA= con.karta();
+                      // KARTA = con.karta(sSelectedUser.IDUser);
+                      // KARTA= con.karta();
                       //KARTA = con.karta(S_FirstName, S_LastName, S_DateBorn);
                       //KARTA = con;
                       //MessageBox.Show(S_FirstName+" "+ S_LastName);
                   }));
             }
         }
+        connect localDB = new connect();
+        private Appointments _SUser;
+        public Appointments SUser
+        {
+            get { return _SUser; }
+            set
+            {
+                _SUser = value;
+                KARTA = con.karta(_SUser.IDUser);
+                CardPageOne CPO = new CardPageOne();
+               
+                CPO = KARTA;
+                MessageBox.Show(KARTA.Name + " " + KARTA.Sername);
+            }
+        }
+        //private Appointments _SelectedUser;
+        //public Appointments sSelectedUser
+        //{
+        //    get
+        //    {
+        //        return _SelectedUser;
+        //    }
+        //    set
+        //    {
+        //        _SelectedUser = value;
 
+        //        // CardPages CP = new CardPages();
+        //        //   CP._SSelectedUser = _SSelectedUser;
+        //        //   KARTA = localDB.karta(_SelectedUser.IDUser);
+        //        // CP._SSelectedUser = _SSelectedUser;
+        //        //_SSelectedUser.IDUser;
+        //        //   MessageBox.Show(_SelectedUser.IDUser);
+        //    }
+        //}
 
         /// <summary>
         /// Page 2

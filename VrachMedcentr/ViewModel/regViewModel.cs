@@ -14,6 +14,7 @@ using System.Windows.Controls;
 
 using System.Windows.Input;
 using VrachMedcentr.HelpersClass.MyHalpers;
+using WPF_Hospital;
 
 namespace VrachMedcentr
 {
@@ -49,8 +50,9 @@ namespace VrachMedcentr
         // public ObservableCollection<Times> DoctorTimes { get; set; }
         public ObservableCollection<string> Users { get; set; }
         public ObservableCollection<DateTime> WorkingDays { get; set; }
-        private Users _SSelectedUser;
-        public Users SSelectedUser
+        public CardPageOne KARTA { get; set; }
+        private Appointments _SSelectedUser;
+        public Appointments SSelectedUser
         {
             get
             {
@@ -59,7 +61,22 @@ namespace VrachMedcentr
             set
             {
                 _SSelectedUser = value;
-                MessageBox.Show(_SSelectedUser.userFIO);
+
+                CardPages CP = new CardPages();
+                CP.SUser = _SSelectedUser;
+                KARTA = localDB.karta(_SSelectedUser.IDUser);
+                //CP.sSelectedUser = _SSelectedUser;
+                //  CP.KARTA = localDB.karta(_SSelectedUser.IDUser);
+
+                //  MainWindow MW = new MainWindow();
+
+                //CP.KARTA= localDB.karta(_SSelectedUser.IDUser);
+
+                //   CP._SSelectedUser = _SSelectedUser;
+                //  KARTA = localDB.karta(_SSelectedUser.IDUser);
+                //      CP.SSelectedUser = _SSelectedUser;
+                //_SSelectedUser.IDUser;
+                // MessageBox.Show(_SSelectedUser.IDUser);
             }
         }
 
@@ -489,8 +506,8 @@ namespace VrachMedcentr
                 return _SearchUsers ??
                   (_SearchUsers = new RelayCommand(obj =>
                   {
-                     
-                      localDB.karta(S_FirstName, S_LastName, S_DateBorn);
+
+                      // localDB.karta(S_FirstName, S_LastName, S_DateBorn);
 
 
                       //SearchUsersCard SearchView = new SearchUsersCard();
