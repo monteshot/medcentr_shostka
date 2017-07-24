@@ -140,7 +140,6 @@ namespace VrachMedcentr
                 _SUser = value;
                 KARTA = con.karta(_SUser.IDUser);
                 CardPageOne CPO = new CardPageOne();
-               
                 CPO = KARTA;
                 MessageBox.Show(KARTA.Name + " " + KARTA.Sername);
             }
