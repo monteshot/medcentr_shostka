@@ -6,6 +6,7 @@ using kepkaSQL;
 using System.Collections.Generic;
 using System.Windows;
 using System.Linq;
+using WPF_Hospital;
 
 namespace VrachMedcentr
 {
@@ -141,7 +142,9 @@ namespace VrachMedcentr
                 KARTA = con.karta(_SUser.IDUser);
                 CardPageOne CPO = new CardPageOne();
                 CPO = KARTA;
-                MessageBox.Show(KARTA.Name + " " + KARTA.Sername);
+                MainWindow mw = new MainWindow();
+                mw.Page1.DataContext = KARTA;
+                MessageBox.Show("Вытянул с базы:\n"+ KARTA.Name + " " + KARTA.Sername);
             }
         }
         //private Appointments _SelectedUser;

@@ -64,7 +64,8 @@ namespace VrachMedcentr
 
                 CardPages CP = new CardPages();
                 CP.SUser = _SSelectedUser;
-                KARTA = localDB.karta(_SSelectedUser.IDUser);
+                MainWindow mw = new MainWindow();
+                mw.Page1.DataContext = localDB.karta(_SSelectedUser.IDUser);
                 //CP.sSelectedUser = _SSelectedUser;
                 //  CP.KARTA = localDB.karta(_SSelectedUser.IDUser);
 
