@@ -20,26 +20,43 @@ namespace VrachMedcentr
 {
     class StartUPViewModel
     {
-        public ObservableCollection<DocNames> startupDocNames { get; set; }
-        conBD con = new conBD();
+        #region Constructor
+
         public StartUPViewModel()
         {
             PresentationTraceSources.DataBindingSource.Listeners.Add(new BindingErrorTraceListener());
             PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
-            startupDocNames = con.GetDoctorsNamesFORStartup();
-
+            tempDocNamesList = con.GetDoctorsNamesFORStartup();
+            startupDocNamesList = new ObservableCollection<string>();
+            foreach (var a in tempDocNamesList)
+            {
+                startupDocNamesList.Add(a.docName);
+            }
 
         }
-        private DocNames _SelectedDoc;
-        public DocNames SelectedDoc
+
+        #endregion
+
+        #region Publick Variables
+
+        public ObservableCollection<string> startupDocNamesList { get; set; }
+        private ObservableCollection<DocNames> tempDocNamesList = new ObservableCollection<DocNames>();
+        public conBD con = new conBD();
+
+        #endregion
+        private DocNames SelectedDocObj;
+        private string _SelectedDocString;
+        public string SelectedDocString
         {
             get
             {
-                return _SelectedDoc;
+                return _SelectedDocString;
             }
             set
             {
-                _SelectedDoc = value;
+                _SelectedDocString = value;
+                //SelectedDocObj = tempDocNamesList.Where(x=>x.docName)
+
                 
                 //azazaz
             }
@@ -57,7 +74,7 @@ namespace VrachMedcentr
                       DocView docView = new DocView();
                      
                       regViewModel reg = new regViewModel();
-                      reg.SelectedDocNames = SelectedDoc;
+                      //reg.SelectedDocNames = SelectedDoc;
                       docView.DataContext = reg;
                       try
                       {
