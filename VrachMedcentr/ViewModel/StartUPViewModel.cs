@@ -14,39 +14,35 @@ using VrachMedcentr.View;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using MySql.Data;
 using static WPF_Hospital.MainWindow;
 
 namespace VrachMedcentr
 {
     class StartUPViewModel
     {
-        #region Constructor
-
+        public ObservableCollection<DocNames> startupDocNames { get; set; }
+        conBD con = new conBD();
+        connect con1 = new connect();
         public StartUPViewModel()
         {
+            //try
+            //{
+            //    var a = con1.karta("Імя", "Прізвище", DateTime.Parse("1995-01-01"));
+            //}
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show(e.Message.ToString());
+            //}
             PresentationTraceSources.DataBindingSource.Listeners.Add(new BindingErrorTraceListener());
             PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
-            tempDocNamesList = con.GetDoctorsNamesFORStartup();
-            startupDocNamesList = new ObservableCollection<string>();
-            foreach (var a in tempDocNamesList)
-            {
-                startupDocNamesList.Add(a.docName);
-            }
+            startupDocNames = con.GetDoctorsNamesFORStartup();
+            
+
 
         }
-
-        #endregion
-
-        #region Publick Variables
-
-        public ObservableCollection<string> startupDocNamesList { get; set; }
-        private ObservableCollection<DocNames> tempDocNamesList = new ObservableCollection<DocNames>();
-        public conBD con = new conBD();
-
-        #endregion
-        private DocNames SelectedDocObj;
-        private string _SelectedDocString;
-        public string SelectedDocString
+        private DocNames _SelectedDoc;
+        public DocNames SelectedDoc
         {
             get
             {
@@ -54,10 +50,8 @@ namespace VrachMedcentr
             }
             set
             {
-                _SelectedDocString = value;
-                //SelectedDocObj = tempDocNamesList.Where(x=>x.docName)
+                _SelectedDoc = value;
 
-                
                 //azazaz
             }
         }
@@ -72,7 +66,7 @@ namespace VrachMedcentr
                   (_Likar_app = new RelayCommand(obj =>
                   {
                       DocView docView = new DocView();
-                     
+
                       regViewModel reg = new regViewModel();
                       //reg.SelectedDocNames = SelectedDoc;
                       docView.DataContext = reg;
@@ -98,7 +92,7 @@ namespace VrachMedcentr
                   (_Reg_app = new RelayCommand(obj =>
                   {
                       MainWindow regs = new MainWindow();
-                      StartUPView sUPv = new StartUPView();
+                    //  StartUPView sUPv = new StartUPView();
                       regViewModel reg = new regViewModel();
                       regs.DataContext = reg;
                       try

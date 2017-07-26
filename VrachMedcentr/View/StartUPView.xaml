@@ -17,7 +17,7 @@
         
         mc:Ignorable="d"
         Title="Виберіть додаток - Нова Медицина" Height="400" Width="500" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
-    <Grid Background="#FFE5E5E5" >
+    <Grid Background="#FFE5E5E5"  >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.4*" />
@@ -34,7 +34,31 @@
             <Button x:Name="Likar" Grid.Column="0" Margin="20" Style="{DynamicResource ButtonGreen}" Content="Додаток Лікаря" Command="{Binding Likar_app }" />
             <Button x:Name="Reg" Grid.Column="1" Margin="20" Style="{DynamicResource ButtonBlue}" Content="Додаток Реєстратури" Command="{Binding Reg_app}" Click="Reg_Click" />
         </Grid>
-        <ComboBox Grid.Row="2" Margin="20,0,20,0" Visibility="Visible" SelectedItem="{Binding SelectedDocString}" ItemsSource="{Binding startupDocNamesList}" IsEditable="False" />
-        <Button x:Name="Close" Grid.Row="3" Margin="20,5,20,5" Style="{DynamicResource ButtonOrange}" Content="Закрити додаток" Command="{Binding Close_app}" Click="Close_Click" />
+        <ComboBox Grid.Row="2" Margin="20,0,20,0" Visibility="Visible" SelectedItem="{Binding SelectedDoc}" Text="ПІБ Лікаря"  ItemsSource="{Binding startupDocNames}" IsEditable="False" >
+            <ComboBox.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Likar}" >
+                    <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
+                        
+                        <TextBlock TextWrapping="Wrap"  FontSize="15" Text="{Binding docName}" VerticalAlignment="Center"/>
+                     
+                    </StackPanel>
+                    <HierarchicalDataTemplate.ItemTemplate  >
+                        <HierarchicalDataTemplate>
+
+                            <!--<StackPanel Margin="15,0,0,0" Orientation="Horizontal">
+                                            <TextBlock  FontSize="20" Text="{Binding docName }" VerticalAlignment="Center"/>
+                                            <CheckBox  FontSize="20" IsChecked="{Binding docBool }" VerticalAlignment="Center"/>
+                                        </StackPanel>-->
+
+
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+
+
+
+                </HierarchicalDataTemplate>
+            </ComboBox.ItemTemplate>    
+        </ComboBox>
+        <Button x:Name="Close" Grid.Row="3" Margin="20,5,20,5" Style="{DynamicResource ButtonOrange}" Content="Закрити додаток"  Click="Close_Click" />
     </Grid>
 </Window>

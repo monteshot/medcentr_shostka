@@ -1,4 +1,5 @@
-﻿using System;
+﻿using kepkaSQL;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,8 +11,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 using System.Windows.Input;
 using VrachMedcentr.HelpersClass.MyHalpers;
+using WPF_Hospital;
 
 namespace VrachMedcentr
 {
@@ -47,7 +50,36 @@ namespace VrachMedcentr
         // public ObservableCollection<Times> DoctorTimes { get; set; }
         public ObservableCollection<string> Users { get; set; }
         public ObservableCollection<DateTime> WorkingDays { get; set; }
+        public CardPageOne KARTA { get; set; }
+        private Appointments _SSelectedUser;
+        public Appointments SSelectedUser
+        {
+            get
+            {
+                return _SSelectedUser;
+            }
+            set
+            {
+                _SSelectedUser = value;
 
+                CardPages CP = new CardPages();
+                CP.SUser = _SSelectedUser;
+                MainWindow mw = new MainWindow();
+                mw.Page1.DataContext = localDB.karta(_SSelectedUser.IDUser);
+                //CP.sSelectedUser = _SSelectedUser;
+                //  CP.KARTA = localDB.karta(_SSelectedUser.IDUser);
+
+                //  MainWindow MW = new MainWindow();
+
+                //CP.KARTA= localDB.karta(_SSelectedUser.IDUser);
+
+                //   CP._SSelectedUser = _SSelectedUser;
+                //  KARTA = localDB.karta(_SSelectedUser.IDUser);
+                //      CP.SSelectedUser = _SSelectedUser;
+                //_SSelectedUser.IDUser;
+                // MessageBox.Show(_SSelectedUser.IDUser);
+            }
+        }
 
         public string teststring { get; set; }//тесовый стринг
         /// <summary>
@@ -507,7 +539,10 @@ namespace VrachMedcentr
                   }));
             }
         }
-
+        connect localDB = new connect();
+        string S_LastName { get; set; }
+        string S_FirstName { get; set; }
+        DateTime S_DateBorn { get; set; }
         private RelayCommand _SearchUsers;
         public RelayCommand SearchUsers
         {
@@ -516,19 +551,23 @@ namespace VrachMedcentr
                 return _SearchUsers ??
                   (_SearchUsers = new RelayCommand(obj =>
                   {
-                      SearchUsersCard SearchView = new SearchUsersCard();
-                      selectedSearchVM sSVM = new selectedSearchVM();
+
+                      // localDB.karta(S_FirstName, S_LastName, S_DateBorn);
 
 
-                      SearchView.DataContext = sSVM;
-                      // sSVM = SelectedDocNames;
-
-                      ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
+                      //SearchUsersCard SearchView = new SearchUsersCard();
+                      //selectedSearchVM sSVM = new selectedSearchVM();
 
 
+                      //SearchView.DataContext = sSVM;
+                      //// sSVM = SelectedDocNames;
 
-                      try { SearchView.ShowDialog(); }
-                      catch { }
+                      //ObservableCollection<Times> BackUPdocTimes = new ObservableCollection<Times>(); // не менять на лист, ибо не будет обновлятся вью расписания
+
+
+
+                      //try { SearchView.ShowDialog(); }
+                      //catch { }
 
 
 

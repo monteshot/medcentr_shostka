@@ -31,12 +31,12 @@ namespace VrachMedcentr.View
             DataContext = new StartUPViewModel();
             var currVer = Assembly.GetExecutingAssembly().GetName().Version;
             Title += " " + currVer; //не выпиливать! дает версию в заголовке аппы
-          
+
         }
 
         private void Reg_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         public void exitFromApp()
@@ -45,7 +45,7 @@ namespace VrachMedcentr.View
             string capt = "Вийти з додатка?";
             var result = MessageBox.Show(mess, capt, MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes) { Environment.Exit(0); }
-            else { }
+            if (result == MessageBoxResult.No) { }
         }
         private void Close_Click(object sender, RoutedEventArgs e)
         {

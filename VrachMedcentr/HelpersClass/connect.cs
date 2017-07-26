@@ -11,10 +11,11 @@ namespace kepkaSQL
     {
         #region Private Variables
 
-        private string server;
-        private string database;
-        private string UserID;
-        private string Password;
+        public string server;
+        public string database;
+        public string UserID;
+        public string Password;
+
         private string stat;
         MySqlDataAdapter adapter;
         private DataTable dtFbase;
@@ -24,10 +25,10 @@ namespace kepkaSQL
         #region Constructors
         public connect()
         {
-            server = "localhost";
-            database = "medcentr";
-            UserID = "root";
-            Password = "monteshot";
+            server = "shostka.mysql.ukraine.com.ua";
+            database = "shostka_medcen";
+            UserID = "shostka_medcen";
+            Password = "n5t7jzqv";
         }
         public connect(string Server, string Database, string userid, string pass)
         {
@@ -38,9 +39,7 @@ namespace kepkaSQL
         }
         #endregion
 
-
-
-        public ObservableCollection<CardPageOne>/*CardPageOne*/ karta(string Name, string LastName, DateTime bDate)
+        public /*ObservableCollection*/CardPageOne karta(/*string Name, string LastName, DateTime bDate*/string UID)
         {
 
             MySqlConnectionStringBuilder mysqlCSB;
@@ -55,18 +54,20 @@ namespace kepkaSQL
             MySqlCommand cmd = new MySqlCommand();
             ObservableCollection<CardPageOne> temp = new ObservableCollection<CardPageOne>();
             CardPageOne temp1 = new CardPageOne();
+
             con.Open();
-            cmd.Parameters.AddWithValue("@name", Name);
-            cmd.Parameters.AddWithValue("@Lname", LastName);
-            cmd.Parameters.AddWithValue("@birthDate", bDate);
-            cmd.CommandText = "SELECT * FROM karta WHERE P=@Lname AND I=@name AND birthDate=@birthDate";
+            cmd.Parameters.AddWithValue("@UserID", UID);
+            //cmd.Parameters.AddWithValue("@name", Name);
+            //cmd.Parameters.AddWithValue("@Lname", LastName);
+            //cmd.Parameters.AddWithValue("@birthDate", bDate);
+            cmd.CommandText = "SELECT * FROM karta WHERE ID_pat=@UserID";// WHERE P=@Lname AND I=@name AND birthDate=@birthDate
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             using (MySqlDataReader dr = cmd.ExecuteReader())
             {
                 while (dr.Read())
                 {
-                    temp.Add (new CardPageOne
+                    temp1 = (new CardPageOne
                     {
                         Sername = dr.GetString("P"),
                         Name = dr.GetString("I"),
@@ -88,10 +89,10 @@ namespace kepkaSQL
             }
             con.Close();
 
-            return temp; 
+            return temp1;
         }
         //bool ConvDispensary(bool num) {
-            
+
         //    bool dispOut = false;
         //    if (num == "1") { return dispOut = true; }
         //    else if (num == "0") {return dispOut = false; }
@@ -99,7 +100,7 @@ namespace kepkaSQL
         //}
         bool ConvSex(string bukva)
         {
-            bool sex=false;
+            bool sex = false;
             if (bukva == "M") { return sex = false; }
             else if (bukva == "F") { return sex = true; }
             return sex;
