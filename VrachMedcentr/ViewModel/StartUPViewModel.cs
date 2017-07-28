@@ -41,7 +41,7 @@ namespace VrachMedcentr
 
 
         }
-        private DocNames _SelectedDoc;
+        private DocNames _SelectedDocString;
         public DocNames SelectedDoc
         {
             get
@@ -50,7 +50,7 @@ namespace VrachMedcentr
             }
             set
             {
-                _SelectedDoc = value;
+                _SelectedDocString = value;
 
                 //azazaz
             }
