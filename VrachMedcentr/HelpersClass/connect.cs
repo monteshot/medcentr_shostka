@@ -69,6 +69,7 @@ namespace kepkaSQL
                 {
                     temp1 = (new CardPageOne
                     {
+                        NumberPacient = dr.GetString("ID_pat"),
                         Sername = dr.GetString("P"),
                         Name = dr.GetString("I"),
                         FathersName = dr.GetString("B"),
@@ -81,6 +82,50 @@ namespace kepkaSQL
                         Dispensary = dr.GetBoolean("dispans"),
                         PreferentNumber = dr.GetString("npmPilg")
                         // Likar = GetDoctrosNames(dr.GetString("id"))
+
+
+
+                    });
+                }
+            }
+            con.Close();
+
+            return temp1;
+        }
+
+        public CardPageTwo signPozn(string UID)
+        {
+
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand();
+            
+            CardPageTwo temp1 = new CardPageTwo();
+
+            con.Open();
+            cmd.Parameters.AddWithValue("@UserID", UID);
+            
+            cmd.CommandText = "SELECT * FROM signpozn WHERE ID_pat=@UserID";//
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            using (MySqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    temp1 = (new CardPageTwo
+                    {
+                        Shugar = dr.GetString("diabet"),
+                        InfectiousDis = dr.GetString("Infeciya"),
+                        AlergiAnam = dr.GetString("AlAnam"),
+                        IntoleranceToDrugs = dr.GetString("AlergiyaLek"),
+                        NumPat = dr.GetString("ID_pat")
 
 
 

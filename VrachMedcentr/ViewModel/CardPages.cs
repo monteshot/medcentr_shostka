@@ -18,20 +18,46 @@ namespace VrachMedcentr
         private DataTable TestTable = new DataTable();
         private connect con = new connect();
         private ObservableCollection<CardPageOne> ListOfUsers;
-        //CardPageTwo PageTwo = new CardPageTwo();
+        CardPageTwo PageTwo = new CardPageTwo();
+        private CardPageOne _KARTA;
+        public CardPageOne KARTA
+        {
+            get
+            {
+              
+                return _KARTA;
 
+            }
+            set
+            {
+                _KARTA = value;
+                NumberPacient = _KARTA.NumberPacient;
+               // MessageBox.Show(_KARTA.NumberPacient);
+            }
+        }
+        public CardPageTwo Card2 { get; set; }
+        public CardPageThree Card3 { get; set; }
+        public CardPageFour Card4 { get; set; }
+        public CardPageFive Card5 { get; set; }
         #endregion
         #region Constructor
 
         public CardPages()
         {
 
+            
+            KARTA = con.karta(KARTA.NumberPacient);  //не работает
+           Card2 = con.signPozn(KARTA.NumberPacient); //не работает
+            KARTA = con.karta("473"); // работает
+            Card2 = con.signPozn("473");// работает
+            // Card3= new CardPageThree
             //    Dilery = new ObservableCollection<CardPageFive>
             //    {
             //        new CardPageFive{ ComingDate  = "fasfafsa", HealingPlace="fasfas", Diagnosis="podox", Stamp="fasdfas"}
 
             //};
 
+            //   KARTA = new CardPageOne { Name = "aaaaaaaaaa", Sername = "bbbbbbbbbbb" };
         }
         #endregion
 
@@ -71,7 +97,7 @@ namespace VrachMedcentr
         /// data ObservableCollection
         /// </summary>
         /// 
-        public CardPageOne KARTA { get; set; }
+      //  public CardPageOne KARTA { get; set; }
         public ObservableCollection<OblickTable> Phones { get; set; }
         public ObservableCollection<CardPageFive> Dilery { get; set; }
         public ObservableCollection<CardPageThree> Diagnosis { get; set; }
@@ -128,6 +154,9 @@ namespace VrachMedcentr
                       //KARTA = con.karta(S_FirstName, S_LastName, S_DateBorn);
                       //KARTA = con;
                       //MessageBox.Show(S_FirstName+" "+ S_LastName);
+                      //    MessageBox.Show(SUser.IDUser);
+                      _KARTA = con.karta(SUser.IDUser);
+                      // MessageBox.Show(KARTA.Name + " " + KARTA.Sername);
                   }));
             }
         }
@@ -140,13 +169,12 @@ namespace VrachMedcentr
             {
                 _SUser = value;
                 KARTA = con.karta(_SUser.IDUser);
-                CardPageOne CPO = new CardPageOne();
-                CPO = KARTA;
-                MainWindow mw = new MainWindow();
-                mw.Page1.DataContext = KARTA;
-                MessageBox.Show("Вытянул с базы:\n"+ KARTA.Name + " " + KARTA.Sername);
+
+                MessageBox.Show("Вытянул с базы:\n" + KARTA.Name + " " + KARTA.Sername);
             }
         }
+
+
         //private Appointments _SelectedUser;
         //public Appointments sSelectedUser
         //{
@@ -275,6 +303,9 @@ namespace VrachMedcentr
                   }));
             }
         }
+
+
+
         //public RelayCommand InsertP3
         //{
         //    get

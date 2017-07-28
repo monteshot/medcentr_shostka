@@ -63,9 +63,10 @@ namespace WPF_Hospital
             Title += " Версія: " + currVer; //не выпиливать! дает версию в заголовке аппы
 
             connect con = new connect();
-           // page1.DataContext = new CardPages();
-            Page1.DataContext = new CardPageOne();
-            page2.DataContext = new CardPageTwo();
+            CardPages CP = new CardPages();
+            page1.DataContext =  CP.KARTA;
+            //Page1.DataContext = new CardPageOne();
+            page2.DataContext = CP.Card2;
             Registratyra.DataContext = new regViewModel();
             Testersitem.DataContext = new DiagnosesViewModel();
             // Update.DataContext = new update();

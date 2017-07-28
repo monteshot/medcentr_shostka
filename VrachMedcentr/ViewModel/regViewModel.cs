@@ -50,7 +50,8 @@ namespace VrachMedcentr
         // public ObservableCollection<Times> DoctorTimes { get; set; }
         public ObservableCollection<string> Users { get; set; }
         public ObservableCollection<DateTime> WorkingDays { get; set; }
-        public CardPageOne KARTA { get; set; }
+        //   public CardPageOne KARTA { get; set; }
+
         private Appointments _SSelectedUser;
         public Appointments SSelectedUser
         {
@@ -61,11 +62,12 @@ namespace VrachMedcentr
             set
             {
                 _SSelectedUser = value;
-
+               // MessageBox.Show(_SSelectedUser.IDUser);
                 CardPages CP = new CardPages();
                 CP.SUser = _SSelectedUser;
-                MainWindow mw = new MainWindow();
-                mw.Page1.DataContext = localDB.karta(_SSelectedUser.IDUser);
+              //  MainWindow mw = new MainWindow();
+              //  mw.page1.DataContext = localDB.karta(_SSelectedUser.IDUser);
+              ////  MessageBox.Show(_SSelectedUser.IDUser);
                 //CP.sSelectedUser = _SSelectedUser;
                 //  CP.KARTA = localDB.karta(_SSelectedUser.IDUser);
 
@@ -304,7 +306,7 @@ namespace VrachMedcentr
 
         public regViewModel()
         {
-
+           // KARTA = new CardPageOne { Name = "aaaaaaaaaa", Sername = "bbbbbbbbbbb" };
 
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();

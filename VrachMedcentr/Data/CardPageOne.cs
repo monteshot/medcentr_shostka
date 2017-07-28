@@ -22,7 +22,7 @@ namespace VrachMedcentr
         #endregion
 
         #region Data_page1
-              
+
         public string CodeZKPO { get; set; }
         public string NumberPacient { get; set; }
         public string CodePacient { get; set; }
@@ -61,20 +61,29 @@ namespace VrachMedcentr
         //        return addCommand ??
         //          (addCommand = new RelayCommand(obj =>
         //          {
-                     
+
         //              // Setter();
         //          }));
         //    }
         //}
 
-       
+    //    public CardPageOne KARTA { get; set; }
+
         public void Setter()
 
         {
 
             Adress = "fasfasf";
         }
-
+        public CardPageOne()
+        {
+            //KARTA = new CardPageOne
+            //{
+            //    Name = "aaaaaaaaaa",
+            //    Sername = "bbbbbbbbbbb",
+            //    DateCardWriten = DateTime.Today
+            //};
+        }
         #endregion
         #region Event
         /// <summary>
@@ -86,7 +95,7 @@ namespace VrachMedcentr
 
         #endregion
 
-       
+
     }
 
 }

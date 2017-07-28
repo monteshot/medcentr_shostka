@@ -324,7 +324,7 @@
                         </Grid>
 
                     </Grid>
-                    <ListBox Grid.Row="1" SelectedItem="{Binding SSelectedUser}" ItemsSource="{Binding Appointments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox Grid.Row="1" SelectedItem="{Binding SSelectedUser,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Appointments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -343,7 +343,6 @@
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-
                     </ListBox>
                     <!--<DataGrid  Margin="0,10,0,0" FontSize="15" Foreground="White" Grid.Row="1"   
                                AutoGenerateColumns="False" ItemsSource="{Binding Appointments}" Style="{DynamicResource GrayDataGrid}" 
@@ -432,7 +431,7 @@
 
         </TabItem>
         <TabItem x:Name="Pacient" Header="Картка пацієнта">
-            <Grid ShowGridLines="False" Background="#FFE5E5E5"  x:Name="page1" >
+            <Grid ShowGridLines="False" Background="#FFE5E5E5"   >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />
                     <RowDefinition />
@@ -479,7 +478,7 @@
 
                 <TabControl Grid.Row="1" x:Name="PacientCard" >
 
-                    <TabItem   >
+                    <TabItem DataContext="{Binding KARTA}" x:Name="page1"  >
                         <TabItem.Header>
                             <StackPanel>
                                 <TextBlock TextAlignment ="Center"><Run Text="Титульний"/></TextBlock>
@@ -487,7 +486,7 @@
                             </StackPanel>
                         </TabItem.Header>
 
-                        <Grid DataContext="{Binding KARTA}" x:Name="Page1" Background="#FFE5E5E5">
+                        <Grid  Background="#FFE5E5E5">
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.20*"/>
@@ -673,7 +672,7 @@
                             </Grid>
                         </Grid>
                     </TabItem>
-                    <TabItem x:Name="page2">
+                    <TabItem DataContext="{Binding Card2}" x:Name="page2">
                         <TabItem.Header>
                             <StackPanel>
                                 <TextBlock TextAlignment ="Center"><Run Text="Сигнальні"/></TextBlock>
@@ -685,10 +684,10 @@
                             <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
                                 <Grid>
 
-                                    <TextBox Text="{Binding Shugar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                                    <TextBox Text="{Binding Shugar}"  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                                    <TextBox Text="{Binding AlergiAnam}" Margin="253,88,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                                    <TextBox Text="{Binding IntoleranceToDrugs}" Margin="253,57,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
+                                    <TextBox Text="{Binding Shugar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Margin="253,1,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                                    <TextBox Text="{Binding InfectiousDis}"  Margin="253,27,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                                    <TextBox Text="{Binding AlergiAnam}" Margin="253,85,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
+                                    <TextBox Text="{Binding IntoleranceToDrugs}" Margin="253,58,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
                                     <TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Цукровий діабет" VerticalAlignment="Top"/>
                                     <TextBlock HorizontalAlignment="Left" Margin="5,62,0,0" TextWrapping="Wrap" Text="Алергічний анамнез" VerticalAlignment="Top"/>
                                     <TextBlock HorizontalAlignment="Left" Margin="5,31,0,0" TextWrapping="Wrap" Text="Інфекційні захворювання" VerticalAlignment="Top"/>
