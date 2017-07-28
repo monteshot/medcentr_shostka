@@ -11,14 +11,17 @@ namespace VrachMedcentr
     class CardPageTwo //: INotifyPropertyChanged
     {
         #region VuiwData_page2
-
-        public string Shugar { get; set; } = "gsdgsgdg";
+        public string NumPat { get; set; }
+        public string Shugar { get; set; } = "xxxxx";
         public string InfectiousDis { get; set; }
         public string AlergiAnam { get; set; }
         public string IntoleranceToDrugs { get; set; }
-
+       // public CardPageTwo Card2 { get;  set; }
         #endregion
-
+        public CardPageTwo()
+        {
+          //  Card2 = new CardPageTwo { AlergiAnam = "aaaaaaaaa", InfectiousDis = "bbbbbbb", IntoleranceToDrugs = "cccccccccccc", Shugar = "ddddddddddddd" };
+        }
         #region Helpers Method
         public void TesterMethod()
         {
@@ -38,6 +41,8 @@ namespace VrachMedcentr
             }
         }
 
+     
+
         #endregion
 
         #region Event
@@ -50,6 +55,6 @@ namespace VrachMedcentr
 
         #endregion
 
-       
+
     }
 }
