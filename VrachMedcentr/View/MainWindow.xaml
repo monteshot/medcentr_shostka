@@ -16,9 +16,9 @@
         mc:Ignorable="d"
         Title="Клієнт для роботи з реєстратурою та лікарем - Нова Медицина"  Height="900" Width="1280"  WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
-    <TabControl >
+    <TabControl x:Name="Registratyra" >
 
-        <TabItem MinHeight="30" x:Name="Registratyra" Header="Реєстратура">
+        <TabItem MinHeight="30"  Header="Реєстратура">
             <Grid Background="#FFE5E5E5">
 
 
@@ -430,7 +430,7 @@
             </Grid>
 
         </TabItem>
-        <TabItem x:Name="Pacient" Header="Картка пацієнта">
+        <TabItem x:Name="Pacient"  Header="Картка пацієнта">
             <Grid ShowGridLines="False" Background="#FFE5E5E5"   >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />
@@ -483,8 +483,8 @@
                 </DockPanel>
                 <!--<GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />-->
-
-                <TabControl Grid.Row="1" x:Name="PacientCard" >
+<!--Поковырял ненмого здесь биндингов для передачи данных с таб итема регистратуры(требует дороботки)-->
+                <TabControl Grid.Row="1"  DataContext="{Binding CP}" x:Name="PacientCard" >
 
                     <TabItem DataContext="{Binding KARTA}" x:Name="page1"  >
                         <TabItem.Header>
@@ -673,7 +673,7 @@
                                 </Grid>
                                 <StackPanel  Grid.Row="11" HorizontalAlignment="Right" Orientation="Horizontal" >
 
-                                    <Button Grid.Column="0" Margin="10,-2,10,2"  Style="{DynamicResource ButtonOrange}" Content="Видалити запис"/>
+                                    <Button Grid.Column="0" Margin="10,-2,10,2" Command="{Binding ElementName=PacientCard,Path=DataContext.TestCP}" CommandParameter="{Binding}" Style="{DynamicResource ButtonOrange}" Content="Видалити запис"/>
                                     <Button  Grid.Column="1" Margin="10,-2,10,2" Style="{DynamicResource ButtonOrange}" Content="Зберегти" />
                                 </StackPanel>
 

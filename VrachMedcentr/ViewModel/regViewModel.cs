@@ -50,7 +50,13 @@ namespace VrachMedcentr
         // public ObservableCollection<Times> DoctorTimes { get; set; }
         public ObservableCollection<string> Users { get; set; }
         public ObservableCollection<DateTime> WorkingDays { get; set; }
-        //   public CardPageOne KARTA { get; set; }
+        /// <summary>
+        /// создал обект который бинтидься к дата контексту карточки в
+        /// который влажываем все остальные дата контектсты и биндим их 
+        ///  в тоже время все команды и функции с вложеных дата контекство вроде как работают проверил на кнопке 
+        ///  **Файл CardPages строка: 218
+        /// </summary>
+        public CardPages CP { get; set; } = new CardPages();
 
         private Appointments _SSelectedUser;
         public Appointments SSelectedUser
@@ -62,9 +68,10 @@ namespace VrachMedcentr
             set
             {
                 _SSelectedUser = value;
-               // MessageBox.Show(_SSelectedUser.IDUser);
-                CardPages CP = new CardPages();
-                CP.SUser = _SSelectedUser;
+                // MessageBox.Show(_SSelectedUser.IDUser);
+                //CardPages CP = new CardPages();
+               
+               // KARTA.SUser = _SSelectedUser;
               //  MainWindow mw = new MainWindow();
               //  mw.page1.DataContext = localDB.karta(_SSelectedUser.IDUser);
               ////  MessageBox.Show(_SSelectedUser.IDUser);
@@ -209,9 +216,10 @@ namespace VrachMedcentr
             {
                 dateDoctorAcepting = value;
                 int i = 0;
+               
                 try
                 {
-
+                    CP.KARTA.Adress = "gsdgsdgsgsdg";
                     //if (TimeHour == true)
                     //{
                     if (WorkingDays.Contains(value))

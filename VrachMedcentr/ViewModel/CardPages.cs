@@ -19,7 +19,7 @@ namespace VrachMedcentr
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
         private connect con = new connect();
-        private ObservableCollection<CardPageOne> ListOfUsers;
+        //private ObservableCollection<CardPageOne> ListOfUsers;//что это?
         CardPageTwo PageTwo = new CardPageTwo();
         private CardPageOne _KARTA;
         public CardPageOne KARTA
@@ -42,15 +42,17 @@ namespace VrachMedcentr
         public CardPageFour Card4 { get; set; }
         public CardPageFive Card5 { get; set; }
         #endregion
+
+
         #region Constructor
 
         public CardPages()
         {
 
             
-            KARTA = con.karta(KARTA.NumberPacient);  //не работает
-           Card2 = con.signPozn(KARTA.NumberPacient); //не работает
-            KARTA = con.karta("473"); // работает
+            //KARTA = con.karta(KARTA.NumberPacient);  //не работает
+          // Card2 = con.signPozn(KARTA.NumberPacient); //не работает
+            //KARTA = con.karta("473"); // работает
             Card2 = con.signPozn("473");// работает
             // Card3= new CardPageThree
             //    Dilery = new ObservableCollection<CardPageFive>
@@ -211,6 +213,21 @@ namespace VrachMedcentr
         public bool ComboBoxDropDown { get; set; } = false;
 
         public bool IsTextSearchEnabled { get; set; } = false;
+        /// <summary>
+        /// комнада для теста биндингов вложеных дата контекстов
+        /// </summary>
+        private RelayCommand _TestCP;
+        public RelayCommand TestCP
+        {
+            get
+            {
+                return _TestCP ??
+                  (_TestCP = new RelayCommand(obj =>
+                  {
+                      KARTA = con.karta("473");
+                  }));
+            }
+        }
         private RelayCommand _SearchPat;
         public RelayCommand SearchPat
         {

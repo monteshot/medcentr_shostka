@@ -63,10 +63,12 @@ namespace WPF_Hospital
             Title += " Версія: " + currVer; //не выпиливать! дает версию в заголовке аппы
 
             connect con = new connect();
+            //закомнетилд для теста подвязки дата котекста с родительского дата конетекста
+
             CardPages CP = new CardPages();
-            page1.DataContext =  CP.KARTA;
+           // page1.DataContext = CP.KARTA;
             //Page1.DataContext = new CardPageOne();
-            page2.DataContext = CP.Card2;
+            //page2.DataContext = CP.Card2;
             Registratyra.DataContext = new regViewModel();
             Testersitem.DataContext = new DiagnosesViewModel();
             // Update.DataContext = new update();
