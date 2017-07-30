@@ -168,8 +168,8 @@ namespace VrachMedcentr
             {
                 _SUser = value;
 
-                NumCard(_SUser.IDUser);
-                MessageBox.Show("Вытянул с базы:\n" + KARTA.Name + " " + KARTA.Sername);
+                NumCard(_SUser.IDUser);// вроде работает но UI не меняется
+                MessageBox.Show("Вытянул с базы:\n" + KARTA.Name + " " + KARTA.Sername);// работает
             }
         }
 
