@@ -22,6 +22,20 @@ namespace VrachMedcentr
         //private ObservableCollection<CardPageOne> ListOfUsers;//что это?
         CardPageTwo PageTwo = new CardPageTwo();
         private CardPageOne _KARTA;
+
+        private Appointments _AppSelectedUser;
+        public Appointments AppSelectedUser
+        {
+            get
+            {
+                return _AppSelectedUser;
+            }
+            set
+            {
+                _AppSelectedUser = value;
+                string r = "fafsafs";
+            }
+        }
         public CardPageOne KARTA
         {
             get

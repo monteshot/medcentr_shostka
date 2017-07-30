@@ -56,8 +56,7 @@ namespace VrachMedcentr
         ///  в тоже время все команды и функции с вложеных дата контекство вроде как работают проверил на кнопке 
         ///  **Файл CardPages строка: 218
         /// </summary>
-        public CardPages CP { get; set; } = new CardPages();
-
+        public CardPages CP { get; set; } 
         private Appointments _SSelectedUser;
         public Appointments SSelectedUser
         {
@@ -68,6 +67,8 @@ namespace VrachMedcentr
             set
             {
                 _SSelectedUser = value;
+                CP.AppSelectedUser = value;
+                CP.Adress = "fggsdgsdgsdgsdgsdgsgd";
                 // MessageBox.Show(_SSelectedUser.IDUser);
                 //CardPages CP = new CardPages();
                
@@ -91,6 +92,7 @@ namespace VrachMedcentr
         }
 
         public string teststring { get; set; }//тесовый стринг
+
         /// <summary>
         /// умный поиск по комбобоксу
         /// </summary>
@@ -219,7 +221,7 @@ namespace VrachMedcentr
                
                 try
                 {
-                    CP.KARTA.Adress = "gsdgsdgsgsdg";
+                    //CP.KARTA.Adress = "gsdgsdgsgsdg";
                     //if (TimeHour == true)
                     //{
                     if (WorkingDays.Contains(value))
@@ -238,9 +240,9 @@ namespace VrachMedcentr
 
                         }
 
-                        catch (Exception)
+                        catch (Exception e )
                         {
-                            //MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній");
+                            MessageBox.Show(e.ToString());
                         }
                     }
                     else
@@ -326,11 +328,13 @@ namespace VrachMedcentr
 
         public regViewModel()
         {
-           // KARTA = new CardPageOne { Name = "aaaaaaaaaa", Sername = "bbbbbbbbbbb" };
-
+            // KARTA = new CardPageOne { Name = "aaaaaaaaaa", Sername = "bbbbbbbbbbb" };
+            CP = new CardPages();
+            CP.Adress = "afasfafafasf";
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();
             ListOfUsers = con.GetUsers();
+           
 
 
             Users = OneTimeUsers;
