@@ -64,9 +64,13 @@ namespace WPF_Hospital
 
             connect con = new connect();
             CardPages CP = new CardPages();
-            page1.DataContext =  CP.KARTA;
-            //Page1.DataContext = new CardPageOne();
-            page2.DataContext = CP.Card2;
+
+            // ниже идут датаконтесты, которые были подвязаны во CardPages
+            page1.DataContext = CP.KARTA;
+            page2.DataContext = CP.Card2;// Сигнаьны позначик
+            Shelpennya.ItemsSource = CP.Shepl;// щеплення на той же странице шо и позначки
+            Profilact.ItemsSource = CP.Profilact; // профосмотры на той же странице шо и позначки
+            DPage3.ItemsSource = CP.Card3; // личток заключительных дигнозов
             Registratyra.DataContext = new regViewModel();
             Testersitem.DataContext = new DiagnosesViewModel();
             // Update.DataContext = new update();
@@ -77,7 +81,7 @@ namespace WPF_Hospital
 
 
 
-           
+
             //Regis.DataContext = new regViewModel();// может еще нам нужно будет
             //Card3.DataContext= new CardPageThree();
             //Card4.DataContext = new CardPageFour();

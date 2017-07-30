@@ -19,12 +19,13 @@ namespace VrachMedcentr
         private connect con = new connect();
         private ObservableCollection<CardPageOne> ListOfUsers;
         CardPageTwo PageTwo = new CardPageTwo();
+
         private CardPageOne _KARTA;
         public CardPageOne KARTA
         {
             get
             {
-              
+
                 return _KARTA;
 
             }
@@ -32,11 +33,13 @@ namespace VrachMedcentr
             {
                 _KARTA = value;
                 NumberPacient = _KARTA.NumberPacient;
-               // MessageBox.Show(_KARTA.NumberPacient);
+
             }
         }
         public CardPageTwo Card2 { get; set; }
-        public CardPageThree Card3 { get; set; }
+        public ObservableCollection<Sheplenya> Shepl { get; set; }
+        public ObservableCollection<Profilact> Profilact { get; set; }
+        public ObservableCollection< CardPageThree> Card3 { get; set; }
         public CardPageFour Card4 { get; set; }
         public CardPageFive Card5 { get; set; }
         #endregion
@@ -45,22 +48,18 @@ namespace VrachMedcentr
         public CardPages()
         {
 
-            
-            KARTA = con.karta(KARTA.NumberPacient);  //не работает
-           Card2 = con.signPozn(KARTA.NumberPacient); //не работает
-            KARTA = con.karta("473"); // работает
-            Card2 = con.signPozn("473");// работает
-            // Card3= new CardPageThree
-            //    Dilery = new ObservableCollection<CardPageFive>
-            //    {
-            //        new CardPageFive{ ComingDate  = "fasfafsa", HealingPlace="fasfas", Diagnosis="podox", Stamp="fasdfas"}
+            NumCard("473");
 
-            //};
-
-            //   KARTA = new CardPageOne { Name = "aaaaaaaaaa", Sername = "bbbbbbbbbbb" };
         }
         #endregion
-
+        public void NumCard(string inp) //вызывать этот метод по клику на пациента
+        {
+            KARTA = con.karta(inp);
+            Card2 = con.signPozn(inp);
+            Shepl = con.shepl(inp);
+            Profilact = con.profilact(inp);
+            Card3 = con.DiagList(inp);
+        }
         #region Data_pages
         /// <summary>
         /// Page 1
@@ -168,11 +167,12 @@ namespace VrachMedcentr
             set
             {
                 _SUser = value;
-                KARTA = con.karta(_SUser.IDUser);
 
+                NumCard(_SUser.IDUser);
                 MessageBox.Show("Вытянул с базы:\n" + KARTA.Name + " " + KARTA.Sername);
             }
         }
+
 
 
         //private Appointments _SelectedUser;
@@ -286,7 +286,7 @@ namespace VrachMedcentr
                   (readP3 = new RelayCommand(obj =>
                   {
 
-                      Diagnosis = con.DiagList();
+                   //   Diagnosis = con.DiagList();
                   }));
             }
         }

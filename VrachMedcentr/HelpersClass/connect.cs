@@ -106,12 +106,12 @@ namespace kepkaSQL
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = mysqlCSB.ConnectionString;
             MySqlCommand cmd = new MySqlCommand();
-            
+
             CardPageTwo temp1 = new CardPageTwo();
 
             con.Open();
             cmd.Parameters.AddWithValue("@UserID", UID);
-            
+
             cmd.CommandText = "SELECT * FROM signpozn WHERE ID_pat=@UserID";//
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
@@ -127,6 +127,100 @@ namespace kepkaSQL
                         IntoleranceToDrugs = dr.GetString("AlergiyaLek"),
                         NumPat = dr.GetString("ID_pat")
 
+
+
+                    });
+                }
+            }
+            con.Close();
+
+            return temp1;
+        }
+
+        public ObservableCollection<Sheplenya> shepl(string UID)
+        {
+
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand();
+
+            ObservableCollection<Sheplenya> temp1 = new ObservableCollection<Sheplenya>();
+
+            con.Open();
+            cmd.Parameters.AddWithValue("@UserID", UID);
+
+            cmd.CommandText = "SELECT * FROM sheplennya WHERE ID_pat=@UserID";//
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            using (MySqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    temp1.Add(new Sheplenya
+                    {
+
+                        NumPat = dr.GetString("ID_pat"),
+                        NazvaShepl = dr.GetString("nazvaShep"),
+                        Date = dr.GetDateTime("date"),
+                        Age = dr.GetString("age"),
+                        Doze = dr.GetString("doza"),
+                        Seria = dr.GetString("seriya"),
+                        NazvaPrep = dr.GetString("nazvaPrep"),
+                        SposibVV = dr.GetString("sposib"),
+                        MReact = dr.GetBoolean("reakMisceva"),
+                        ZReact = dr.GetBoolean("reakZagal"),
+                        MedProt = dr.GetString("medProty")
+
+
+                    });
+                }
+            }
+            con.Close();
+
+            return temp1;
+        }
+        public ObservableCollection<Profilact> profilact(string UID)
+        {
+
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand();
+
+            ObservableCollection<Profilact> temp1 = new ObservableCollection<Profilact>();
+
+            con.Open();
+            cmd.Parameters.AddWithValue("@UserID", UID);
+
+            cmd.CommandText = "SELECT * FROM profilact WHERE ID_pat=@UserID";//
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            using (MySqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    temp1.Add(new Profilact
+                    {
+
+                        NumPat = dr.GetString("ID_pat"),
+                        Date = dr.GetDateTime("date"),
+                        NumCab = dr.GetString("noCabinet"),
+                        Flura = dr.GetString("flyra"),
+                        Syphilis = dr.GetString("sifon"),
+                        HIV= dr.GetString("HIV")
 
 
                     });
@@ -234,43 +328,48 @@ namespace kepkaSQL
         /// Считивание листа записи заключних диагнозов страница карточки 3
         /// </summary>
         /// <returns></returns>
-        public ObservableCollection<CardPageThree> DiagList()
+        public ObservableCollection<CardPageThree> DiagList(string UID)
         {
             ObservableCollection<CardPageThree> InlIst = new ObservableCollection<CardPageThree>();
-            DataTable dt = new DataTable();
+           
             MySqlConnectionStringBuilder mysqlCSB;
+            MySqlConnection con = new MySqlConnection();
+            
+            MySqlCommand cmd = new MySqlCommand();
             mysqlCSB = new MySqlConnectionStringBuilder();
             mysqlCSB.Server = server;
             mysqlCSB.Database = database;
             mysqlCSB.UserID = UserID;
             mysqlCSB.Password = Password;
-            mysqlCSB.ConvertZeroDateTime = true;
-
-            string queryString = "SELECT * FROM diagnoz";
-            using (MySqlConnection con = new MySqlConnection())
+          
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            
+            con.Open();
+            cmd.Parameters.AddWithValue("@UserID", UID);
+            cmd.CommandText = "SELECT * FROM diagnoz WHERE ID_pat=@UserID";//
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            using (MySqlDataReader dr = cmd.ExecuteReader())
             {
-                con.ConnectionString = mysqlCSB.ConnectionString;
-                MySqlCommand com = new MySqlCommand(queryString, con);
-                var da = new MySqlDataAdapter(com);
-
-                con.Open();
-                using (MySqlDataReader dr = com.ExecuteReader())
+                while (dr.Read())
                 {
-                    while (dr.Read())
+                    InlIst.Add(new CardPageThree
                     {
-                        InlIst.Add(new CardPageThree
-                        {
-                            DataZvern = dr.GetDateTime("dataZvern"),
-                            ZaklDiagn = dr.GetString("text_diag"),
-                            FDiagn = dr.GetBoolean("diagFirst"),
-                            PDiag = dr.GetBoolean("diagProf"),
-                            Sign = dr.GetString("pidpLik")
-                        });
-                    }
-                }
-                con.Close();
 
+                        NumPat = dr.GetString("ID_pat"),
+                        DataZvern = dr.GetDateTime("dataZvern"),
+                        ZaklDiagn = dr.GetString("text_diag"),
+                        FDiagn = dr.GetBoolean("diagFirst"),
+                        PDiag = dr.GetBoolean("diagProf"),
+                        Sign = dr.GetString("pidpLik")
+
+
+                    });
+                }
             }
+            con.Close();
+
+
             //copyP3 = InlIst;
             return InlIst;
         }
@@ -282,7 +381,7 @@ namespace kepkaSQL
         /// <param name="temp"></param>
         public void UpdateP3(ObservableCollection<CardPageThree> temp)
         {
-            copyP3 = DiagList();
+           // copyP3 = DiagList();
             ObservableCollection<CardPageThree> InlIst = new ObservableCollection<CardPageThree>();
 
 

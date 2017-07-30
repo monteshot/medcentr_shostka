@@ -672,7 +672,7 @@
                             </Grid>
                         </Grid>
                     </TabItem>
-                    <TabItem DataContext="{Binding Card2}" x:Name="page2">
+                    <TabItem  x:Name="page2">
                         <TabItem.Header>
                             <StackPanel>
                                 <TextBlock TextAlignment ="Center"><Run Text="Сигнальні"/></TextBlock>
@@ -681,8 +681,8 @@
                         </TabItem.Header>
                         <Grid Background="#FFE5E5E5">
 
-                            <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
-                                <Grid>
+                            <GroupBox  Header="Сигнальні позначки" Margin="0,0,6,28">
+                                <Grid >
 
                                     <TextBox Text="{Binding Shugar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Margin="253,1,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
                                     <TextBox Text="{Binding InfectiousDis}"  Margin="253,27,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
@@ -695,29 +695,32 @@
 
                                 </Grid>
                             </GroupBox>
-                            <DataGrid 
-                        Margin="10,127,18,0" VerticalAlignment="Top" MaxHeight="300">
+                            <DataGrid x:Name="Shelpennya" DataContext="{Binding Shepl}" ItemsSource="{Binding Shepl}"
+                        Margin="10,127,18,0" VerticalAlignment="Top" MaxHeight="300" Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Найменування щеплення"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Вік"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Доза"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Серія"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Назва препарату"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Спосіб введення"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Місцева реак. на щеплення"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Загальна реак. на щеплення"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Медичні протипоказання"/>
+                                    <DataGridTextColumn Binding="{Binding NazvaShepl}" ClipboardContentBinding="{x:Null}" Header="Найменування щеплення"/>
+                                    <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
+                                    <DataGridTextColumn Binding="{Binding Age}" ClipboardContentBinding="{x:Null}" Header="Вік"/>
+                                    <DataGridTextColumn Binding="{Binding Doze}" ClipboardContentBinding="{x:Null}" Header="Доза"/>
+                                    <DataGridTextColumn Binding="{Binding Seria}" ClipboardContentBinding="{x:Null}" Header="Серія"/>
+                                    <DataGridTextColumn Binding="{Binding NazvaPrep}" ClipboardContentBinding="{x:Null}" Header="Назва препарату"/>
+                                    <DataGridTextColumn Binding="{Binding SposibVV}" ClipboardContentBinding="{x:Null}" Header="Спосіб введення"/>
+                                    <DataGridCheckBoxColumn Binding="{Binding MReact}" ClipboardContentBinding="{x:Null}" Header="Місцева реак. на щеплення"/>
+                                    <DataGridCheckBoxColumn Binding="{Binding ZReact}" ClipboardContentBinding="{x:Null}" Header="Загальна реак. на щеплення"/>
+                                    <DataGridTextColumn Binding="{Binding MedProt}" ClipboardContentBinding="{x:Null}" Header="Медичні протипоказання"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <DataGrid 
-                        Margin="10,457,10,0" VerticalAlignment="Top" MaxHeight="330">
+                            <DataGrid  x:Name="Profilact"  Margin="10,457,10,0" VerticalAlignment="Top" Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White" MaxHeight="330">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата/рік"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Кабінет №"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Флюрографія органів грудної клітки"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Обстеження на сифіліс"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Обстеження на ВІЛ"/>
+                                    <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата/рік"/>
+                                    <DataGridTextColumn Binding="{Binding NumCab}" ClipboardContentBinding="{x:Null}" Header="Кабінет №"/>
+                                    <DataGridTextColumn Binding="{Binding Flura}" ClipboardContentBinding="{x:Null}" Header="Флюрографія органів грудної клітки"/>
+                                    <DataGridTextColumn Binding="{Binding Syphilis}" ClipboardContentBinding="{x:Null}" Header="Обстеження на сифіліс"/>
+                                    <DataGridTextColumn Binding="{Binding HIV}" ClipboardContentBinding="{x:Null}" Header="Обстеження на ВІЛ"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -730,7 +733,9 @@
                             </StackPanel>
                         </TabItem.Header>
                         <Grid x:Name="Card3" Background="#FFE5E5E5">
-                            <DataGrid x:Name="DPage3" ItemsSource="{Binding Diagnosis}"  AutoGenerateColumns="False">
+                            <DataGrid x:Name="DPage3" ItemsSource="{Binding Diagnosis}" Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White" >
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Дата Звернення">
                                         <DataGridTemplateColumn.CellTemplate>
@@ -746,8 +751,8 @@
                                     <DataGridTextColumn Binding="{Binding Sign}" ClipboardContentBinding="{x:Null}" Header="Підпис"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <Button Content="чтен" Command="{Binding ReadP3}" HorizontalAlignment="Left" Margin="756,582,0,0" VerticalAlignment="Top" Width="160" Height="133"/>
-                            <Button Content="зап" Command="{Binding UpdateP3}" HorizontalAlignment="Left" Margin="990,567,0,0" VerticalAlignment="Top" Width="268" Height="148"/>
+                            <!--<Button Content="чтен" Command="{Binding ReadP3}" HorizontalAlignment="Left" Margin="756,582,0,0" VerticalAlignment="Top" Width="160" Height="133"/>
+                            <Button Content="зап" Command="{Binding UpdateP3}" HorizontalAlignment="Left" Margin="990,567,0,0" VerticalAlignment="Top" Width="268" Height="148"/>-->
                         </Grid>
                     </TabItem>
                     <TabItem x:Name="page4">
