@@ -34,7 +34,7 @@
             <Button x:Name="Likar" Grid.Column="0" Margin="20" Style="{DynamicResource ButtonGreen}" Content="Додаток Лікаря" Command="{Binding Likar_app }" />
             <Button x:Name="Reg" Grid.Column="1" Margin="20" Style="{DynamicResource ButtonBlue}" Content="Додаток Реєстратури" Command="{Binding Reg_app}" Click="Reg_Click" />
         </Grid>
-        <ComboBox Grid.Row="2" Margin="20,0,20,0" Visibility="Visible" SelectedItem="{Binding SelectedDoc}" Text="ПІБ Лікаря"  ItemsSource="{Binding startupDocNames}" IsEditable="False" >
+        <ComboBox Grid.Row="2" Margin="20,0,20,0" Visibility="Visible" SelectedItem="{Binding SelectedDocString}" Text="ПІБ Лікаря"  ItemsSource="{Binding startupDocNames}" IsEditable="False" >
             <ComboBox.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Likar}" >
                     <StackPanel Margin="15,0,0,0" Orientation="Horizontal">

@@ -50,8 +50,13 @@ namespace VrachMedcentr
         // public ObservableCollection<Times> DoctorTimes { get; set; }
         public ObservableCollection<string> Users { get; set; }
         public ObservableCollection<DateTime> WorkingDays { get; set; }
-        //   public CardPageOne KARTA { get; set; }
-
+        /// <summary>
+        /// создал обект который бинтидься к дата контексту карточки в
+        /// который влажываем все остальные дата контектсты и биндим их 
+        ///  в тоже время все команды и функции с вложеных дата контекство вроде как работают проверил на кнопке 
+        ///  **Файл CardPages строка: 218
+        /// </summary>
+        public CardPages CP { get; set; }
         private Appointments _SSelectedUser;
         public Appointments SSelectedUser
         {
@@ -62,12 +67,15 @@ namespace VrachMedcentr
             set
             {
                 _SSelectedUser = value;
-               // MessageBox.Show(_SSelectedUser.IDUser);
-                CardPages CP = new CardPages();
-                CP.SUser = _SSelectedUser;
-              //  MainWindow mw = new MainWindow();
-              //  mw.page1.DataContext = localDB.karta(_SSelectedUser.IDUser);
-              ////  MessageBox.Show(_SSelectedUser.IDUser);
+                CP.AppSelectedUser = value;
+                CP.Adress = "fggsdgsdgsdgsdgsdgsgd";
+                // MessageBox.Show(_SSelectedUser.IDUser);
+                //CardPages CP = new CardPages();
+
+                // KARTA.SUser = _SSelectedUser;
+                //  MainWindow mw = new MainWindow();
+                //  mw.page1.DataContext = localDB.karta(_SSelectedUser.IDUser);
+                ////  MessageBox.Show(_SSelectedUser.IDUser);
                 //CP.sSelectedUser = _SSelectedUser;
                 //  CP.KARTA = localDB.karta(_SSelectedUser.IDUser);
 
@@ -84,6 +92,7 @@ namespace VrachMedcentr
         }
 
         public string teststring { get; set; }//тесовый стринг
+
         /// <summary>
         /// умный поиск по комбобоксу
         /// </summary>
@@ -164,39 +173,36 @@ namespace VrachMedcentr
             set
             {
                 timehour = value;
-                int i = 0;
-                if (TimeHour == true)
-                {
-                    try
-                    {
-                        //int i = 0;
-                        ObservableCollection<Times> temp = new ObservableCollection<Times>();
+                //int i = 0;
+                //if (TimeHour == true )
+                //{
+                //    try
+                //    {
 
-                        foreach (var a in DoctorTimes)
-                        {
-                            i++;
-                            temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(), TimeProperties = a.TimeProperties });
-                        }
-                        DoctorTimes = temp;
+                //        if (WorkingDays.Contains(DateDoctorAcepting) == true)
+                //        {
+                //            ObservableCollection<Times> temp = new ObservableCollection<Times>();
 
-                    }
+                //            foreach (var a in DoctorTimes)
+                //            {
+                //                i++;
+                //                temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(), TimeProperties = a.TimeProperties });
+                //            }
+                //            DoctorTimes = temp;
+                //        }
+                //    }
 
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній");
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        RefreshDocTimes();
-                    }
-                    catch
-                    {
-                        // MessageBox.Show("Лікар не вибраний");
-                    }
-                }
+                //    catch (Exception)
+                //    {
+                //        MessageBox.Show("Лікар не вибраний");
+                //    }
+                //}
+                //else
+                //{
+
+                RefreshDocTimes();
+
+                //}
             }
         }
 
@@ -210,47 +216,15 @@ namespace VrachMedcentr
             }
             set
             {
-                dateDoctorAcepting = value;
-                int i = 0;
                 try
                 {
-                    if (TimeHour == false)
-                    {
-                        RefreshDocTimes();
-                    }
-                    if (TimeHour == true)
-                    {
-                        if (WorkingDays.Contains(value))
-                        {
-                            try
-                            {
-                                //int i = 0;
-                                ObservableCollection<Times> temp = new ObservableCollection<Times>();
-                                ObservableCollection<Times> tempList = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
-                                foreach (var a in tempList)
-                                {
-                                    i++;
-                                    temp.Add(new Times { Status = a.Status, Time = "Талон №" + i.ToString(), TimeProperties = a.TimeProperties });
-                                }
-                                DoctorTimes = temp;
-
-                            }
-
-                            catch (Exception)
-                            {
-                                MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній");
-                            }
-                        }
-                        else
-                        {
-                            RefreshDocTimes();
-                        }
-                    }
+                    dateDoctorAcepting = value;
+                    int i = 0;
+                    RefreshDocTimes();
                     Appointments = con.GetAppointments(SelectedDocNames.docID, value);
-
+                    
                 }
                 catch { }
-
 
             }
         }
@@ -280,13 +254,26 @@ namespace VrachMedcentr
                 //подавляем екзепшены так как при выборе специальности DocNames становиться null
                 try
                 {
-                    Otemp = con.GetListOfWorkingDays(Convert.ToInt32(value.docID));
-                    TimeHour = con.GetDocTimeTalonStatus(Convert.ToInt32(value.docID));
                     WorkingDays = con.GetListOfWorkingDays(Convert.ToInt32(value.docID));
+                    //Otemp = con.GetListOfWorkingDays(Convert.ToInt32(value.docID));
+                    if (con.CheckDoctorList(SelectedDocNames.docTimeId))
+                    {
+                        TimeHour = con.GetDocTimeTalonStatus(Convert.ToInt32(value.docID));
+                        RefreshDocTimes();
+                    }
+                    else
+                    {
+                        DoctorTimes.Clear();
+                        if (SelectedDocNames != null || con.CheckDoctorList(SelectedDocNames.docTimeId))
+                        {
+                            MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній", "Прийом відсутній", MessageBoxButton.OK, MessageBoxImage.Information);
+                            edDaysMethod();
+                        }
+                    }
                     //if (SelectedDocNames.docTimeId == "0" && SelectedDocNames.docTimeId == null || WorkingDays.Contains(DateDoctorAcepting)==false)
-                    RefreshDocTimes();
-                    Appointments = con.GetAppointments(SelectedDocNames.docID, DateDoctorAcepting);//  DateTime.Parse("2017-07-07"));
-                    // TimeHour = value.docBool; // присваивать значение с статуса врача
+
+                    Appointments = con.GetAppointments(SelectedDocNames.docID, DateDoctorAcepting);
+                    //TimeHour = value.docBool; // присваивать значение с статуса врача
                     // КОСТІЛЬ ПЕРЕДЕЛАТЬ ИЗМЕНИТЬ СЧИТІВАНЬЕ ЛИСТА С СПЕЦИФИКАЦИЯМИ И ВРАЧАМИ (Спросить у ИЛЬИ)
 
                 }
@@ -306,11 +293,13 @@ namespace VrachMedcentr
 
         public regViewModel()
         {
-           // KARTA = new CardPageOne { Name = "aaaaaaaaaa", Sername = "bbbbbbbbbbb" };
-
+            // KARTA = new CardPageOne { Name = "aaaaaaaaaa", Sername = "bbbbbbbbbbb" };
+            CP = new CardPages();
+            CP.Adress = "afasfafafasf";
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();
             ListOfUsers = con.GetUsers();
+          // DateDoctorAcepting = DateTime.Parse("2017-07-07");
 
 
             Users = OneTimeUsers;
@@ -346,29 +335,61 @@ namespace VrachMedcentr
         {
             try
             {
-
-                if (con.CheckDoctorList(SelectedDocNames.docTimeId))
+                int i = 0;
+                //if (con.CheckDoctorList(SelectedDocNames.docTimeId))
+                //{
+                if (TimeHour == true)
                 {
-                    if (SelectedDocNames.docTimeId == "0" || WorkingDays.Contains(DateDoctorAcepting) == false)
+                    try
                     {
 
-                        DoctorTimes = new ObservableCollection<Times>();
-                        DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
+                        if (WorkingDays.Contains(DateDoctorAcepting) == true)
+                        {
+                            ObservableCollection<Times> temp = new ObservableCollection<Times>();
+                            DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                            foreach (var a in DoctorTimes)
+                            {
+                                i++;
+                                temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(), TimeProperties = a.TimeProperties });
+                            }
+                            DoctorTimes = temp;
+                        }
+                        else
+                        {
+                            DoctorTimes = new ObservableCollection<Times>();
+                            DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
+                        }
                     }
-                    else
+
+                    catch (Exception)
                     {
-                        DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                        MessageBox.Show("Лікар не вибраний");
                     }
                 }
                 else
                 {
-                    DoctorTimes = null;
-                    if (SelectedDocNames != null || con.CheckDoctorList(SelectedDocNames.docTimeId))
+                    if (WorkingDays.Contains(DateDoctorAcepting) == true)
                     {
-                        MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній", "Прийом відсутній", MessageBoxButton.OK, MessageBoxImage.Information);
-                        edDaysMethod();
+                        DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
                     }
+                    else
+                    {
+                        DoctorTimes = new ObservableCollection<Times>();
+                        DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
+                    }
+
                 }
+                //}
+                //else
+                //{
+                //    DoctorTimes.Clear();
+                //    if (SelectedDocNames != null || con.CheckDoctorList(SelectedDocNames.docTimeId))
+                //    {
+                //        MessageBox.Show("Для лікаря " + SelectedDocNames.docName + " графік прийому відсутній", "Прийом відсутній", MessageBoxButton.OK, MessageBoxImage.Information);
+                //        edDaysMethod();
+                //    }
+                //}
+
 
             }
             catch (Exception e)

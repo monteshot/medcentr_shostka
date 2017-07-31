@@ -325,7 +325,48 @@ namespace kepkaSQL
 
 
 
-        #region ObservableCollection 
+        #region ObservableCollectionRead 
+
+        public ObservableCollection<CardUsers> GetCardUsersList(DateTime _bornDate)
+        {
+
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand();
+            ObservableCollection<CardUsers> temp = new ObservableCollection<CardUsers>();
+            
+            con.Open();
+           
+            cmd.CommandText = "SELECT * FROM karta";
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            using (MySqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    temp.Add(new CardUsers
+                    {
+                       userFIO = dr.GetString("P")+dr.GetString("I")+dr.GetString("B")
+
+
+
+                    });
+                }
+            }
+            con.Close();
+
+            return temp;
+        }
+
+
+
         /// <summary>
         /// Считывание дненвика с базы
         /// </summary>

@@ -41,16 +41,16 @@ namespace VrachMedcentr
 
 
         }
-        private DocNames _SelectedDoc;
-        public DocNames SelectedDoc
+        private DocNames _SelectedDocString;
+        public DocNames SelectedDocString
         {
             get
             {
-                return _SelectedDoc;
+                return _SelectedDocString;
             }
             set
             {
-                _SelectedDoc = value;
+                _SelectedDocString = value;
 
                 //azazaz
             }
@@ -68,7 +68,7 @@ namespace VrachMedcentr
                       DocView docView = new DocView();
 
                       regViewModel reg = new regViewModel();
-                      reg.SelectedDocNames = SelectedDoc;
+                      //reg.SelectedDocNames = SelectedDoc;
                       docView.DataContext = reg;
                       try
                       {
