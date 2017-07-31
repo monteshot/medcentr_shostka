@@ -68,7 +68,7 @@ namespace VrachMedcentr
                       DocView docView = new DocView();
 
                       regViewModel reg = new regViewModel();
-                      //reg.SelectedDocNames = SelectedDoc;
+                      reg.SelectedDocNames = SelectedDocString;
                       docView.DataContext = reg;
                       try
                       {

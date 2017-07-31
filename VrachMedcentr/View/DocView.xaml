@@ -55,7 +55,64 @@
             </DockPanel>
             <!--<GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />-->
-            <ListBox FontSize="15" Grid.Row="1" SelectedItem="{Binding SSelectedUser}" ItemsSource="{Binding Appointments}">
+            <ListBox Grid.Row="1" SelectedItem="{Binding SSelectedUser,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Appointments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <Grid DockPanel.Dock="Top" Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.22*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Margin="10,0,0,0" FontSize="20" VerticalAlignment="Center" Grid.Column="0">№</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20" VerticalAlignment="Center" Grid.Column="1">ПІБ</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20"  VerticalAlignment="Center" Grid.Column="2">Час</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20"  VerticalAlignment="Center" Grid.Column="3">Коментар</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20"  VerticalAlignment="Center" Grid.Column="4">Не прийшов</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20"  VerticalAlignment="Center" Grid.Column="5">uID</TextBlock>
+                            </Grid>
+                            <ItemsPresenter></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+
+
+                    <DataTemplate>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.32*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.22*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <!--<TextBlock Grid.Column="0" FontSize="20" Text="№"/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="0" FontSize="20" Text="{Binding NumberZP}"/>
+                            <!--<TextBlock Grid.Column="1" FontSize="20" Text=" | ПІБ: "/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="1" FontSize="20" Text="{Binding Pacient}"/>
+                            <!--<TextBlock Grid.Column="2" FontSize="20" Text=" | Час: "/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="2" FontSize="20" Text="{Binding TimeAppomination}"/>
+                            <!--<TextBlock Grid.Column="3" FontSize="20" Text=" | Коментар: "/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="3" FontSize="20" Text="{Binding Comment}"/>
+                            <!--<TextBlock Grid.Column="4" FontSize="20" Text=" | Не прийшов: "/>-->
+                            <CheckBox Grid.Column="4" FontSize="20" IsChecked="{Binding NotComing}"/>
+                            <!--<TextBlock Grid.Column="5" FontSize="20" Text=" | uID: "/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="5" FontSize="20" Text="{Binding IDUser}"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!--<ListBox FontSize="15" Grid.Row="1" SelectedItem="{Binding SSelectedUser}" ItemsSource="{Binding Appointments}">
                 <ListBox.ItemTemplate >
                     <DataTemplate>
                         <StackPanel  Orientation="Horizontal">
@@ -73,7 +130,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
 
-            </ListBox>
+            </ListBox>-->
             <!--<DataGrid BorderBrush="Black"  BorderThickness="1.5" FontSize="15" Foreground="White"  Grid.Column="0" Grid.Row="1"    
                                AutoGenerateColumns="False" ItemsSource="{Binding Appointments}" Style="{DynamicResource GrayDataGridInDocView}" 
                                CellStyle="{DynamicResource GrayDataGridCellStyle}" SelectedItem="{Binding SSelectedUser}" RowStyle="{DynamicResource GrayGridInDocView}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
