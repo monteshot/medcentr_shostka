@@ -42,7 +42,7 @@ namespace VrachMedcentr
 
         }
         private DocNames _SelectedDocString;
-        public DocNames SelectedDoc
+        public DocNames SelectedDocString
         {
             get
             {

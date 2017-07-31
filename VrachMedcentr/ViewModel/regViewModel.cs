@@ -299,7 +299,7 @@ namespace VrachMedcentr
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();
             ListOfUsers = con.GetUsers();
-
+          // DateDoctorAcepting = DateTime.Parse("2017-07-07");
 
 
             Users = OneTimeUsers;
