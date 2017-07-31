@@ -2097,7 +2097,7 @@
     
     <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
 
-        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="MinWidth" Value="120"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Cursor" Value="SizeWE"/>
         <Setter Property="Template">

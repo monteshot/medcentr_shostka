@@ -769,8 +769,16 @@
                                CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
                                ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding NumList}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
-                                    <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
+                                    
+                                    <!--<DataGridTextColumn Binding="{Binding NumList}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>-->
+                                    <!--<DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата"/>-->
+                                    <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Дата Звернення">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DatePicker  SelectedDate="{Binding Date}" BorderThickness="0" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
                                     <DataGridTextColumn Binding="{Binding Procedure}" ClipboardContentBinding="{x:Null}" Header="Вид дослідження, кількість і вид процедур"/>
                                     <DataGridTextColumn Binding="{Binding Doze}" ClipboardContentBinding="{x:Null}" Header="Ефективна доза дослідження"/>
                                     <DataGridTextColumn Binding="{Binding Mitka}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
