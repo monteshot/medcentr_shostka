@@ -733,7 +733,7 @@
                             </StackPanel>
                         </TabItem.Header>
                         <Grid x:Name="Card3" Background="#FFE5E5E5">
-                            <DataGrid x:Name="DPage3" ItemsSource="{Binding Diagnosis}" Style="{DynamicResource GrayDataGrid}" 
+                            <DataGrid x:Name="DPage3"  Style="{DynamicResource GrayDataGrid}" 
                                CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
                                ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White" >
                                 <DataGrid.Columns>
@@ -757,6 +757,7 @@
                     </TabItem>
                     <TabItem x:Name="page4">
                         <TabItem.Header>
+                            <!--<TextBlock TextAlignment="Center" Text="Картка обліку навантаженнь при рентген дослідженнях" TextWrapping="Wrap" />-->
                             <StackPanel>
                                 <TextBlock TextAlignment ="Center"><Run Text="Картка обліку навантаженнь"/></TextBlock>
                                 <TextBlock TextAlignment ="Center"><Run Text="при рентген дослідженнях"/></TextBlock>
@@ -764,16 +765,18 @@
                         </TabItem.Header>
                         <Grid x:Name="Card4" Background="#FFE5E5E5">
 
-                            <DataGrid x:Name="DPage4" ItemsSource="{Binding page4}" AutoGenerateColumns="False">
+                            <DataGrid x:Name="DPage4"  Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding nomZver}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
-                                    <DataGridTextColumn Binding="{Binding dataZver}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
-                                    <DataGridTextColumn Binding="{Binding VydDosl}" ClipboardContentBinding="{x:Null}" Header="Вид дослідження, кількість і вид процедур"/>
-                                    <DataGridTextColumn Binding="{Binding doza}" ClipboardContentBinding="{x:Null}" Header="Ефективна доза дослідження"/>
-                                    <DataGridTextColumn Binding="{Binding mitka}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
+                                    <DataGridTextColumn Binding="{Binding NumList}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
+                                    <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
+                                    <DataGridTextColumn Binding="{Binding Procedure}" ClipboardContentBinding="{x:Null}" Header="Вид дослідження, кількість і вид процедур"/>
+                                    <DataGridTextColumn Binding="{Binding Doze}" ClipboardContentBinding="{x:Null}" Header="Ефективна доза дослідження"/>
+                                    <DataGridTextColumn Binding="{Binding Mitka}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <Button Content="Button" Command="{Binding AddCommand4}" HorizontalAlignment="Left" Margin="368,105,0,0" VerticalAlignment="Top" Width="279" Height="147"/>
+                            <!--<Button Content="Button" Command="{Binding AddCommand4}" HorizontalAlignment="Left" Margin="368,105,0,0" VerticalAlignment="Top" Width="279" Height="147"/>-->
                         </Grid>
                     </TabItem>
                     <TabItem x:Name="page5">
@@ -795,16 +798,18 @@
                         </DataGrid.Columns>
 
                     </DataGrid>-->
-                            <DataGrid x:Name="DPage5" ItemsSource="{Binding Dilery}" AutoGenerateColumns="False">
+                            <DataGrid x:Name="DPage5" ItemsSource="{Binding Dilery}" Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding ComingDate}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
-                                    <DataGridTextColumn Binding="{Binding HealingPlace}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
+                                    <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
+                                    <DataGridTextColumn Binding="{Binding MisceLik}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
                                     <DataGridTextColumn Binding="{Binding Diagnosis}" ClipboardContentBinding="{x:Null}" Header="Скарги хворого,об'єктивні дані, діагноз, перебіг хвороби"/>
-                                    <DataGridTextColumn Binding="{Binding Stamp}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
+                                    <DataGridTextColumn Binding="{Binding PryznLik}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <Button Content="Read" Command="{Binding DileryRead}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
-                            <Button Content="Write" Command="{Binding DileryInsert}" HorizontalAlignment="Left" Margin="210,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                            <!--<Button Content="Read" Command="{Binding DileryRead}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                            <Button Content="Write" Command="{Binding DileryInsert}" HorizontalAlignment="Left" Margin="210,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>-->
                         </Grid>
 
                     </TabItem>

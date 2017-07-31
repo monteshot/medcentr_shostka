@@ -40,8 +40,8 @@ namespace VrachMedcentr
         public ObservableCollection<Sheplenya> Shepl { get; set; }
         public ObservableCollection<Profilact> Profilact { get; set; }
         public ObservableCollection< CardPageThree> Card3 { get; set; }
-        public CardPageFour Card4 { get; set; }
-        public CardPageFive Card5 { get; set; }
+        public ObservableCollection<CardPageFour> Card4 { get; set; }
+        public ObservableCollection< CardPageFive> Card5 { get; set; }
         #endregion
         #region Constructor
 
@@ -59,6 +59,8 @@ namespace VrachMedcentr
             Shepl = con.shepl(inp);
             Profilact = con.profilact(inp);
             Card3 = con.DiagList(inp);
+            Card4 = con.rentgen(inp);
+            Card5 = con.diary(inp);
         }
         #region Data_pages
         /// <summary>
@@ -237,33 +239,33 @@ namespace VrachMedcentr
         /// <summary>
         /// Command for Dilery
         /// </summary>
-        public RelayCommand DileryInsert
-        {
-            get
-            {
-                return insert ??
-                  (insert = new RelayCommand(obj =>
-                  {
-                      Dilery.Add(new CardPageFive { ComingDate = "0.10231", HealingPlace = "hospital", Diagnosis = "live", Stamp = "podps" });
-                      //con.UpdateDileryBase(Dilery);
-                      Setter();
-                  }));
-            }
-        }
-        public RelayCommand DileryRead
-        {
+        //public RelayCommand DileryInsert
+        //{
+        //    get
+        //    {
+        //        return insert ??
+        //          (insert = new RelayCommand(obj =>
+        //          {
+        //              Dilery.Add(new CardPageFive { ComingDate = "0.10231", HealingPlace = "hospital", Diagnosis = "live", Stamp = "podps" });
+        //              //con.UpdateDileryBase(Dilery);
+        //              Setter();
+        //          }));
+        //    }
+        //}
+        //public RelayCommand DileryRead
+        //{
 
-            get
-            {
-                return dileryread ??
-                  (dileryread = new RelayCommand(obj =>
-                  {
-                      Dilery = con.ReadDileryList();
-                      Setter();
-                  }));
-            }
+        //    get
+        //    {
+        //        return dileryread ??
+        //          (dileryread = new RelayCommand(obj =>
+        //          {
+        //             // Dilery = con.ReadDileryList();
+        //              Setter();
+        //          }));
+        //    }
 
-        }
+        //}
 
         //public RelayCommand DileryRead
         //{

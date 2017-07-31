@@ -71,6 +71,8 @@ namespace WPF_Hospital
             Shelpennya.ItemsSource = CP.Shepl;// щеплення на той же странице шо и позначки
             Profilact.ItemsSource = CP.Profilact; // профосмотры на той же странице шо и позначки
             DPage3.ItemsSource = CP.Card3; // личток заключительных дигнозов
+            DPage4.ItemsSource = CP.Card4; //рентген
+            DPage5.ItemsSource = CP.Card5;
             Registratyra.DataContext = new regViewModel();
             Testersitem.DataContext = new DiagnosesViewModel();
             // Update.DataContext = new update();

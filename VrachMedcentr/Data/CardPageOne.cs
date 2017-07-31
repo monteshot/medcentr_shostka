@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using WPF_Hospital;
-using System.Data;
 using System.Windows.Input;
 namespace VrachMedcentr
 {
@@ -67,7 +66,7 @@ namespace VrachMedcentr
         //    }
         //}
 
-    //    public CardPageOne KARTA { get; set; }
+        //    public CardPageOne KARTA { get; set; }
 
         public void Setter()
 
