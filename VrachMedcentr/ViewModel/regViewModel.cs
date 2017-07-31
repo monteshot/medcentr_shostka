@@ -395,7 +395,7 @@ namespace VrachMedcentr
             catch (Exception e)
             {
                 //Розкомнетить для отладки
-                MessageBox.Show(e.ToString());
+                //MessageBox.Show(e.ToString());
             }
         }
 
