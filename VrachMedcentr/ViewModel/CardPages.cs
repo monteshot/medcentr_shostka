@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using kepkaSQL;
@@ -7,20 +6,37 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Linq;
 using WPF_Hospital;
+using System;
 
 namespace VrachMedcentr
 {
     class CardPages : INotifyPropertyChanged
     {
         #region Helpers Class Object
-
+        private DateTime _dateBorn;
+        private string comboboxtext;
+        private string selectedFIO;
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
         private connect con = new connect();
-        private ObservableCollection<CardPageOne> ListOfUsers;
+        //private ObservableCollection<CardPageOne> ListOfUsers;//что это?
         CardPageTwo PageTwo = new CardPageTwo();
 
         private CardPageOne _KARTA;
+
+        private Appointments _AppSelectedUser;
+        public Appointments AppSelectedUser
+        {
+            get
+            {
+                return _AppSelectedUser;
+            }
+            set
+            {
+                _AppSelectedUser = value;
+                string r = "fafsafs";
+            }
+        }
         public CardPageOne KARTA
         {
             get
@@ -43,6 +59,8 @@ namespace VrachMedcentr
         public CardPageFour Card4 { get; set; }
         public CardPageFive Card5 { get; set; }
         #endregion
+
+
         #region Constructor
 
         public CardPages()
@@ -51,6 +69,13 @@ namespace VrachMedcentr
             NumCard("473");
 
         }
+
+        //    foreach (var a in ListOfUsers)
+        //    {
+        //        OneTimeUsers.Add(a.userFIO);
+        //    }   
+
+        //}
         #endregion
         public void NumCard(string inp) //вызывать этот метод по клику на пациента
         {
@@ -103,21 +128,52 @@ namespace VrachMedcentr
         private ObservableCollection<string> OneTimeUsers = new ObservableCollection<string>();// переменная для представления ФИО юзверей в комбобоксе  
         public ObservableCollection<string> Users { get; set; }
         public string S_FirstName { get; set; }
-        public string S_LastName { get; set; }
-        public DateTime S_DateBorn { get; set; }
+        public string S_LastName { get; set; }        
         private Users SelectedUser;
-        private string s_name;
-        public string S_Name
-        {
-            get { return s_name; }
+
+        private ObservableCollection<Users> ListOfUsers;//переменная для считыванья списка юзверей единожди при запуске програмы
+        private ObservableCollection<CardUsers> ListOfUsers1 = new ObservableCollection<CardUsers>();
+        public DateTime S_DateBorn {
+            get
+            {
+                return _dateBorn;
+            }
             set
             {
+                _dateBorn = value;
+                //for (int i = 0; i < 100; i++)
+                //{
+                //    ListOfUsers1.Add(new CardUsers { userFIO = i.ToString() + "Valera" + value.ToString() });
+                //}
+                ListOfUsers1 = con.GetCardUsersList(value);
+
+                foreach(var a in ListOfUsers1)
+                {
+                    OneTimeUsers.Add(a.userFIO);
+                }
+                Users = OneTimeUsers;
+            }
+
+        }
+        /// <summary>
+        /// умный поиск по комбобоксу
+        /// </summary>
+        public string ComboboxText
+        {
+            get
+            {
+                return comboboxtext;
+            }
+            set
+            {
+
                 if (value != "")
                 {
-                    s_name = value;
-                    ObservableCollection<string> temps = new ObservableCollection<string>();
+                    comboboxtext = value;
+                    //ComboBoxDropDown = true;
+                    //IsTextSearchEnabled = false;
                     var FiltredUsers = from Users in OneTimeUsers where Users.Contains(value) select Users;
-
+                    ObservableCollection<string> temps = new ObservableCollection<string>();
                     foreach (var a in FiltredUsers)
                     {
                         temps.Add(a);
@@ -127,19 +183,64 @@ namespace VrachMedcentr
                     {
                         SelectedUser = new Users { userFIO = value, userId = "007", userMail = "registratura@coworking.com", userPhone = "8-800-555-35-35" };
                     }
+
+
                 }
                 else
                 {
-                    s_name = value;
+                    comboboxtext = value;
                     //ComboBoxDropDown = false;
-                    // IsTextSearchEnabled = false;
+                    //IsTextSearchEnabled = false;
                     Users = OneTimeUsers;
                 }
             }
         }
+
+        /// <summary>
+        /// Выбор юзера по выбраному фио из комбобокса
+        /// </summary>
+        public string SelectedFIO
+        {
+            get
+            {
+                return selectedFIO;
+            }
+            set
+            {
+                selectedFIO = value;
+                comboboxtext = value;
+                //Возможно нужна проверка на полное совпадение если таково бредусмотрено базой
+                foreach (var a in ListOfUsers)
+                {
+                    if (a.userFIO == value)
+                    {
+                        SelectedUser = a;
+                    }
+                }
+
+
+
+            }
+        }
+
         public bool ComboBoxDropDown { get; set; } = false;
 
         public bool IsTextSearchEnabled { get; set; } = false;
+        /// <summary>
+        /// комнада для теста биндингов вложеных дата контекстов
+        /// </summary>
+        private RelayCommand _TestCP;
+        public RelayCommand TestCP
+        {
+            get
+            {
+                return _TestCP ??
+                  (_TestCP = new RelayCommand(obj =>
+                  {
+                      KARTA = con.karta("473");
+                  }));
+            }
+        }
         private RelayCommand _SearchPat;
         public RelayCommand SearchPat
         {
@@ -219,6 +320,7 @@ namespace VrachMedcentr
         private RelayCommand dileryread;
         private RelayCommand readP3;
         private RelayCommand addCommand;
+       
         #endregion
         //какаето тестовая команда
         public RelayCommand AddCommand

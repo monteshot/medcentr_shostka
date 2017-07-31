@@ -42,7 +42,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -138,6 +138,7 @@
     <Compile Include="View\confirmation.xaml.cs">
       <DependentUpon>confirmation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Card Models\CardUsers.cs" />
     <Compile Include="Data\CardPageFive.cs" />
     <Compile Include="Data\CardPageFour.cs" />
     <Compile Include="Data\CardPageOne.cs" />
