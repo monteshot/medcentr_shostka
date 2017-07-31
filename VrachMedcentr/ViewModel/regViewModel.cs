@@ -56,7 +56,7 @@ namespace VrachMedcentr
         ///  в тоже время все команды и функции с вложеных дата контекство вроде как работают проверил на кнопке 
         ///  **Файл CardPages строка: 218
         /// </summary>
-        public CardPages CP { get; set; } 
+        public CardPages CP { get; set; }
         private Appointments _SSelectedUser;
         public Appointments SSelectedUser
         {
@@ -71,11 +71,11 @@ namespace VrachMedcentr
                 CP.Adress = "fggsdgsdgsdgsdgsdgsgd";
                 // MessageBox.Show(_SSelectedUser.IDUser);
                 //CardPages CP = new CardPages();
-               
-               // KARTA.SUser = _SSelectedUser;
-              //  MainWindow mw = new MainWindow();
-              //  mw.page1.DataContext = localDB.karta(_SSelectedUser.IDUser);
-              ////  MessageBox.Show(_SSelectedUser.IDUser);
+
+                // KARTA.SUser = _SSelectedUser;
+                //  MainWindow mw = new MainWindow();
+                //  mw.page1.DataContext = localDB.karta(_SSelectedUser.IDUser);
+                ////  MessageBox.Show(_SSelectedUser.IDUser);
                 //CP.sSelectedUser = _SSelectedUser;
                 //  CP.KARTA = localDB.karta(_SSelectedUser.IDUser);
 
@@ -216,50 +216,15 @@ namespace VrachMedcentr
             }
             set
             {
-                dateDoctorAcepting = value;
-                int i = 0;
-               
                 try
                 {
-                    //CP.KARTA.Adress = "gsdgsdgsgsdg";
-                    //if (TimeHour == true)
-                    //{
-                    if (WorkingDays.Contains(value))
-                    {
-                        try
-                        {
-                            //int i = 0;
-                            ObservableCollection<Times> temp = new ObservableCollection<Times>();
-                            ObservableCollection<Times> tempList = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
-                            foreach (var a in tempList)
-                            {
-                                i++;
-                                temp.Add(new Times { Status = a.Status, Time = "Талон №" + i.ToString(), TimeProperties = a.TimeProperties });
-                            }
-                            DoctorTimes = temp;
-
-                        }
-
-                        catch (Exception e )
-                        {
-                            MessageBox.Show(e.ToString());
-                        }
-                    }
-                    else
-                    {
-                        RefreshDocTimes();
-                    }
-                    //}
-                    //else
-                    //{
-                    //    RefreshDocTimes();
-                    //}
-
+                    dateDoctorAcepting = value;
+                    int i = 0;
+                    RefreshDocTimes();
                     Appointments = con.GetAppointments(SelectedDocNames.docID, value);
-
+                    
                 }
                 catch { }
-
 
             }
         }
@@ -334,7 +299,7 @@ namespace VrachMedcentr
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();
             ListOfUsers = con.GetUsers();
-           
+
 
 
             Users = OneTimeUsers;
@@ -373,47 +338,47 @@ namespace VrachMedcentr
                 int i = 0;
                 //if (con.CheckDoctorList(SelectedDocNames.docTimeId))
                 //{
-                    if (TimeHour == true)
+                if (TimeHour == true)
+                {
+                    try
                     {
-                        try
-                        {
 
-                            if (WorkingDays.Contains(DateDoctorAcepting) == true)
-                            {
-                                ObservableCollection<Times> temp = new ObservableCollection<Times>();
-
-                                foreach (var a in DoctorTimes)
-                                {
-                                    i++;
-                                    temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(), TimeProperties = a.TimeProperties });
-                                }
-                                DoctorTimes = temp;
-                            }
-                            else
-                            {
-                                DoctorTimes = new ObservableCollection<Times>();
-                                DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
-                            }
-                        }
-
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Лікар не вибраний");
-                        }
-                    }
-                    else
-                    {
                         if (WorkingDays.Contains(DateDoctorAcepting) == true)
                         {
+                            ObservableCollection<Times> temp = new ObservableCollection<Times>();
                             DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                            foreach (var a in DoctorTimes)
+                            {
+                                i++;
+                                temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(), TimeProperties = a.TimeProperties });
+                            }
+                            DoctorTimes = temp;
                         }
                         else
                         {
                             DoctorTimes = new ObservableCollection<Times>();
                             DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
                         }
-                                               
                     }
+
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Лікар не вибраний");
+                    }
+                }
+                else
+                {
+                    if (WorkingDays.Contains(DateDoctorAcepting) == true)
+                    {
+                        DoctorTimes = con.getDocTimes(SelectedDocNames.docID, SelectedDocNames.docTimeId, DateDoctorAcepting);
+                    }
+                    else
+                    {
+                        DoctorTimes = new ObservableCollection<Times>();
+                        DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
+                    }
+
+                }
                 //}
                 //else
                 //{
@@ -424,13 +389,13 @@ namespace VrachMedcentr
                 //        edDaysMethod();
                 //    }
                 //}
-                
-                   
+
+
             }
             catch (Exception e)
             {
                 //Розкомнетить для отладки
-                //MessageBox.Show(e.ToString());
+                MessageBox.Show(e.ToString());
             }
         }
 
