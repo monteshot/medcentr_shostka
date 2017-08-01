@@ -1,10 +1,13 @@
-﻿using System;
+﻿using kepkaSQL;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace VrachMedcentr
@@ -12,13 +15,14 @@ namespace VrachMedcentr
     class CardPageTwo //: INotifyPropertyChanged
     {
         #region VuiwData_page2
+        connect localDB = new connect();
         public string NumPat { get; set; }
         public string Shugar { get; set; } = "xxxxx";
         public string InfectiousDis { get; set; }
         public string AlergiAnam { get; set; }
         public string IntoleranceToDrugs { get; set; }
-        public ObservableCollection<Sheplenya> Sheplennya { get; set; }
-        public ObservableCollection<Profilact> Profilactica { get; set; }
+        //public ObservableCollection<Sheplenya> Sheplennya { get; set; }
+        //public ObservableCollection<Profilact> Profilactica { get; set; }
         #endregion
         public CardPageTwo()
         {
@@ -29,6 +33,8 @@ namespace VrachMedcentr
             Shugar = "sfafasfaf";
             //PropertyChanged
         }
+      
+        
         private RelayCommand saveToBase;
         public RelayCommand SaveToBase
         {
@@ -43,6 +49,22 @@ namespace VrachMedcentr
         }
 
 
+        //private RelayCommand _Save2;// команда на сохранение второй вкладки
+        //public RelayCommand Save2
+        //{
+        //    get
+        //    {
+        //        return _Save2 ??
+        //          (_Save2 = new RelayCommand(obj =>
+        //          {
+        //              localDB.save2("473", "SUG+", "AL+", "Inf+", "Med+");
+        //          }));
+        //    }
+        //}
+        //public void save2M()//метод сохранненя второй вкладки
+        //{
+        //    // localDB
+        //}
 
         #endregion
 

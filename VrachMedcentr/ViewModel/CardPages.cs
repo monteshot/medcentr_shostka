@@ -55,9 +55,9 @@ namespace VrachMedcentr
         public CardPageTwo Card2 { get; set; }
         public ObservableCollection<Sheplenya> Shepl { get; set; }
         public ObservableCollection<Profilact> Profilact { get; set; }
-        public ObservableCollection< CardPageThree> Card3 { get; set; }
+        public ObservableCollection<CardPageThree> Card3 { get; set; }
         public ObservableCollection<CardPageFour> Card4 { get; set; }
-        public ObservableCollection< CardPageFive> Card5 { get; set; }
+        public ObservableCollection<CardPageFive> Card5 { get; set; }
         #endregion
 
 
@@ -66,7 +66,7 @@ namespace VrachMedcentr
         public CardPages()
         {
 
-            NumCard("473");
+               NumCard("473");
 
         }
 
@@ -77,6 +77,12 @@ namespace VrachMedcentr
 
         //}
         #endregion
+        public void updScr()
+        {
+            MainWindow MW = new MainWindow();
+            MW.Shelpennya.UpdateLayout();
+
+        }
         public void NumCard(string inp) //вызывать этот метод по клику на пациента
         {
             KARTA = con.karta(inp);
@@ -86,6 +92,8 @@ namespace VrachMedcentr
             Card3 = con.DiagList(inp);
             Card4 = con.rentgen(inp);
             Card5 = con.diary(inp);
+
+            // updScr();
         }
         #region Data_pages
         /// <summary>
@@ -130,12 +138,13 @@ namespace VrachMedcentr
         private ObservableCollection<string> OneTimeUsers = new ObservableCollection<string>();// переменная для представления ФИО юзверей в комбобоксе  
         public ObservableCollection<string> Users { get; set; }
         public string S_FirstName { get; set; }
-        public string S_LastName { get; set; }        
+        public string S_LastName { get; set; }
         private Users SelectedUser;
 
         private ObservableCollection<Users> ListOfUsers;//переменная для считыванья списка юзверей единожди при запуске програмы
         private ObservableCollection<CardUsers> ListOfUsers1 = new ObservableCollection<CardUsers>();
-        public DateTime S_DateBorn {
+        public DateTime S_DateBorn
+        {
             get
             {
                 return _dateBorn;
@@ -149,7 +158,7 @@ namespace VrachMedcentr
                 //}
                 ListOfUsers1 = con.GetCardUsersList(value);
 
-                foreach(var a in ListOfUsers1)
+                foreach (var a in ListOfUsers1)
                 {
                     OneTimeUsers.Add(a.userFIO);
                 }
@@ -262,6 +271,7 @@ namespace VrachMedcentr
                   }));
             }
         }
+        //  Appointments SELUSER { get; set; }
         connect localDB = new connect();
         private Appointments _SUser;
         public Appointments SUser
@@ -322,7 +332,7 @@ namespace VrachMedcentr
         private RelayCommand dileryread;
         private RelayCommand readP3;
         private RelayCommand addCommand;
-       
+
         #endregion
         //какаето тестовая команда
         public RelayCommand AddCommand
@@ -390,7 +400,7 @@ namespace VrachMedcentr
                   (readP3 = new RelayCommand(obj =>
                   {
 
-                   //   Diagnosis = con.DiagList();
+                      //   Diagnosis = con.DiagList();
                   }));
             }
         }

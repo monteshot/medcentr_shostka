@@ -133,6 +133,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\TablesData\TextInputToVisibilityConverter.cs" />
     <Compile Include="ViewModel\Reg.cs" />
     <Compile Include="ViewModel\StartUPViewModel.cs" />
     <Compile Include="View\confirmation.xaml.cs">

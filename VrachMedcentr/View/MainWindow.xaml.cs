@@ -65,9 +65,10 @@ namespace WPF_Hospital
             connect con = new connect();
             CardPages CP = new CardPages();
 
-            // ниже идут датаконтесты, которые были подвязаны во CardPages
+            // ниже идут датаконтесты, которые были подвязаны во CardPages !!!!!!!НУЖНО ПЕРЕДЕЛАТЬ!!!!!
             page1.DataContext = CP.KARTA;
             page2.DataContext = CP.Card2;// Сигнаьны позначик
+            Shelpennya.UpdateLayout();
             Shelpennya.ItemsSource = CP.Shepl;// щеплення на той же странице шо и позначки
             Profilact.ItemsSource = CP.Profilact; // профосмотры на той же странице шо и позначки
             DPage3.ItemsSource = CP.Card3; // личток заключительных дигнозов

@@ -108,31 +108,35 @@ namespace kepkaSQL
             MySqlCommand cmd = new MySqlCommand();
 
             CardPageTwo temp1 = new CardPageTwo();
-
-            con.Open();
-            cmd.Parameters.AddWithValue("@UserID", UID);
-
-            cmd.CommandText = "SELECT * FROM signpozn WHERE ID_pat=@UserID";//
-            cmd.Connection = con;
-            cmd.ExecuteNonQuery();
-            using (MySqlDataReader dr = cmd.ExecuteReader())
+            try
             {
-                while (dr.Read())
+                con.Open();
+                cmd.Parameters.AddWithValue("@UserID", UID);
+
+                cmd.CommandText = "SELECT * FROM signpozn WHERE ID_pat=@UserID";//
+                cmd.Connection = con;
+                cmd.ExecuteNonQuery();
+
+                using (MySqlDataReader dr = cmd.ExecuteReader())
                 {
-                    temp1 = (new CardPageTwo
+                    while (dr.Read())
                     {
-                        Shugar = dr.GetString("diabet"),
-                        InfectiousDis = dr.GetString("Infeciya"),
-                        AlergiAnam = dr.GetString("AlAnam"),
-                        IntoleranceToDrugs = dr.GetString("AlergiyaLek"),
-                        NumPat = dr.GetString("ID_pat")
+                        temp1 = (new CardPageTwo
+                        {
+                            Shugar = dr.GetString("diabet"),
+                            InfectiousDis = dr.GetString("Infeciya"),
+                            AlergiAnam = dr.GetString("AlAnam"),
+                            IntoleranceToDrugs = dr.GetString("AlergiyaLek"),
+                            NumPat = dr.GetString("ID_pat")
 
 
 
-                    });
+                        });
+                    }
                 }
+                con.Close();
             }
-            con.Close();
+            catch (Exception e) { }
 
             return temp1;
         }
@@ -341,9 +345,9 @@ namespace kepkaSQL
             con.ConnectionString = mysqlCSB.ConnectionString;
             MySqlCommand cmd = new MySqlCommand();
             ObservableCollection<CardUsers> temp = new ObservableCollection<CardUsers>();
-            
+
             con.Open();
-           
+
             cmd.CommandText = "SELECT * FROM karta";
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
@@ -353,7 +357,7 @@ namespace kepkaSQL
                 {
                     temp.Add(new CardUsers
                     {
-                       userFIO = dr.GetString("P")+dr.GetString("I")+dr.GetString("B")
+                        userFIO = dr.GetString("P") + dr.GetString("I") + dr.GetString("B")
 
 
 
@@ -503,8 +507,36 @@ namespace kepkaSQL
             //copyP3 = InlIst;
             return InlIst;
         }
-        private ObservableCollection<CardPageThree> copyP3;
 
+        public void save2(string UID, string Sugar, string AlergAn, string InfDis, string MedInt, Sheplenya colShepl=null, Profilact colProfilact=null)
+        {
+            MySqlConnectionStringBuilder mysqlCSB;
+            mysqlCSB = new MySqlConnectionStringBuilder();
+            mysqlCSB.Server = server;
+            mysqlCSB.Database = database;
+            mysqlCSB.UserID = UserID;
+            mysqlCSB.Password = Password;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = mysqlCSB.ConnectionString;
+            MySqlCommand cmd = new MySqlCommand();
+
+            CardPageTwo temp1 = new CardPageTwo();
+
+            con.Open();
+            cmd.Parameters.AddWithValue("@UserID", UID);
+            cmd.Parameters.AddWithValue("@Sugar", Sugar);
+            cmd.Parameters.AddWithValue("@InfDis", InfDis);
+            cmd.Parameters.AddWithValue("@AlergAn", AlergAn);
+            cmd.Parameters.AddWithValue("@MedInt", MedInt);
+            cmd.CommandText = "UPDATE signpozn AS SG SET SG.diabet=@Sugar,SG.Infeciya=@InfDis, SG.AlAnam=@AlergAn, SG.AlergiyaLek=@MedInt WHERE SG.ID_pat=@UserID";//
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+
+        private ObservableCollection<CardPageThree> copyP3;
         /// <summary>
         ///  Не рабюотает сравненеи обектов колекции( метод для страници карточки 3)
         /// </summary>

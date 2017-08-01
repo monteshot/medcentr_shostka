@@ -69,6 +69,7 @@ namespace VrachMedcentr
                 _SSelectedUser = value;
                 CP.AppSelectedUser = value;
                 CP.Adress = "fggsdgsdgsdgsdgsdgsgd";
+                CP.SUser = value;
                 // MessageBox.Show(_SSelectedUser.IDUser);
                 //CardPages CP = new CardPages();
 
@@ -222,7 +223,7 @@ namespace VrachMedcentr
                     int i = 0;
                     RefreshDocTimes();
                     Appointments = con.GetAppointments(SelectedDocNames.docID, value);
-                    
+
                 }
                 catch { }
 
@@ -299,7 +300,7 @@ namespace VrachMedcentr
             DateDoctorAcepting = DateTime.Today;
             ListOfSpecf = con.getList();
             ListOfUsers = con.GetUsers();
-          // DateDoctorAcepting = DateTime.Parse("2017-07-07");
+            // DateDoctorAcepting = DateTime.Parse("2017-07-07");
 
 
             Users = OneTimeUsers;
@@ -316,7 +317,7 @@ namespace VrachMedcentr
                 OneTimeDoctorTimes = DoctorTimes;
             }
             catch { }
-
+          //  localDB.save2("473", "SUG+", "AL+", "Inf+");
 
         }
 
@@ -505,6 +506,23 @@ namespace VrachMedcentr
 
                   }));
             }
+        }
+        private RelayCommand _Save2;// команда на сохранение второй вкладки
+        public RelayCommand Save2
+        {
+            get
+            {
+                return _Save2 ??
+                  (_Save2 = new RelayCommand(obj =>
+                  {
+                      localDB.save2("473","SUG+","AL+","Inf+","Med+");      
+                      
+                  }));
+            }
+        }
+        public void save2M()//метод сохранненя второй вкладки
+        {
+           // localDB
         }
         private RelayCommand _EditTimes;
         public RelayCommand EditTimes
