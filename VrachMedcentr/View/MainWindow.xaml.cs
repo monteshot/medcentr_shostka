@@ -63,8 +63,17 @@ namespace WPF_Hospital
             Title += " Версія: " + currVer; //не выпиливать! дает версию в заголовке аппы
 
             connect con = new connect();
-            page1.DataContext = new CardPages();
-            page2.DataContext = new CardPageTwo();
+            CardPages CP = new CardPages();
+
+            // ниже идут датаконтесты, которые были подвязаны во CardPages !!!!!!!НУЖНО ПЕРЕДЕЛАТЬ!!!!!
+            page1.DataContext = CP.KARTA;
+            page2.DataContext = CP.Card2;// Сигнаьны позначик
+            Shelpennya.UpdateLayout();
+            Shelpennya.ItemsSource = CP.Shepl;// щеплення на той же странице шо и позначки
+            Profilact.ItemsSource = CP.Profilact; // профосмотры на той же странице шо и позначки
+            DPage3.ItemsSource = CP.Card3; // личток заключительных дигнозов
+            DPage4.ItemsSource = CP.Card4; //рентген
+            DPage5.ItemsSource = CP.Card5;
             Registratyra.DataContext = new regViewModel();
             Testersitem.DataContext = new DiagnosesViewModel();
             // Update.DataContext = new update();

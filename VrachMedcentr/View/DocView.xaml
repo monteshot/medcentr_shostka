@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VrachMedcentr.View"
+        xmlns:local="clr-namespace:VrachMedcentr"
         mc:Ignorable="d"
         Title="Клієнт для роботи з лікарем - Нова Медицина" Height="900" Width="1280"  WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
@@ -55,10 +55,85 @@
             </DockPanel>
             <!--<GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />-->
+            <ListBox Grid.Row="1" SelectedItem="{Binding SSelectedUser,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Appointments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <Grid DockPanel.Dock="Top" Height="30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.22*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Margin="10,0,0,0" FontSize="20" VerticalAlignment="Center" Grid.Column="0">№</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20" VerticalAlignment="Center" Grid.Column="1">ПІБ</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20"  VerticalAlignment="Center" Grid.Column="2">Час</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20"  VerticalAlignment="Center" Grid.Column="3">Коментар</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20"  VerticalAlignment="Center" Grid.Column="4">Не прийшов</TextBlock>
+                                <TextBlock  Margin="10,0,0,0" FontSize="20"  VerticalAlignment="Center" Grid.Column="5">uID</TextBlock>
+                            </Grid>
+                            <ItemsPresenter></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
 
-            <DataGrid BorderBrush="Black"  BorderThickness="1.5" FontSize="15" Foreground="White"  Grid.Column="0" Grid.Row="1"    
+
+                    <DataTemplate>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.32*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.22*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <!--<TextBlock Grid.Column="0" FontSize="20" Text="№"/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="0" FontSize="20" Text="{Binding NumberZP}"/>
+                            <!--<TextBlock Grid.Column="1" FontSize="20" Text=" | ПІБ: "/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="1" FontSize="20" Text="{Binding Pacient}"/>
+                            <!--<TextBlock Grid.Column="2" FontSize="20" Text=" | Час: "/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="2" FontSize="20" Text="{Binding TimeAppomination}"/>
+                            <!--<TextBlock Grid.Column="3" FontSize="20" Text=" | Коментар: "/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="3" FontSize="20" Text="{Binding Comment}"/>
+                            <!--<TextBlock Grid.Column="4" FontSize="20" Text=" | Не прийшов: "/>-->
+                            <CheckBox Grid.Column="4" FontSize="20" IsChecked="{Binding NotComing}"/>
+                            <!--<TextBlock Grid.Column="5" FontSize="20" Text=" | uID: "/>-->
+                            <TextBlock Margin="10,0,0,0" Grid.Column="5" FontSize="20" Text="{Binding IDUser}"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!--<ListBox FontSize="15" Grid.Row="1" SelectedItem="{Binding SSelectedUser}" ItemsSource="{Binding Appointments}">
+                <ListBox.ItemTemplate >
+                    <DataTemplate>
+                        <StackPanel  Orientation="Horizontal">
+                            <TextBlock Text="№"/>
+                            <TextBlock Text="{Binding NumberZP}"/>
+                            <TextBlock Text=" | ПІБ: "/>
+                            <TextBlock Text="{Binding Pacient}"/>
+                            <TextBlock Text=" | Час: "/>
+                            <TextBlock Text="{Binding TimeAppomination}"/>
+                            <TextBlock Text=" | Коментар: "/>
+                            <TextBlock Text="{Binding Comment}"/>
+                            <TextBlock Text=" | "/>
+                            <Button Style="{DynamicResource ButtonOrange}" Margin="5,0,0,0" Content="Не прийшов" Command="{Binding NotComing}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>-->
+            <!--<DataGrid BorderBrush="Black"  BorderThickness="1.5" FontSize="15" Foreground="White"  Grid.Column="0" Grid.Row="1"    
                                AutoGenerateColumns="False" ItemsSource="{Binding Appointments}" Style="{DynamicResource GrayDataGridInDocView}" 
-                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridInDocView}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" SelectedItem="{Binding SSelectedUser}" RowStyle="{DynamicResource GrayGridInDocView}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
                                ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyleInDocView}" >
                 <DataGrid.Columns>
                     <DataGridTextColumn FontSize="20" Binding="{Binding NumberZP}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
@@ -67,7 +142,7 @@
                     <DataGridTextColumn FontSize="20" Binding="{Binding Comment}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
                     <DataGridCheckBoxColumn  Binding="{Binding NotComing}" ClipboardContentBinding="{x:Null}" Header="Не прийшов"/>
                 </DataGrid.Columns>
-            </DataGrid>
+            </DataGrid>-->
             <TextBlock Text="Пацієнти на прийомі:" FontSize="25"  VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"/>
 
             <TabControl Grid.Row="1" Grid.Column="1" x:Name="PacientCard" >
@@ -476,6 +551,7 @@
                     </Grid>
                 </TabItem>
             </TabControl>
+            <GridSplitter Grid.Column="1" Background="#8FC1E5"  HorizontalAlignment="Left" Height="Auto"  Grid.Row="1" VerticalAlignment="Stretch" Width="3"/>
         </Grid>
 
     </Grid>

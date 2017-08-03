@@ -12,13 +12,29 @@
     
          xmlns:helpers="clr-namespace:VrachMedcentr.HelpersClass.MyHalpers"
    
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="WPF_Hospital.MainWindow"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:local2="clr-namespace:WaterMarkTextBoxDemo" x:Class="WPF_Hospital.MainWindow"
         mc:Ignorable="d"
         Title="Клієнт для роботи з реєстратурою та лікарем - Нова Медицина"  Height="900" Width="1280"  WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Window.Resources>
 
-    <TabControl >
+        <SolidColorBrush x:Key="brushWatermarkBackground" Color="White" />
+        <SolidColorBrush x:Key="brushWatermarkForeground" Color="LightSteelBlue" />
+        <SolidColorBrush x:Key="brushWatermarkBorder" Color="Indigo" />
 
-        <TabItem MinHeight="30" x:Name="Registratyra" Header="Реєстратура">
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local2:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />
+
+        <Style x:Key="EntryFieldStyle" TargetType="Grid" >
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="0,0" />
+        </Style>
+
+    </Window.Resources>
+    <TabControl x:Name="Registratyra" >
+
+        <TabItem MinHeight="30"  Header="Реєстратура">
             <Grid Background="#FFE5E5E5">
 
 
@@ -285,9 +301,10 @@
                                 <RowDefinition />
                                 <RowDefinition Height="0.2*"/>
                             </Grid.RowDefinitions>
+
                             <Calendar    SelectedDate="{Binding DateDoctorAcepting}" DisplayDate="{Binding DateDoctorAcepting}"  
                                          
-                                   helpers:HolidayHelper.List ="{Binding Otemp}"          
+                                   helpers:HolidayHelper.List ="{Binding WorkingDays}"          
                                    Style="{DynamicResource MyCalendar}"
                                    CalendarButtonStyle="{DynamicResource MyCalendarButtonStyle}"
                                    CalendarDayButtonStyle="{DynamicResource MyCalendarDayButtonStyle}"
@@ -295,6 +312,7 @@
                                 >
 
                             </Calendar>
+
                             <Button Margin="15,5,15,0" Padding="5" Grid.Row="1" UseLayoutRounding="True"  Style="{DynamicResource ButtonOrange}" Command="{Binding editDays}"  FontSize="14"  Content="Редагувати робочі дні"  />
                         </Grid>
 
@@ -308,7 +326,7 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Margin="5,0,0,0" FontSize="15" VerticalAlignment="Bottom"><Run Text="Прізвище, Ім'я, По батькові Пацієнта"/></TextBlock>
+                                <TextBlock Margin="10,0,0,0" FontSize="15" VerticalAlignment="Bottom"><Run Text="Прізвище, Ім'я, По батькові Пацієнта"/></TextBlock>
                             </StackPanel>
                             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,0,0,0">
                                 <ComboBox Grid.Column="0" IsEditable="True"  IsTextSearchCaseSensitive="False"  
@@ -320,13 +338,70 @@
                                         Command="{Binding Conf}"  FontSize="14" Padding="5"  Margin="5,0,5,0" Content="Записати на прийом"/>
 
                             </StackPanel>
-                               
+
                         </Grid>
 
                     </Grid>
-                    <DataGrid  Margin="0,10,0,0" FontSize="15" Foreground="White" Grid.Row="1"   
+                    <ListBox Grid.Row="1"  SelectedItem="{Binding SSelectedUser,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Appointments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <DockPanel LastChildFill="True"  >
+                                    <Grid DockPanel.Dock="Top"  Height="30">
+                                        <Grid.ColumnDefinitions >
+                                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                                            <ColumnDefinition Width="0.22*"></ColumnDefinition>
+                                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Margin="10,0,0,0" FontSize="20" Background="#8FC1E5" Foreground="White" VerticalAlignment="Center" Grid.Column="0">№</TextBlock>
+                                        <TextBlock  Margin="10,0,0,0" FontSize="20" Background="#8FC1E5" Foreground="White" VerticalAlignment="Center" Grid.Column="1">ПІБ</TextBlock>
+                                        <TextBlock  Margin="10,0,0,0" FontSize="20"  Background="#8FC1E5" Foreground="White" VerticalAlignment="Center" Grid.Column="2">Час</TextBlock>
+                                        <TextBlock  Margin="10,0,0,0" FontSize="20" Background="#8FC1E5" Foreground="White" VerticalAlignment="Center" Grid.Column="3">Коментар</TextBlock>
+                                        <TextBlock  Margin="10,0,0,0" FontSize="20" Background="#8FC1E5" Foreground="White" VerticalAlignment="Center" Grid.Column="4">Не прийшов</TextBlock>
+                                        <TextBlock  Margin="10,0,0,0" FontSize="20" Background="#8FC1E5" Foreground="White" VerticalAlignment="Center" Grid.Column="5">uID</TextBlock>
+                                    </Grid>
+                                    <ItemsPresenter></ItemsPresenter>
+                                </DockPanel>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                        <ListBox.ItemTemplate>
+
+
+                            <DataTemplate>
+
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.32*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.22*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--<TextBlock Grid.Column="0" FontSize="20" Text="№"/>-->
+                                    <TextBlock Margin="10,0,0,0" Grid.Column="0" FontSize="20" Text="{Binding NumberZP}"/>
+                                    <!--<TextBlock Grid.Column="1" FontSize="20" Text=" | ПІБ: "/>-->
+                                    <TextBlock Margin="10,0,0,0" Grid.Column="1" FontSize="20" Text="{Binding Pacient}"/>
+                                    <!--<TextBlock Grid.Column="2" FontSize="20" Text=" | Час: "/>-->
+                                    <TextBlock Margin="10,0,0,0" Grid.Column="2" FontSize="20" Text="{Binding TimeAppomination}"/>
+                                    <!--<TextBlock Grid.Column="3" FontSize="20" Text=" | Коментар: "/>-->
+                                    <TextBlock Margin="10,0,0,0" Grid.Column="3" FontSize="20" Text="{Binding Comment}"/>
+                                    <!--<TextBlock Grid.Column="4" FontSize="20" Text=" | Не прийшов: "/>-->
+                                    <CheckBox Grid.Column="4" FontSize="20" IsChecked="{Binding NotComing}"/>
+                                    <!--<TextBlock Grid.Column="5" FontSize="20" Text=" | uID: "/>-->
+                                    <TextBlock Margin="10,0,0,0" Grid.Column="5" FontSize="20" Text="{Binding IDUser}"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <!--<DataGrid  Margin="0,10,0,0" FontSize="15" Foreground="White" Grid.Row="1"   
                                AutoGenerateColumns="False" ItemsSource="{Binding Appointments}" Style="{DynamicResource GrayDataGrid}" 
-                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" SelectedValue="{Binding SSelectedUser}" SelectedItem="{Binding SSelectedUser}" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
                                ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}">
                         <DataGrid.Columns>
                             <DataGridTextColumn FontSize="20" Binding="{Binding NumberZP}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
@@ -335,7 +410,7 @@
                             <DataGridTextColumn FontSize="20" Binding="{Binding Comment}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
                             <DataGridCheckBoxColumn  Binding="{Binding NotComing}" ClipboardContentBinding="{x:Null}" Header="Не прийшов"/>
                         </DataGrid.Columns>
-                    </DataGrid>
+                    </DataGrid>-->
 
                 </Grid>
 
@@ -410,10 +485,10 @@
             </Grid>
 
         </TabItem>
-        <TabItem x:Name="Pacient" Header="Картка пацієнта">
-            <Grid ShowGridLines="False" Background="#FFE5E5E5"  x:Name="page1" >
+        <TabItem x:Name="Pacient"  Header="Картка пацієнта">
+            <Grid ShowGridLines="False" Background="#FFE5E5E5"   >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="0.08*" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <DockPanel>
@@ -423,18 +498,32 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <!--<RowDefinition/>-->
-                            <RowDefinition Height="0.5*"/>
+                            <!--<RowDefinition Height="0.5*"/>-->
                             <RowDefinition Height="0.7*"/>
 
                         </Grid.RowDefinitions>
 
-                        <StackPanel Margin="-1" Orientation="Horizontal" Grid.Row="1">
-
-                            <TextBox  VerticalAlignment="Center" MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0" Text="{Binding S_LastName}"/>
-                            <TextBox VerticalAlignment="Center"  MinHeight="30" MinWidth="100" Height="35" Margin="10,0,0,0" Text="{Binding S_FirstName}"/>
+                        <StackPanel   Margin="0,0,0,3" Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Stretch" Width="1266">
+                            <!--<ComboBox Grid.Column="0" IsEditable="True"  IsTextSearchCaseSensitive="False"  
+                                          IsTextSearchEnabled="False" Text="{Binding ComboboxText, UpdateSourceTrigger=PropertyChanged}"  
+                                          IsDropDownOpen="{Binding ComboBoxDropDown}"  SelectedItem="{Binding SelectedFIO}"  ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}" 
+                                          MinWidth="300" FontSize="15" VerticalAlignment="Center" Margin="5,0,5,0">
+                            </ComboBox>-->
+                            <TextBlock Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="ПІБ пацієнта: "/>
+                            <ComboBox IsEnabled="True" IsTextSearchCaseSensitive="False" IsTextSearchEnabled="False"
+                                      Text="{Binding ComboboxText, UpdateSourceTrigger=PropertyChanged}"
+                                       IsDropDownOpen="{Binding ComboBoxDropDown}"
+                                      SelectedItem="{Binding SelectedFIO}"  ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}"
+                                       MinWidth="300" FontSize="15" VerticalAlignment="Center" Margin="5,0,5,0">
+                            </ComboBox>
                             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" ><Run Text="Дата народження:"/></TextBlock>
-                            <DatePicker  MinWidth="100" MinHeight="35" Height="35" Margin="5,0,0,0" Text="{Binding S_DateBorn}" SelectedDateFormat="Short"/>
-                            <Button  Style="{DynamicResource ButtonGreen}" Command="{Binding SearchUsers}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" Content="Пошук пацієнта"/>
+                            <DatePicker  MinWidth="100" MinHeight="35" Height="35" Margin="5,0,0,0" 
+                                         Text="{Binding S_DateBorn}" SelectedDateFormat="Short"
+                                         Style="{DynamicResource MyDatePickerStyle}"
+                                         CalendarStyle="{DynamicResource MyCalendar}"
+                                         
+                                         />
+                            <Button  Style="{DynamicResource ButtonGreen}"  Command="{Binding SearchPat}" VerticalAlignment="Center" Padding="5" Margin="10,0,0,0" Content="Пошук пацієнта"/>
                         </StackPanel>
 
                     </Grid>
@@ -455,10 +544,10 @@
                 </DockPanel>
                 <!--<GridSplitter  Grid.Row="0" Grid.ColumnSpan="2" Height="10"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />-->
+                <!--Поковырял ненмого здесь биндингов для передачи данных с таб итема регистратуры(требует дороботки)-->
+                <TabControl Grid.Row="1"  DataContext="{Binding CP}" x:Name="PacientCard" >
 
-                <TabControl Grid.Row="1" x:Name="PacientCard" >
-
-                    <TabItem   >
+                    <TabItem DataContext="{Binding KARTA}" x:Name="page1"  >
                         <TabItem.Header>
                             <StackPanel>
                                 <TextBlock TextAlignment ="Center"><Run Text="Титульний"/></TextBlock>
@@ -466,7 +555,7 @@
                             </StackPanel>
                         </TabItem.Header>
 
-                        <Grid DataContext="{Binding KARTA}" x:Name="Page1" Background="#FFE5E5E5">
+                        <Grid  Background="#FFE5E5E5">
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.20*"/>
@@ -559,7 +648,12 @@
                                     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
                                         <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Times New Roman"><Run Text="Дата заповнення карти"/></TextBlock>
 
-                                        <DatePicker SelectedDate="{Binding DateCardWriten, Mode=TwoWay}" SelectedDateFormat="Short" VerticalAlignment="Center" Margin="10,0,0,0" Padding="5"/>
+                                        <DatePicker SelectedDate="{Binding DateCardWriten, Mode=TwoWay}" 
+                                                    SelectedDateFormat="Short" VerticalAlignment="Center" Margin="10,0,0,0" 
+                                                    Padding="5"
+                                                    Style="{DynamicResource MyDatePickerStyle}"
+                                                    CalendarStyle="{DynamicResource MyCalendar}"
+                                                    />
                                     </StackPanel>
 
 
@@ -591,12 +685,18 @@
                                     <TextBox Text="{Binding FathersName}" Background="LightGray"  MinWidth="150" Margin="10,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
 
                                 </StackPanel>
-                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,0">
+
                                     <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="2. Стать: чоловіча"/></TextBlock>
                                     <CheckBox Style="{DynamicResource CheckBoxSwitcher}" IsChecked="{Binding Sex}" x:Name="Sex" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
                                     <TextBlock   Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="жіноча"/></TextBlock>
-                                       <TextBlock x:Name="SexMale"  Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="3. Дата народження"/></TextBlock>
-                                    <DatePicker  SelectedDate="{Binding dateBirth, Mode=TwoWay}" SelectedDateFormat="Short" x:Name="BornDate" VerticalAlignment="Center" Margin="10,-5,0,0"/>
+                                    <TextBlock x:Name="SexMale"  Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="3. Дата народження"/></TextBlock>
+                                    <DatePicker Margin="10,0,0,0" SelectedDate="{Binding dateBirth, Mode=TwoWay}" 
+                                                 SelectedDateFormat="Short" x:Name="BornDate" VerticalAlignment="Center" 
+                                                 Style="{DynamicResource MyDatePickerStyle}"
+                                                 CalendarStyle="{DynamicResource MyCalendar}"
+                                   
+                                                 />
                                 </StackPanel>
                                 <StackPanel Grid.Row="2" Orientation="Horizontal"  Margin="0,5,0,0">
                                     <TextBlock   Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="14" FontFamily="Times New Roman"><Run Text="4. Адереса"/></TextBlock>
@@ -645,14 +745,14 @@
                                 </Grid>
                                 <StackPanel  Grid.Row="11" HorizontalAlignment="Right" Orientation="Horizontal" >
 
-                                    <Button Grid.Column="0" Margin="10,-2,10,2"  Style="{DynamicResource ButtonOrange}" Content="Видалити запис"/>
+                                    <Button Grid.Column="0" Margin="10,-2,10,2" Command="{Binding ElementName=PacientCard,Path=DataContext.TestCP}" CommandParameter="{Binding}" Style="{DynamicResource ButtonOrange}" Content="Видалити запис"/>
                                     <Button  Grid.Column="1" Margin="10,-2,10,2" Style="{DynamicResource ButtonOrange}" Content="Зберегти" />
                                 </StackPanel>
 
                             </Grid>
                         </Grid>
                     </TabItem>
-                    <TabItem x:Name="page2">
+                    <TabItem  x:Name="page2">
                         <TabItem.Header>
                             <StackPanel>
                                 <TextBlock TextAlignment ="Center"><Run Text="Сигнальні"/></TextBlock>
@@ -660,47 +760,96 @@
                             </StackPanel>
                         </TabItem.Header>
                         <Grid Background="#FFE5E5E5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.2*"/>
+                                    <RowDefinition Height="0.25*" />
+                                    <RowDefinition Height="0.25*"/>
+                                    <RowDefinition Height="0.1*"/>
+                                </Grid.RowDefinitions>
+                                <GroupBox Grid.Row="0"  Header="Сигнальні позначки" Margin="0,0,6,0">
+                                    <Grid >
+                                        <Grid >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.3*"/>
+                                                <ColumnDefinition Width="0.7*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <!--<TextBox Margin="3" Grid.Column="1" Grid.Row="0" FontSize="13" Text="{Binding Shugar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"   TextWrapping="Wrap" TextDecorations="Underline" Height="Auto" AutomationProperties.HelpText="Відсутні" />-->
 
-                            <GroupBox Header="Сигнальні позначки" Margin="0,0,6,28">
-                                <Grid>
+                                            <Grid Margin="3" Grid.Row="0" Grid.Column="1"  Background="{StaticResource brushWatermarkBackground}" >
+                                                <TextBox Grid.Row="0" x:Name="diabet" FontSize="13" Text="{Binding Shugar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" TextDecorations="Underline" Height="Auto" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" />
+                                                <TextBlock Margin="10,0,0,0" Text="Відсутній" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource Text_Waterm_}" Visibility="{Binding Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=diabet}" />
+                                            </Grid>
+                                            <Grid Margin="3" Grid.Row="1" Grid.Column="1"  Background="{StaticResource brushWatermarkBackground}" >
+                                                <TextBox Grid.Row="0" x:Name="Alerg" FontSize="13" Text="{Binding AlergiAnam, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" TextDecorations="Underline" Height="Auto" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" />
+                                                <TextBlock Margin="10,0,0,0" Text="Відсутній" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource Text_Waterm_}" Visibility="{Binding Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Alerg}" />
+                                            </Grid>
+                                            <Grid Margin="3" Grid.Row="2" Grid.Column="1"  Background="{StaticResource brushWatermarkBackground}" >
+                                                <TextBox Grid.Row="0" x:Name="Infec" FontSize="13" Text="{Binding InfectiousDis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" TextDecorations="Underline" Height="Auto" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" />
+                                                <TextBlock Margin="10,0,0,0" Text="Відсутні" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource Text_Waterm_}" Visibility="{Binding Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=Infec}" />
+                                            </Grid>
+                                            <Grid Margin="3" Grid.Row="3" Grid.Column="1"  Background="{StaticResource brushWatermarkBackground}" >
+                                                <TextBox Grid.Row="0" x:Name="MedInt" FontSize="13" Text="{Binding IntoleranceToDrugs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" TextDecorations="Underline" Height="Auto" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" />
+                                                <TextBlock Margin="10,0,0,0" Text="Відсутня" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{StaticResource Text_Waterm_}" Visibility="{Binding Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=MedInt}" />
+                                            </Grid>
+                                            <!--<TextBox Margin="3" Grid.Column="1" Grid.Row="1" FontSize="13" Text="{Binding InfectiousDis}"  TextWrapping="Wrap" TextDecorations="Underline" Height="Auto" />-->
+                                            <!--<TextBox Margin="3" Grid.Column="1" Grid.Row="2" FontSize="13" Text="{Binding AlergiAnam}"  TextWrapping="Wrap"  TextDecorations="Underline" Height="Auto" />-->
+                                            <!--<TextBox Margin="3" Grid.Column="1" Grid.Row="3" FontSize="13" Text="{Binding IntoleranceToDrugs}"  TextWrapping="Wrap"  TextDecorations="Underline" Height="Auto" AutomationProperties.HelpText="Відсутні" />-->
+                                            <TextBlock   Grid.Column="0" Grid.Row="0" FontSize="15" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center" Text="Цукровий діабет" />
+                                            <TextBlock  Grid.Column="0" Grid.Row="1" FontSize="15" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Text="Алергічний анамнез"/>
+                                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="15" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Інфекційні захворювання" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="0" Grid.Row="3" FontSize="15" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Непереносимість до лікарських препаратів" VerticalAlignment="Center"/>
+                                        </Grid>
 
-                                    <TextBox Text="{Binding Shugar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Margin="253,4,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                                    <TextBox Text="{Binding Shugar}"  Margin="253,30,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                                    <TextBox Text="{Binding AlergiAnam}" Margin="253,88,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="20" />
-                                    <TextBox Text="{Binding IntoleranceToDrugs}" Margin="253,57,6,0" TextWrapping="Wrap" VerticalAlignment="Top" TextDecorations="Underline" Height="18" />
-                                    <TextBlock HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Цукровий діабет" VerticalAlignment="Top"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="5,62,0,0" TextWrapping="Wrap" Text="Алергічний анамнез" VerticalAlignment="Top"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="5,31,0,0" TextWrapping="Wrap" Text="Інфекційні захворювання" VerticalAlignment="Top"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="5,89,0,0" TextWrapping="Wrap" Text="Непереносимість до лікарських препаратів" VerticalAlignment="Top"/>
 
+                                    </Grid>
+                                </GroupBox>
+                                <DataGrid Grid.Row="1" x:Name="Shelpennya" DataContext="{Binding VrachMedcentr.Sheplenya}" ItemsSource="{Binding Path= Sheplenya }" 
+                         VerticalAlignment="Top" MaxHeight="300" Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding NazvaShepl}" ClipboardContentBinding="{x:Null}" Header="Найменування щеплення"/>
+                                        <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
+                                        <DataGridTextColumn Binding="{Binding Age}" ClipboardContentBinding="{x:Null}" Header="Вік"/>
+                                        <DataGridTextColumn Binding="{Binding Doze}" ClipboardContentBinding="{x:Null}" Header="Доза"/>
+                                        <DataGridTextColumn Binding="{Binding Seria}" ClipboardContentBinding="{x:Null}" Header="Серія"/>
+                                        <DataGridTextColumn Binding="{Binding NazvaPrep}" ClipboardContentBinding="{x:Null}" Header="Назва препарату"/>
+                                        <DataGridTextColumn Binding="{Binding SposibVV}" ClipboardContentBinding="{x:Null}" Header="Спосіб введення"/>
+                                        <DataGridCheckBoxColumn Binding="{Binding MReact}" ClipboardContentBinding="{x:Null}" Header="Місцева реак. на щеплення"/>
+                                        <DataGridCheckBoxColumn Binding="{Binding ZReact}" ClipboardContentBinding="{x:Null}" Header="Загальна реак. на щеплення"/>
+                                        <DataGridTextColumn Binding="{Binding MedProt}" ClipboardContentBinding="{x:Null}" Header="Медичні протипоказання"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <DataGrid Grid.Row="2" x:Name="Profilact"   VerticalAlignment="Top" Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White" MaxHeight="330">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата/рік"/>
+                                        <DataGridTextColumn Binding="{Binding NumCab}" ClipboardContentBinding="{x:Null}" Header="Кабінет №"/>
+                                        <DataGridTextColumn Binding="{Binding Flura}" ClipboardContentBinding="{x:Null}" Header="Флюрографія органів грудної клітки"/>
+                                        <DataGridTextColumn Binding="{Binding Syphilis}" ClipboardContentBinding="{x:Null}" Header="Обстеження на сифіліс"/>
+                                        <DataGridTextColumn Binding="{Binding HIV}" ClipboardContentBinding="{x:Null}" Header="Обстеження на ВІЛ"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                                <Grid Grid.Row="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition  Width="0*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Command="{Binding Save2}" DataContext="{Binding regViewModel}" Content="Оновити інформацію" FontSize="15" Style="{DynamicResource ButtonOrange}"  />
                                 </Grid>
-                            </GroupBox>
-                            <DataGrid 
-                        Margin="10,127,18,0" VerticalAlignment="Top" MaxHeight="300">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Найменування щеплення"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Вік"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Доза"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Серія"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Назва препарату"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Спосіб введення"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Місцева реак. на щеплення"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Загальна реак. на щеплення"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Медичні протипоказання"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                            <DataGrid 
-                        Margin="10,457,10,0" VerticalAlignment="Top" MaxHeight="330">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Дата/рік"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Кабінет №"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Флюрографія органів грудної клітки"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Обстеження на сифіліс"/>
-                                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Обстеження на ВІЛ"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+
+                            </Grid>
                         </Grid>
+
                     </TabItem>
                     <TabItem  x:Name="Page3" >
                         <TabItem.Header>
@@ -710,7 +859,21 @@
                             </StackPanel>
                         </TabItem.Header>
                         <Grid x:Name="Card3" Background="#FFE5E5E5">
-                            <DataGrid x:Name="DPage3" ItemsSource="{Binding Diagnosis}"  AutoGenerateColumns="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.8*"/>
+
+                                <RowDefinition Height="0.1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition  Width="0*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Command="{Binding Save3}" Content="Оновити інформацію" FontSize="15" Style="{DynamicResource ButtonOrange}"  />
+                            </Grid>
+                            <DataGrid Grid.Row="0" x:Name="DPage3"  Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White" >
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Дата Звернення">
                                         <DataGridTemplateColumn.CellTemplate>
@@ -726,29 +889,51 @@
                                     <DataGridTextColumn Binding="{Binding Sign}" ClipboardContentBinding="{x:Null}" Header="Підпис"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <Button Content="чтен" Command="{Binding ReadP3}" HorizontalAlignment="Left" Margin="756,582,0,0" VerticalAlignment="Top" Width="160" Height="133"/>
-                            <Button Content="зап" Command="{Binding UpdateP3}" HorizontalAlignment="Left" Margin="990,567,0,0" VerticalAlignment="Top" Width="268" Height="148"/>
+                            <!--<Button Content="чтен" Command="{Binding ReadP3}" HorizontalAlignment="Left" Margin="756,582,0,0" VerticalAlignment="Top" Width="160" Height="133"/>
+                            <Button Content="зап" Command="{Binding UpdateP3}" HorizontalAlignment="Left" Margin="990,567,0,0" VerticalAlignment="Top" Width="268" Height="148"/>-->
                         </Grid>
                     </TabItem>
                     <TabItem x:Name="page4">
                         <TabItem.Header>
+                            <!--<TextBlock TextAlignment="Center" Text="Картка обліку навантаженнь при рентген дослідженнях" TextWrapping="Wrap" />-->
                             <StackPanel>
                                 <TextBlock TextAlignment ="Center"><Run Text="Картка обліку навантаженнь"/></TextBlock>
                                 <TextBlock TextAlignment ="Center"><Run Text="при рентген дослідженнях"/></TextBlock>
                             </StackPanel>
                         </TabItem.Header>
                         <Grid x:Name="Card4" Background="#FFE5E5E5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.8*"/>
 
-                            <DataGrid x:Name="DPage4" ItemsSource="{Binding page4}" AutoGenerateColumns="False">
+                                <RowDefinition Height="0.1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition  Width="0*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Command="{Binding Save4}" Content="Оновити інформацію" FontSize="15" Style="{DynamicResource ButtonOrange}"  />
+                            </Grid>
+                            <DataGrid Grid.Row="0" x:Name="DPage4"  Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding nomZver}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>
-                                    <DataGridTextColumn Binding="{Binding dataZver}" ClipboardContentBinding="{x:Null}" Header="Дата"/>
-                                    <DataGridTextColumn Binding="{Binding VydDosl}" ClipboardContentBinding="{x:Null}" Header="Вид дослідження, кількість і вид процедур"/>
-                                    <DataGridTextColumn Binding="{Binding doza}" ClipboardContentBinding="{x:Null}" Header="Ефективна доза дослідження"/>
-                                    <DataGridTextColumn Binding="{Binding mitka}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
+
+                                    <!--<DataGridTextColumn Binding="{Binding NumList}" ClipboardContentBinding="{x:Null}" Header="№ з/п"/>-->
+                                    <!--<DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата"/>-->
+                                    <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Дата Звернення">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DatePicker  SelectedDate="{Binding Date}" BorderThickness="0" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding Procedure}" ClipboardContentBinding="{x:Null}" Header="Вид дослідження, кількість і вид процедур"/>
+                                    <DataGridTextColumn Binding="{Binding Doze}" ClipboardContentBinding="{x:Null}" Header="Ефективна доза дослідження"/>
+                                    <DataGridTextColumn Binding="{Binding Mitka}" ClipboardContentBinding="{x:Null}" Header="Примітка"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <Button Content="Button" Command="{Binding AddCommand4}" HorizontalAlignment="Left" Margin="368,105,0,0" VerticalAlignment="Top" Width="279" Height="147"/>
+                            <!--<Button Content="Button" Command="{Binding AddCommand4}" HorizontalAlignment="Left" Margin="368,105,0,0" VerticalAlignment="Top" Width="279" Height="147"/>-->
                         </Grid>
                     </TabItem>
                     <TabItem x:Name="page5">
@@ -758,6 +943,18 @@
                             </WrapPanel>
                         </TabItem.Header>
                         <Grid x:Name="Card5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.8*"/>
+
+                                <RowDefinition Height="0.1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition  Width="0*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Command="{Binding Save5}" Content="Оновити інформацію" FontSize="15" Style="{DynamicResource ButtonOrange}"  />
+                            </Grid>
                             <!--<WindowsFormsHost>
                         <wf:ScrollableControl/>
                     </WindowsFormsHost>-->
@@ -770,16 +967,18 @@
                         </DataGrid.Columns>
 
                     </DataGrid>-->
-                            <DataGrid x:Name="DPage5" ItemsSource="{Binding Dilery}" AutoGenerateColumns="False">
+                            <DataGrid Grid.Row="0" x:Name="DPage5" ItemsSource="{Binding Dilery}" Style="{DynamicResource GrayDataGrid}" 
+                               CellStyle="{DynamicResource GrayDataGridCellStyle}" RowStyle="{DynamicResource GrayGridRowStyle}" AutoGenerateColumns="False" RowHeaderStyle="{DynamicResource GrayDataGridRowHeaderStyle}" 
+                               ColumnHeaderStyle="{DynamicResource GrayDataGridColumnHeaderStyle}" FontSize="15" Foreground="White">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding ComingDate}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
-                                    <DataGridTextColumn Binding="{Binding HealingPlace}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
+                                    <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Дата звернення"/>
+                                    <DataGridTextColumn Binding="{Binding MisceLik}" ClipboardContentBinding="{x:Null}" Header="Місце проведення лікування"/>
                                     <DataGridTextColumn Binding="{Binding Diagnosis}" ClipboardContentBinding="{x:Null}" Header="Скарги хворого,об'єктивні дані, діагноз, перебіг хвороби"/>
-                                    <DataGridTextColumn Binding="{Binding Stamp}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
+                                    <DataGridTextColumn Binding="{Binding PryznLik}" ClipboardContentBinding="{x:Null}" Header="Призначення, підпис лікаря, або консультанта"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <Button Content="Read" Command="{Binding DileryRead}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
-                            <Button Content="Write" Command="{Binding DileryInsert}" HorizontalAlignment="Left" Margin="210,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                            <!--<Button Content="Read" Command="{Binding DileryRead}" HorizontalAlignment="Left" Margin="484,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>
+                            <Button Content="Write" Command="{Binding DileryInsert}" HorizontalAlignment="Left" Margin="210,122,0,0" VerticalAlignment="Top" Width="231" Height="181"/>-->
                         </Grid>
 
                     </TabItem>

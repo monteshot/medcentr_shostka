@@ -28,13 +28,14 @@ namespace VrachMedcentr
 
         #region Data_page3
 
-
+        public string NumPat { get; set; }
         public DateTime DataZvern { get; set; } = DateTime.Today;
         public string ZaklDiagn { get; set; }
         public bool FDiagn { get; set; }
         public bool PDiag { get; set; }
         public string Sign { get; set; }
-        public DataView page3 { get; set; }
+      //  public DataView page3 { get; set; }
+
         //public void Comparer(CardPageThree temp)
         //{
         //    if (temp)

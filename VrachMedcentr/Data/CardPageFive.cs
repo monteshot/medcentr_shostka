@@ -12,10 +12,12 @@ namespace VrachMedcentr
     class CardPageFive
     {
         //public DateTime ComingDate { get; set; }
-        public string ComingDate { get; set; }
-        public string HealingPlace { get; set; }
+        public DateTime Date { get; set; }
+        public string MisceLik { get; set; }
         public string Diagnosis { get; set; }
-        public string Stamp { get; set; }
+       // public string Stamp { get; set; }
+        public string NumPat { get; set; }
+        public string PryznLik { get; set; }
 
         #region Sergio code
         //public DataView page5 { get; set; }

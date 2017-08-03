@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using WPF_Hospital;
-using System.Data;
 using System.Windows.Input;
 namespace VrachMedcentr
 {
@@ -17,12 +16,12 @@ namespace VrachMedcentr
         private DateTime thisDay = DateTime.Today;
         private DataTable TestTable = new DataTable();
         private string codeZYCD;
-        CardPageTwo PageTwo = new CardPageTwo();
+        //CardPageTwo PageTwo = new CardPageTwo();
 
         #endregion
 
         #region Data_page1
-              
+
         public string CodeZKPO { get; set; }
         public string NumberPacient { get; set; }
         public string CodePacient { get; set; }
@@ -61,20 +60,29 @@ namespace VrachMedcentr
         //        return addCommand ??
         //          (addCommand = new RelayCommand(obj =>
         //          {
-                     
+
         //              // Setter();
         //          }));
         //    }
         //}
 
-       
+        //    public CardPageOne KARTA { get; set; }
+
         public void Setter()
 
         {
 
             Adress = "fasfasf";
         }
-
+        public CardPageOne()
+        {
+            //KARTA = new CardPageOne
+            //{
+            //    Name = "aaaaaaaaaa",
+            //    Sername = "bbbbbbbbbbb",
+            //    DateCardWriten = DateTime.Today
+            //};
+        }
         #endregion
         #region Event
         /// <summary>
@@ -86,7 +94,7 @@ namespace VrachMedcentr
 
         #endregion
 
-       
+
     }
 
 }

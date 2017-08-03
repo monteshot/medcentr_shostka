@@ -51,6 +51,10 @@
 
     <Color x:Key="Text_dark">#FF515151</Color>
     <Brush x:Key="Text_dark_">#FF515151</Brush>
+
+    <Color x:Key="Text_Waterm">#FF7c7b7b</Color>
+    <Brush x:Key="Text_Waterm_">#FF7c7b7b</Brush>
+    
     <Brush x:Key="Text_light_">#FFFFFFFF</Brush>
     <Brush x:Key="Text_disabled_">#80000000</Brush>
 
@@ -2097,7 +2101,7 @@
     
     <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
 
-        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="MinWidth" Value="120"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Cursor" Value="SizeWE"/>
         <Setter Property="Template">

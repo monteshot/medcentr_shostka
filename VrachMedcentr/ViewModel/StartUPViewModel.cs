@@ -26,30 +26,31 @@ namespace VrachMedcentr
         connect con1 = new connect();
         public StartUPViewModel()
         {
-            try
-            {
-                var a = con1.karta("Імя", "Прізвище", DateTime.Parse("1995-01-01"));
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message.ToString());
-            }
+            //try
+            //{
+            //    var a = con1.karta("Імя", "Прізвище", DateTime.Parse("1995-01-01"));
+            //}
+            //catch (Exception e)
+            //{
+            //    MessageBox.Show(e.Message.ToString());
+            //}
             PresentationTraceSources.DataBindingSource.Listeners.Add(new BindingErrorTraceListener());
             PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Off;
             startupDocNames = con.GetDoctorsNamesFORStartup();
+            
 
 
         }
-        private DocNames _SelectedDoc;
-        public DocNames SelectedDoc
+        private DocNames _SelectedDocString;
+        public DocNames SelectedDocString
         {
             get
             {
-                return _SelectedDoc;
+                return _SelectedDocString;
             }
             set
             {
-                _SelectedDoc = value;
+                _SelectedDocString = value;
 
                 //azazaz
             }
@@ -67,7 +68,7 @@ namespace VrachMedcentr
                       DocView docView = new DocView();
 
                       regViewModel reg = new regViewModel();
-                      reg.SelectedDocNames = SelectedDoc;
+                      reg.SelectedDocNames = SelectedDocString;
                       docView.DataContext = reg;
                       try
                       {
@@ -91,7 +92,7 @@ namespace VrachMedcentr
                   (_Reg_app = new RelayCommand(obj =>
                   {
                       MainWindow regs = new MainWindow();
-                      StartUPView sUPv = new StartUPView();
+                    //  StartUPView sUPv = new StartUPView();
                       regViewModel reg = new regViewModel();
                       regs.DataContext = reg;
                       try
