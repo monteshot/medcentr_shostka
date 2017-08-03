@@ -136,14 +136,14 @@ namespace VrachMedcentr
                     try
                     {
                         //int i = 0;
-                        ObservableCollection<Times> temp = new ObservableCollection<Times>();
+                        //ObservableCollection<Times> temp = new ObservableCollection<Times>();
 
-                        foreach (var a in DoctorTimes)
-                        {
-                            i++;
-                            temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(), TimeProperties = a.TimeProperties });
-                        }
-                        DoctorTimes = temp;
+                        //foreach (var a in DoctorTimes)
+                        //{
+                        //    i++;
+                        //    temp.Add(new Times { Status = a.Status, Time = "Talon №" + i.ToString(), TimeProperties = a.TimeProperties });
+                        //}
+                        //DoctorTimes = temp;
 
                     }
 
@@ -319,7 +319,7 @@ namespace VrachMedcentr
                     {
 
                         DoctorTimes = new ObservableCollection<Times>();
-                        DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
+                        DoctorTimes.Add(new Times { Time = "Не робочий день", Status = "Red" });
                     }
                     else
                     {
@@ -382,7 +382,7 @@ namespace VrachMedcentr
                     {
 
                         DoctorTimes = new ObservableCollection<Times>();
-                        DoctorTimes.Add(new Times { Time = "Не робочій день", Status = "Red" });
+                        DoctorTimes.Add(new Times { Time = "Не робочий день", Status = "Red" });
                     }
                     else
                     {
